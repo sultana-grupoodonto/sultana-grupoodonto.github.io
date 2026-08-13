@@ -1,1 +1,153 @@
-# sultana-grupoodonto.github.io
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sultana Dental Group | Premium Caribbean Dental Tourism</title>
+    <script src="https://tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sultanaGold: '#d4af37',
+                        sultanaDark: '#0b132b',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-xl font-black tracking-wider text-sultanaDark">SULTANA<span class="text-amber-500"> DENTAL GROUP</span></span>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
+                <a href="#why-sultana" class="hover:text-amber-500 transition">The MSO Advantage</a>
+                <a href="#matrix" class="hover:text-amber-500 transition">Procedure Rates</a>
+                <a href="#intake" class="hover:text-amber-500 transition">Consultation</a>
+            </nav>
+            <div>
+                <a href="#intake" class="inline-flex items-center justify-center px-4 h-10 text-sm font-bold text-white bg-amber-500 rounded-lg shadow-sm hover:bg-amber-600 transition">
+                    Free Estimation
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-sultanaDark text-white py-24 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-6">
+                <span class="inline-flex items-center px-3 py-1 text-xs font-bold tracking-widest uppercase bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">
+                    Sovereign Clinical Expertise • San Pedro de Macorís Hub
+                </span>
+                <h1 class="text-4xl md:text-5xl font-black tracking-tight leading-tight">
+                    Elite Smile Engineering Met with Caribbean Luxury.
+                </h1>
+                <p class="text-lg text-slate-300 max-w-xl">
+                    Access elite multi-specialty dental care backed by our unified UCE cohort. Save up to 60% on full-mouth reconstructions without compromising clinical integrity.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                    <a href="#intake" class="inline-flex items-center justify-center px-6 h-12 font-bold text-sultanaDark bg-white rounded-lg shadow-md hover:bg-slate-100 transition">
+                        Audit Your Eligibility
+                    </a>
+                    <a href="https://wa.me" target="_blank" class="inline-flex items-center justify-center px-6 h-12 font-bold text-white bg-emerald-600 rounded-lg shadow-md hover:bg-emerald-700 transition">
+                        Direct Specialist Chat
+                    </a>
+                </div>
+            </div>
+            <div class="relative flex justify-center">
+                <div class="w-full max-w-md aspect-[4/3] bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl shadow-2xl flex items-center justify-center text-white font-bold p-8 text-center text-lg">
+                    [ Sultana Elite Clinical Tech Array Placement ]
+                </div>
+            </div>
+        </div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
+    </section>
+
+    <!-- Rationale Section -->
+    <section id="why-sultana" class="py-20 max-w-6xl mx-auto px-4">
+        <div class="text-center space-y-4 mb-16">
+            <h2 class="text-3xl font-black tracking-tight text-sultanaDark">The MSO Structural Advantage</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto">By standardizing digital lab workflows across our partner cells, we extract the structural waste plaguing Western dental groups.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-amber-500 font-bold">$</div>
+                <h3 class="text-xl font-bold text-sultanaDark">Sovereign Asset Pricing</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">By completely bypassing third-party corporate lab fee structures, our pricing matrix reflects raw material efficiency.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-amber-500 font-bold">⚙️</div>
+                <h3 class="text-xl font-bold text-sultanaDark">Automated Cloud Design</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Our clinicians deploy 3D intraoral cloud scans with automated AI margin check protocols, ensuring error-free prosthetic turnaround.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-amber-500 font-bold">🌴</div>
+                <h3 class="text-xl font-bold text-sultanaDark">Sultana Premium Concierge</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Your recovery runway takes place in elite coastal enclaves like Juan Dolio, managed fully by our bilingual companion drivers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost Matrix Table -->
+    <section id="matrix" class="py-20 bg-slate-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-3xl font-black tracking-tight text-sultanaDark">Sultana Network Investment Matrix</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Absolute transparency. No hidden insurance corporate fees.</p>
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                <table class="w-full border-collapse text-left">
+                    <thead>
+                        <tr class="bg-slate-900 text-white text-sm font-semibold">
+                            <th class="p-4 md:p-6">Multi-Specialty Procedure</th>
+                            <th class="p-4 md:p-6">Average US/Canada Cost</th>
+                            <th class="p-4 md:p-6 bg-amber-600">Sultana Network Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-sm md:text-base">
+                        <tr>
+                            <td class="p-4 md:p-6 font-medium text-sultanaDark">Full-Arch Zirconia Bridge (All-on-4)</td>
+                            <td class="p-4 md:p-6 text-red-600 font-semibold">$24,000 USD</td>
+                            <td class="p-4 md:p-6 bg-amber-50/50 text-emerald-600 font-bold">$8,500 USD</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 md:p-6 font-medium text-sultanaDark">Single Premium Implant + Zirconia Crown</td>
+                            <td class="p-4 md:p-6 text-red-600 font-semibold">$5,000 USD</td>
+                            <td class="p-4 md:p-6 bg-amber-50/50 text-emerald-600 font-bold">$1,800 USD</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 md:p-6 font-medium text-sultanaDark">Full Smile Porcelain Veneers (Per Tooth)</td>
+                            <td class="p-4 md:p-6 text-red-600 font-semibold">$1,500 USD</td>
+                            <td class="p-4 md:p-6 bg-amber-50/50 text-emerald-600 font-bold">$450 USD</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intake Section -->
+    <section id="intake" class="py-20 max-w-xl mx-auto px-4">
+        <div class="bg-white border border-slate-200 p-8 rounded-2xl shadow-xl space-y-6">
+            <div class="text-center space-y-2">
+                <h2 class="text-2xl font-bold text-sultanaDark">Secure Diagnostic Strategy Intake</h2>
+                <p class="text-sm text-slate-500">Your clinical metrics route directly to our private UCE advisory panel.</p>
+            </div>
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Full Legal Name</label>
+                    <input type="text" required class="w-full px-4 h-11 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-amber-500 transition" placeholder="John Doe">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">WhatsApp or Phone Number</label>
+                    <input type="tel" required class="w-full px-4 h-11 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-amber-500 transition" placeholder="+1 (555) 000-0000">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Primary Clinical Need</label>
