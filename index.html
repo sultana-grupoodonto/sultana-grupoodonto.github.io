@@ -4,25 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sultana Dental Group | Elite Caribbean Dental Tourism</title>
+    <!-- Production CSS Framework Isolation Layer -->
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         body { background-color: #030712; color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         .sultana-gold { color: #d4af37; }
         .bg-sultanaGold { background-color: #d4af37; }
         .border-sultanaGold { border-color: #d4af37; }
-        .sultana-dark-box { background-color: #0b132b; border: 1px solid #1e293b; }
+        .sultana-dark-box { background-color: #0f172a; border: 1px solid #1e293b; }
         .sultana-btn { background-color: #d4af37; color: #030712; font-weight: 800; text-decoration: none; border-radius: 8px; display: inline-block; padding: 14px 28px; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s ease; text-align: center; }
         .sultana-btn:hover { background-color: #f59e0b; transform: translateY(-1px); }
         .aspen-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 16px; }
         @media (max-width: 640px) { .aspen-grid { grid-template-cols: 1fr; } }
-        .aspen-card { background-color: #0f172a; border: 1px solid #1e293b; padding: 24px; border-radius: 12px; cursor: pointer; text-align: center; transition: all 0.2s ease; position: relative; }
+        .aspen-card { background-color: #0b132b; border: 1px solid #1e293b; padding: 24px; border-radius: 12px; cursor: pointer; text-align: center; transition: all 0.2s ease; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .aspen-card:hover { border-color: #d4af37; background-color: #1e293b; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
         input[type="text"], input[type="tel"] { width: 100%; height: 48px; background-color: #030712; border: 1px solid #1e293b; border-radius: 8px; color: #ffffff; padding: 0 16px; box-sizing: border-box; }
         input:focus { border-color: #d4af37; outline: none; }
     </style>
 </head>
 <body class="w-100 min-vh-100 border-box">
 
+    <!-- Header Navigation Container -->
     <header class="w-100 sticky top-0 z-50 border-b border-gray-900 backdrop-blur-md" style="background-color: rgba(3, 7, 18, 0.95);">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between flex-row" style="max-width: 1152px; display: flex; justify-content: space-between; align-items: center;">
             <div class="text-xl font-black tracking-wider text-white">SULTANA <span class="sultana-gold" style="color: #d4af37;">DENTAL GROUP</span></div>
@@ -37,7 +40,8 @@
         </div>
     </header>
 
-    <section class="relative py-24 bg-cover bg-center border-b border-gray-900" style="background-image: linear-gradient(rgba(3, 7, 18, 0.50), rgba(3, 7, 18, 0.85)), url('https://unsplash.com'); background-size: cover; background-position: center; padding: 100px 0;">
+    <!-- Hero Frame Panel with Dominican Tropical Smile Backdrop Image -->
+    <section class="relative py-24 bg-cover bg-center border-b border-gray-900" style="background-image: linear-gradient(rgba(3, 7, 18, 0.65), rgba(3, 7, 18, 0.90)), url('https://unsplash.com'); background-size: cover; background-position: center; padding: 100px 0;">
         <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10" style="max-width: 1152px; display: flex; flex-wrap: wrap; gap: 40px;">
             <div class="space-y-6" style="flex: 1; min-width: 300px;">
                 <span class="inline-block px-3 py-1 text-xs font-bold tracking-widest uppercase bg-yellow-400 bg-opacity-10 text-yellow-500 rounded-full border border-yellow-400 border-opacity-20" style="color: #fbbf24; background-color: rgba(251, 191, 36, 0.1); padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: bold; border: 1px solid rgba(251, 191, 36, 0.2);">
@@ -46,30 +50,29 @@
                 <h1 class="text-4xl md:text-5xl font-black tracking-tight leading-tight text-white" style="font-size: 42px; font-weight: 900; color: #ffffff; line-height: 1.2; margin: 16px 0;">
                     World-class clinical smiles are closer than you think.
                 </h1>
-                <p class="text-lg text-gray-400 max-w-xl leading-relaxed" style="color: #e2e8f0; font-size: 18px; line-height: 1.6; margin-bottom: 24px;">
+                <p class="text-lg text-gray-400 max-w-xl leading-relaxed" style="color: #cbd5e1; font-size: 18px; line-height: 1.6; margin-bottom: 24px;">
                     Bypass high corporate markup fees in the US and Canada. Receive elite full-mouth zirconia reconstructions and custom smile engineering inside our premium coastal care cells for up to 60% less.
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-2">
                     <a href="#intake" class="sultana-btn" style="background-color: #d4af37; color: #030712; padding: 14px 28px; border-radius: 8px; font-weight: bold; text-decoration: none; text-transform: uppercase;">Free Virtual Consultation</a>
                 </div>
             </div>
-            
             <div class="space-y-4" style="flex: 1; min-width: 300px;">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2" style="color: #94a3b8; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">Explore Premium Coastal Services:</h3>
                 <div class="aspen-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
-                    <a href="#intake" class="no-underline bg-gray-900 bg-opacity-60 border border-gray-800 p-4 rounded-xl flex items-center justify-between text-white hover:border-sultanaGold transition" style="background-color: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; color: white; text-decoration: none;">
+                    <a href="#intake" class="no-underline border border-gray-800 p-4 rounded-xl flex items-center justify-between text-white hover:border-sultanaGold transition" style="background-color: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; color: white; text-decoration: none;">
                         <span class="text-sm font-bold">Dental Implants</span>
                         <span class="sultana-gold" style="color: #d4af37;">&rarr;</span>
                     </a>
-                    <a href="#intake" class="no-underline bg-gray-900 bg-opacity-60 border border-gray-800 p-4 rounded-xl flex items-center justify-between text-white hover:border-sultanaGold transition" style="background-color: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; color: white; text-decoration: none;">
+                    <a href="#intake" class="no-underline border border-gray-800 p-4 rounded-xl flex items-center justify-between text-white hover:border-sultanaGold transition" style="background-color: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; color: white; text-decoration: none;">
                         <span class="text-sm font-bold">Porcelain Veneers</span>
                         <span class="sultana-gold" style="color: #d4af37;">&rarr;</span>
                     </a>
-                    <a href="#intake" class="no-underline bg-gray-900 bg-opacity-60 border border-gray-800 p-4 rounded-xl flex items-center justify-between text-white hover:border-sultanaGold transition" style="background-color: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; color: white; text-decoration: none;">
+                    <a href="#intake" class="no-underline border border-gray-800 p-4 rounded-xl flex items-center justify-between text-white hover:border-sultanaGold transition" style="background-color: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; color: white; text-decoration: none;">
                         <span class="text-sm font-bold">Full-Arch Bridges</span>
                         <span class="sultana-gold" style="color: #d4af37;">&rarr;</span>
                     </a>
-                    <a href="#intake" class="no-underline bg-gray-900 bg-opacity-60 border border-gray-800 p-4 rounded-xl flex items-center justify-between text-white hover:border-sultanaGold transition" style="background-color: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; color: white; text-decoration: none;">
+                    <a href="#intake" class="no-underline border border-gray-800 p-4 rounded-xl flex items-center justify-between text-white hover:border-sultanaGold transition" style="background-color: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; color: white; text-decoration: none;">
                         <span class="text-sm font-bold">Clear Aligners</span>
                         <span class="sultana-gold" style="color: #d4af37;">&rarr;</span>
                     </a>
@@ -78,6 +81,7 @@
         </div>
     </section>
 
+    <!-- MSO Pillars Advantage Grid -->
     <section id="why-sultana" class="py-20 max-w-6xl mx-auto px-4" style="max-width: 1152px; padding: 60px 16px; margin: 0 auto;">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; text-align: center;">
             <div class="p-4 space-y-2" style="background-color: #0f172a; padding: 24px; border-radius: 12px; border: 1px solid #1e293b;">
@@ -90,3 +94,142 @@
                 <h4 class="text-sm font-bold text-white uppercase tracking-wider" style="color: white; font-size: 14px; text-transform: uppercase;">Private Concierge</h4>
                 <p class="text-xs text-gray-400" style="color: #94a3b8; font-size: 12px;">Bilingual companion drivers handle airport and clinic transits safely.</p>
             </div>
+            <div class="p-4 space-y-2" style="background-color: #0f172a; padding: 24px; br: 12px; border-radius: 12px; border: 1px solid #1e293b;">
+                <div class="text-3xl" style="font-size: 32px; margin-bottom: 8px;">💎</div>
+                <h4 class="text-sm font-bold text-white uppercase tracking-wider" style="color: white; font-size: 14px; text-transform: uppercase;">de-Markup Pricing</h4>
+                <p class="text-xs text-gray-400" style="color: #94a3b8; font-size: 12px;">Direct-from-lab workflows save you thousands over US clinics.</p>
+            </div>
+            <div class="p-4 space-y-2" style="background-color: #0f172a; padding: 24px; border-radius: 12px; border: 1px solid #1e293b;">
+                <div class="text-3xl" style="font-size: 32px; margin-bottom: 8px;">🎓</div>
+                <h4 class="text-sm font-bold text-white uppercase tracking-wider" style="color: white; font-size: 14px; text-transform: uppercase;">Elite UCE Cohort</h4>
+                <p class="text-xs text-gray-400" style="color: #94a3b8; font-size: 12px;">Care delivered strictly by top-tier multi-specialty clinical leads.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="offerings" class="py-20 max-w-6xl mx-auto px-4" style="max-width: 1152px; margin: 0 auto; padding: 40px 16px;">
+        <div class="mb-8">
+            <span class="text-xs font-bold uppercase tracking-wider sultana-gold">Clinical Focus</span>
+            <h2 class="text-2xl font-black text-white mt-1">FEATURED CLINICAL OFFERINGS</h2>
+        </div>
+        
+        <div class="grid-container">
+            <div class="sultana-dark-box p-6 rounded-xl" style="padding: 24px; border-radius: 12px; background-color: #0f172a; border: 1px solid #1e293b;">
+                <div class="text-3xl mb-3">🔬</div>
+                <h3 class="text-lg font-bold text-white mb-2">General Dentistry</h3>
+                <p class="text-sm text-gray-400 leading-relaxed" style="color: #94a3b8;">Routine cleanings, digital diagnostics, structural restorations, and continuous clinic care.</p>
+            </div>
+            <div class="sultana-dark-box p-6 rounded-xl" style="padding: 24px; border-radius: 12px; background-color: #0f172a; border: 1px solid #1e293b;">
+                <div class="text-3xl mb-3">✨</div>
+                <h3 class="text-lg font-bold text-white mb-2">Cosmetic Veneers</h3>
+                <p class="text-sm text-gray-400 leading-relaxed" style="color: #94a3b8;">Transform smiles with custom porcelain layers designed by automated AI margin checking workflows.</p>
+            </div>
+            <div class="sultana-dark-box p-6 rounded-xl" style="padding: 24px; border-radius: 12px; background-color: #0f172a; border: 1px solid #1e293b;">
+                <div class="text-3xl mb-3">💎</div>
+                <h3 class="text-lg font-bold text-white mb-2">Orthodontics</h3>
+                <p class="text-sm text-gray-400 leading-relaxed" style="color: #94a3b8;">Clear aligner engineering arrays to safely reconstruct structural bite planes cleanly.</p>
+            </div>
+        </div>
+    </section>
+    <section id="matrix" class="py-20 bg-gray-950 border-t border-b border-gray-900" style="padding: 60px 16px; border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b;">
+        <div class="max-w-6xl mx-auto px-4" style="max-width: 1152px; margin: 0 auto;">
+            <div class="text-center space-y-2 mb-12" style="text-align: center; margin-bottom: 40px;">
+                <h2 class="text-3xl font-black text-white" style="font-size: 32px; font-weight: 900; color: white;">Transparent Network Pricing</h2>
+                <p class="text-sm text-gray-400 max-w-xl mx-auto" style="color: #94a3b8; font-size: 14px;">Absolute flat fees. Zero hidden insurance processing administrative waste.</p>
+            </div>
+            <div class="sultana-dark-box overflow-hidden max-w-4xl mx-auto shadow-2xl rounded-xl" style="max-width: 896px; margin: 0 auto; border-radius: 12px; overflow: hidden; border: 1px solid #1e293b;">
+                <div style="overflow-x: auto;">
+                    <table class="w-full text-left" style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr class="bg-black text-white text-xs font-bold uppercase tracking-wider" style="background-color: #000000; color: white; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                                <th class="p-4" style="padding: 16px;">Multi-Specialty Procedure</th>
+                                <th class="p-4" style="padding: 16px;">Average US / Canada Cost</th>
+                                <th class="p-4 bg-yellow-400 bg-opacity-10 sultana-gold" style="padding: 16px; color: #d4af37; background-color: rgba(212, 175, 55, 0.1);">Sultana Network Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm text-gray-300" style="color: #cbd5e1; font-size: 14px;">
+                            <tr style="border-bottom: 1px solid #1e293b;">
+                                <td class="p-4 font-bold text-white" style="padding: 16px; font-weight: bold; color: white;">Full-Arch Zirconia Bridge (All-on-4)</td>
+                                <td class="p-4 text-red-400 line-through" style="padding: 16px; color: #f87171; text-decoration: line-through;">$24,000 USD</td>
+                                <td class="p-4 text-green-400 font-extrabold text-base" style="padding: 16px; color: #4ade80; font-weight: 800; font-size: 16px;">$8,500 USD</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #1e293b;">
+                                <td class="p-4 font-bold text-white" style="padding: 16px; font-weight: bold; color: white;">Single Premium Implant + Zirconia Crown</td>
+                                <td class="p-4 text-red-400 line-through" style="padding: 16px; color: #f87171; text-decoration: line-through;">$5,000 USD</td>
+                                <td class="p-4 text-green-400 font-extrabold text-base" style="padding: 16px; color: #4ade80; font-weight: 800; font-size: 16px;">$1,800 USD</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-bold text-white" style="padding: 16px; font-weight: bold; color: white;">Full Smile Porcelain Veneers (Per Tooth)</td>
+                                <td class="p-4 text-red-400 line-through" style="padding: 16px; color: #f87171; text-decoration: line-through;">$1,500 USD</td>
+                                <td class="p-4 text-green-400 font-extrabold text-base" style="padding: 16px; color: #4ade80; font-weight: 800; font-size: 16px;">$450 USD</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="intake" class="py-20 px-4" style="padding: 60px 16px;">
+        <div class="bg-gray-900 border border-gray-800 max-w-xl center rounded-xl p-8 shadow-2xl" style="max-width: 576px; margin: 0 auto; border: 1px solid #1e293b; border-radius: 12px;">
+            <div class="text-center mb-6" style="text-align: center; margin-bottom: 24px;">
+                <h2 class="text-2xl font-black text-white" style="font-size: 24px; font-weight: 900; color: white;">Secure Onboarding Consultation Portal</h2>
+                <p class="text-xs text-gray-400" style="color: #94a3b8; font-size: 12px;">Fill in your case parameters below to audit your clinical eligibility safely.</p>
+            </div>
+
+            <form action="https://google.com" method="POST" class="space-y-4">
+                <div style="display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px;">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2" style="color: #94a3b8; font-size: 12px; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 8px;">Full Legal Name</label>
+                        <input type="text" name="entry.111111111" required placeholder="John Doe">
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2" style="color: #94a3b8; font-size: 12px; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 8px;">WhatsApp Number</label>
+                        <input type="tel" name="entry.222222222" required placeholder="+1 (555) 000-0000">
+                    </div>
+                </div>
+
+                <div style="margin-top: 16px;">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2" style="color: #94a3b8; font-size: 12px; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 12px;">Select Primary Reason for Consultation:</label>
+                    <div class="aspen-grid">
+                        <div class="aspen-card">
+                            <input type="radio" name="entry.333333333" value="Dental Implants" required style="margin-bottom: 8px;">
+                            <div class="text-2xl mb-2" style="font-size: 24px;">🦷</div>
+                            <span class="text-xs font-bold text-white block" style="font-size: 12px; font-weight: bold; color: white;">Implants</span>
+                        </div>
+                        <div class="aspen-card">
+                            <input type="radio" name="entry.333333333" value="Dentures" style="margin-bottom: 8px;">
+                            <div class="text-2xl mb-2" style="font-size: 24px;">😬</div>
+                            <span class="text-xs font-bold text-white block" style="font-size: 12px; font-weight: bold; color: white;">Dentures</span>
+                        </div>
+                        <div class="aspen-card">
+                            <input type="radio" name="entry.333333333" value="Porcelain Veneers" style="margin-bottom: 8px;">
+                            <div class="text-2xl mb-2" style="font-size: 24px;">✨</div>
+                            <span class="text-xs font-bold text-white block" style="font-size: 12px; font-weight: bold; color: white;">Veneers</span>
+                        </div>
+                        <div class="aspen-card">
+                            <input type="radio" name="entry.333333333" value="Clear Aligners" style="margin-bottom: 8px;">
+                            <div class="text-2xl mb-2" style="font-size: 24px;">💎</div>
+                            <span class="text-xs font-bold text-white block" style="font-size: 12px; font-weight: bold; color: white;">Aligners</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="sultana-btn w-100 mt-4" style="width: 100%; border: none; font-weight: 900; margin-top: 24px; padding: 14px 0; background-color: #d4af37; color: #030712; text-transform: uppercase; border-radius: 8px; cursor: pointer;">
+                    Submit Secure Strategy Case Request
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-black text-center py-12 text-xs border-t border-gray-900 px-4" style="background-color: #000000; padding: 40px 16px; border-top: 1px solid #1e293b;">
+        <div class="max-w-4xl mx-auto space-y-4" style="max-width: 896px; margin: 0 auto; line-height: 1.6;">
+            <p class="font-bold text-gray-400" style="color: #94a3b8; font-weight: bold;">&copy; 2026 Sultana Dental Group MSO. All Rights Reserved. Framework operating under Persona Física guidelines.</p>
+            <p class="text-gray-600 text-[10px]" style="font-size: 11px; color: #4b5563; text-align: justify; margin-top: 12px;">
+                [ LEGAL DISCLAIMER: Sultana Dental Group acts strictly as a Medical Service Organization (MSO) providing administrative, logistical, and workflow optimization assets. Sultana does not directly practice medicine or dentistry. All clinical diagnoses, evaluations, and prosthetic smile engineering procedures are performed independently by licensed, bilingual clinicians operating within our partner cells under the certified oversight of the Universidad Católica Nordestana / Universidad Central del Este (UCE) cohort registries. Price savings estimates are projections based on historical regional averages; absolute clinical costs vary based on individual physiological presentation and structural margins. All patient data is processed under secure, cross-border cryptographic workflows. ]
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
