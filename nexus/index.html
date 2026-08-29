@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sultana Nexus™ | Enterprise Dental Operating Suite</title>
+    <title>Sultana Nexus™ | Live Cloud Demo Environment</title>
+    <!-- 🔌 CORE DATA HANDSHAKE ENGINE: SUPABASE SCRIPT DRIVER OVERLAY -->
+    <script src="https://jsdelivr.net"></script>
     <style>
         body { background-color: #030712; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; }
         .sultana-gold { color: #d4af37; }
@@ -29,44 +31,16 @@
         .tooth-btn:hover { border-color: #d4af37; }
         .tooth-num { font-size: 9px; font-family: monospace; color: #64748b; margin-bottom: 4px; }
         .tooth-icon { font-size: 20px; display: block; }
-        .dropzone-box { border: 2px dashed #1e293b; background-color: #020617; border-radius: 12px; padding: 48px 24px; text-align: center; margin: 24px 0; }
-        .dropzone-box:hover { border-color: #d4af37; }
-        .sliders-box { display: grid; grid-template-columns: 1fr; gap: 16px; background-color: #020617; padding: 16px; border-radius: 8px; border: 1px solid #1e293b; }
-        @media (min-width: 600px) { .sliders-box { grid-template-columns: repeat(3, 1fr); } }
-        .slider-group { display: flex; flex-direction: column; }
-        .slider-label { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; margin-bottom: 6px; }
-        .slider-input { width: 100%; accent-color: #b45309; }
-        .grid-3-way { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 16px 0; }
-        @media (min-width: 768px) { .grid-3-way { grid-template-columns: repeat(3, 1fr); } }
-        .xray-window { border: 1px solid #1e293b; background-color: #000000; border-radius: 6px; padding: 16px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
-        .xray-title { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; margin: 0; }
-        .xray-icon { font-size: 32px; color: #1e293b; text-align: center; margin: auto; display: block; }
-        .xray-meta { font-size: 9px; color: #334155; text-align: right; }
-        .perio-table-wrap { overflow-x: auto; margin-top: 16px; border: 1px solid #1e293b; border-radius: 8px; }
-        .perio-table { width: 100%; border-collapse: collapse; background-color: #020617; text-align: left; font-size: 12px; }
-        .perio-thead { background-color: #0f172a; color: #94a3b8; font-size: 10px; text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #1e293b; }
-        .perio-th { padding: 12px; }
-        .perio-tr { border-bottom: 1px solid #0f172a; }
-        .perio-tr:hover { background-color: #0f172a; }
-        .perio-td { padding: 10px; }
-        .perio-input { width: 40px; background-color: #111827; border: 1px solid #1e293b; text-align: center; color: #ffffff; padding: 4px 0; border-radius: 4px; outline: none; }
-        .perio-input:focus { border-color: #d4af37; }
-        .lab-layout { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 16px; }
-        @media (min-width: 768px) { .lab-layout { grid-template-columns: 3fr 1fr; } }
-        .cad-viewport { background-color: #000000; border: 1px solid #1e293b; border-radius: 12px; min-height: 320px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .cad-badge { position: absolute; bottom: 12px; left: 12px; background-color: rgba(15,23,42,0.8); padding: 4px 12px; border-radius: 4px; font-size: 10px; font-family: monospace; color: #64748b; border: 1px solid #1e293b; }
-        .lab-sidebar { background-color: #020617; padding: 16px; border-radius: 12px; border: 1px solid #1e293b; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; gap: 24px; }
-        .sidebar-title { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; margin: 0 0 12px 0; }
-        .lab-btn { width: 100%; background-color: #111827; border: 1px solid #1e293b; color: white; font-size: 12px; font-weight: bold; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; margin-bottom: 8px; }
-        .lab-btn:hover { background-color: #1e293b; }
-        .submit-btn { width: 100%; background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 0; border-radius: 8px; text-transform: uppercase; tracking-wider; cursor: pointer; }
+        .form-input { width: 100%; max-width: 400px; background-color: #111827; border: 1px solid #1e293b; color: white; padding: 12px; border-radius: 6px; outline: none; margin-top: 6px; display: block; }
+        .form-input:focus { border-color: #d4af37; }
+        .submit-btn { background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 28px; border-radius: 8px; text-transform: uppercase; tracking-wider; cursor: pointer; margin-top: 16px; }
         .submit-btn:hover { background-color: #eab308; }
         footer { text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto; }
     </style>
 </head>
 <body>
 
-    <!-- BRAND COCKPIT HEADER -->
+    <!-- MASTER BRAND HEADER -->
     <header>
         <div class="brand-block">
             <span style="font-size: 30px;">👑</span>
@@ -75,37 +49,104 @@
                 <p class="brand-sub">Enterprise Dental Core Operating Suite</p>
             </div>
         </div>
-        <!-- HEADER MODULE NAVIGATION TABS -->
         <div class="tabs-row">
-            <button id="tab-chartmax" class="module-tab active" onclick="switchModule('chartmax')">📊 ChartMax</button>
-            <button id="tab-aligniq" class="module-tab" onclick="switchModule('aligniq')">💎 AlignIQ</button>
-            <button id="tab-endoapex" class="module-tab" onclick="switchModule('endoapex')">🔬 EndoApex</button>
-            <button id="tab-periomap" class="module-tab" onclick="switchModule('periomap')">📈 PerioMap</button>
-            <button id="tab-labfab" class="module-tab" onclick="switchModule('labfab')">📐 LabFab</button>
+            <button id="tab-chartmax" class="module-tab active" onclick="switchModule('chartmax')">📊 ChartMax Sandbox</button>
+            <button id="tab-demo" class="module-tab" onclick="switchModule('demo')">💾 Live Database Demo</button>
         </div>
     </header>
 
-    <!-- LIVE MODULAR INTERFACE CONTAINER CANVAS -->
+    <!-- LIVE MODULAR VIEWSPACE VIEWPORT -->
     <main>
         <div class="app-container">
             
-            <!-- PANEL 1: SULTANA CHARTMAX -->
+            <!-- PANEL 1: SULTANA CHARTMAX (VIRTUAL TOOTH CHARTS INTERACTIVE) -->
             <div id="panel-chartmax" class="nexus-panel active">
                 <h2 class="panel-title">📊 Sultana ChartMax™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">odental core sandbox v24.3</span></h2>
-                <p class="panel-sub">Haga clic en una pieza anatómica dental para registrar patologías clínicas o iniciar un expediente digital.</p>
+                <p class="panel-sub">Haga clic en una pieza anatómica dental para registrar patologías clínicas o simular un diagnóstico visual.</p>
                 <div class="grid-32" id="chartmax-grid-target"></div>
             </div>
 
-            <!-- PANEL 2: SULTANA ALIGNIQ -->
-            <div id="panel-aligniq" class="nexus-panel">
-                <h2 class="panel-title">💎 Sultana AlignIQ™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">three.js mesh vector engine</span></h2>
-                <p class="panel-sub">Arrastre el archivo .STL del escaneo intraoral para inicializar el cálculo de alineadores invisibles.</p>
-                <div class="dropzone-box">
-                    <span style="font-size: 40px; display: block; margin-bottom: 12px;">📐</span>
-                    <p style="margin: 0; font-size: 14px; font-weight: bold; color: #e2e8f0;">Arrastre y Suelte el Modelo 3D Aquí</p>
-                    <p style="margin: 4px 0 0 0; font-size: 11px; color: #475569;">Formatos admitidos de alta resolución: .STL / .PLY</p>
+            <!-- PANEL 2: LIVE CLOUD INTENSIVE DATA SUBMISSIONS DRAWER -->
+            <div id="panel-demo" class="nexus-panel">
+                <h2 class="panel-title">💾 Servidor de Base de Datos Activo <span style="font-size:11px; font-weight:normal; color:#22c55e; text-transform:lowercase; margin-left:8px;">● cloud postgresql matrix connected</span></h2>
+                <p class="panel-sub">Ingrese un registro clínico real. Al presionar guardar, los datos se enviarán criptográficamente al almacén de datos central.</p>
+                
+                <div style="space-y-4">
+                    <div style="margin-bottom: 12px;">
+                        <label style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold;">Nombre Completo del Paciente</label>
+                        <input type="text" id="patient-name" class="form-input" placeholder="Juan Pérez">
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold;">Contacto de WhatsApp</label>
+                        <input type="text" id="patient-phone" class="form-input" placeholder="809-555-5555">
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold;">Requerimiento Clínico Principal</label>
+                        <input type="text" id="patient-need" class="form-input" placeholder="Implante Dental / Carillas de Porcelana">
+                    </div>
+                    <button class="submit-btn" onclick="saveToCloud()">Guardar Registro en Base de Datos Real</button>
+                    <p id="db-status-log" style="font-size: 12px; font-weight: bold; margin-top: 16px; color: #94a3b8;"></p>
                 </div>
-                <div class="sliders-box">
-                    <div class="slider-group"><span class="slider-label">Traducción Vector X</span><input type="range" class="slider-input"></div>
-                    <div class="slider-group"><span class="slider-label">Rotación Vector Y</span><input type="range" class="slider-input"></div>
-                    <div class="slider-group"><span class="slider-label">Grosor de Placa (mm)</span><input type="range" class="slider-input"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p style="font-weight: bold; color: #94a3b8; margin: 0 0 4px 0;">&copy; 2026 Sultana Dental Group MSO • Live Demo Environment.</p>
+    </footer>
+
+    <!-- STABLE CONTROL INTERFACE SYSTEM ACTION SCRIPTS -->
+    <script>
+        // 🔑 EXTRA INJECT TARGET BLOCK FOR SULTANA CORE INFRASTRUCTURE CONNECTIVITY
+        const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
+        
+        // Connect to your active cloud engine logic loop parameters
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Render the 32 tooth maps instantly on screen
+        var gridTarget = document.getElementById('chartmax-grid-target');
+        if (gridTarget) {
+            var blockHTML = '';
+            for (var i = 1; i <= 32; i++) {
+                blockHTML += '<div id="tooth-' + i + '" onclick="toggleTooth(' + i + ')" class="tooth-btn">' +
+                                '<div class="tooth-num">' + i + '</div>' +
+                                '<span class="tooth-icon">🦷</span>' +
+                             '</div>';
+            }
+            gridTarget.innerHTML = blockHTML;
+        }
+
+        function switchModule(modKey) {
+            var tabs = document.getElementsByClassName('module-tab');
+            for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
+            document.getElementById('tab-' + modKey).classList.add('active');
+
+            var panels = document.getElementsByClassName('nexus-panel');
+            for (var j = 0; j < panels.length; j++) { panels[j].classList.remove('active'); }
+            document.getElementById('panel-' + modKey).classList.add('active');
+        }
+
+        function toggleTooth(num) {
+            var tooth = document.getElementById('tooth-' + num);
+            if (!tooth) return;
+            if (tooth.style.borderColor === 'rgb(212, 175, 55)' || tooth.getAttribute('data-active') === 'true') {
+                tooth.style.borderColor = '#1e293b';
+                tooth.style.backgroundColor = '#111827';
+                tooth.setAttribute('data-active', 'false');
+            } else {
+                tooth.style.borderColor = '#d4af37';
+                tooth.style.backgroundColor = '#1e1b4b';
+                tooth.setAttribute('data-active', 'true');
+            }
+        }
+
+        // 🚀 THE ASYNCHRONOUS BACK-END CLOUD INTERACTIVE CONNECTION OVERLAY
+        async function saveToCloud() {
+            var name = document.getElementById('patient-name').value;
+            var phone = document.getElementById('patient-phone').value;
+            var need = document.getElementById('patient-need').value;
+            var statusLog = document.getElementById('db-status-log');
+
+            if (!name || !phone || !need) {
