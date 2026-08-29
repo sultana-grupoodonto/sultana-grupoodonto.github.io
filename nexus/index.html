@@ -4,39 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sultana Nexus™ | Enterprise Dental Operating Suite</title>
-    <!-- CORE SYSTEM INTEGRATION: TAILWIND STYLING CORE -->
-    <script src="https://jsdelivr.net"></script>
+    <!-- 🔌 INTERNAL SYSTEM FALLBACK CSS STRUCTURING CORE -->
     <style>
-        body { background-color: #030712; color: #ffffff; }
+        body { background-color: #030712; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; }
         .sultana-gold { color: #d4af37; }
-        .bg-sultana-gold { background-color: #d4af37; }
-        .border-gold { border-color: #d4af37; }
-        .module-tab {
-            background-color: #0f172a; border: 1px solid #1e293b;
-            border-radius: 8px; padding: 12px 20px; font-weight: bold;
-            cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; font-size: 11px; letter-spacing: 1px;
-            color: #94a3b8; display: inline-flex; align-items: center; gap: 8px;
-        }
+        .bg-sultana-gold { background-color: #d4af37; color: #030712; }
+        header { max-width: 1200px; width: 92%; margin: 0 auto; padding: 32px 0 16px 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; gap: 16px; }
+        @media (min-width: 768px) { header { flex-direction: row; } }
+        .brand-block { display: flex; align-items: center; gap: 12px; }
+        .brand-title { margin: 0; font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .brand-sub { margin: 2px 0 0 0; font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; }
+        .tabs-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .module-tab { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 12px 20px; font-weight: bold; cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; color: #94a3b8; display: inline-flex; align-items: center; gap: 8px; }
         .module-tab:hover { border-color: #d4af37; color: #ffffff; }
         .module-tab.active { border-color: #d4af37; background-color: #1e1b4b; color: #d4af37; }
-        .app-container { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; min-height: 480px; }
-        .tooth-btn { border: 1px solid #1e293b; background-color: #111827; border-radius: 6px; padding: 12px; text-center: center; cursor: pointer; transition: all 0.2s ease; }
+        main { flex-grow: 1; max-width: 1200px; width: 92%; margin: 0 auto; padding: 24px 0; }
+        .app-container { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; min-height: 480px; box-sizing: border-box; }
+        .nexus-panel { display: none; }
+        .nexus-panel.active { display: block; }
+        .panel-title { margin: 0 0 8px 0; font-size: 18px; font-weight: 800; text-transform: uppercase; tracking-wide; border-b: 1px solid #1e293b; padding-bottom: 8px; }
+        .panel-sub { margin: 0 0 16px 0; font-size: 12px; color: #94a3b8; }
+        .grid-32 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding-top: 16px; }
+        @media (min-width: 480px) { .grid-32 { grid-template-columns: repeat(8, 1fr); } }
+        @media (min-width: 768px) { .grid-32 { grid-template-columns: repeat(16, 1fr); } }
+        .tooth-btn { border: 1px solid #1e293b; background-color: #111827; border-radius: 6px; padding: 12px 6px; text-align: center; cursor: pointer; transition: all 0.2s ease; user-select: none; }
         .tooth-btn:hover { border-color: #d4af37; }
+        .tooth-num { font-size: 9px; font-family: monospace; color: #64748b; margin-bottom: 4px; }
+        .tooth-icon { font-size: 20px; display: block; }
+        .dropzone-box { border: 2px dashed #1e293b; background-color: #020617; border-radius: 12px; padding: 48px 24px; text-align: center; margin: 24px 0; transition: border-color 0.2s; }
+        .dropzone-box:hover { border-color: #d4af37; }
+        .sliders-box { display: grid; grid-template-columns: 1fr; gap: 16px; background-color: #020617; padding: 16px; border-radius: 8px; border: 1px solid #1e293b; }
+        @media (min-width: 600px) { .sliders-box { grid-template-columns: repeat(3, 1fr); } }
+        .slider-group { display: flex; flex-direction: column; }
+        .slider-label { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; margin-bottom: 6px; }
+        .slider-input { width: 100%; accent-color: #b45309; }
+        .grid-3-way { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 16px 0; }
+        @media (min-width: 768px) { .grid-3-way { grid-template-columns: repeat(3, 1fr); } }
+        .xray-window { bg-color: #000000; border: 1px solid #1e293b; background-color: #000000; border-radius: 6px; padding: 16px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
+        .xray-title { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; tracking-wider; margin: 0; }
+        .xray-icon { font-size: 32px; color: #1e293b; text-align: center; margin: auto; display: block; }
+        .xray-meta { font-size: 9px; color: #334155; text-align: right; }
+        .perio-table-wrap { overflow-x: auto; margin-top: 16px; border: 1px solid #1e293b; border-radius: 8px; }
+        .perio-table { width: 100%; border-collapse: collapse; background-color: #020617; text-align: left; font-size: 12px; }
+        .perio-thead { background-color: #0f172a; color: #94a3b8; font-size: 10px; text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #1e293b; }
+        .perio-th { padding: 12px; }
+        .perio-tr { border-bottom: 1px solid #0f172a; }
+        .perio-tr:hover { background-color: #0f172a; }
+        .perio-td { padding: 10px; }
+        .perio-input { width: 40px; background-color: #111827; border: 1px solid #1e293b; text-align: center; color: #ffffff; padding: 4px 0; rounded: 4px; outline: none; border-radius: 4px; }
+        .perio-input:focus { border-color: #d4af37; }
+        .lab-layout { display: grid; grid-template-columns: 1fr; gap: 24px; pt-4; margin-top: 16px; }
+        @media (min-width: 768px) { .lab-layout { grid-template-columns: 3fr 1fr; } }
+        .cad-viewport { background-color: #000000; border: 1px solid #1e293b; border-radius: 12px; min-height: 320px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .cad-badge { position: absolute; bottom: 12px; left: 12px; background-color: rgba(15,23,42,0.8); padding: 4px 12px; border-radius: 4px; font-size: 10px; font-family: monospace; color: #64748b; border: 1px solid #1e293b; }
+        .lab-sidebar { background-color: #020617; padding: 16px; border-radius: 12px; border: 1px solid #1e293b; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; gap: 24px; }
+        .sidebar-title { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; margin: 0 0 12px 0; }
+        .lab-btn { width: 100%; background-color: #111827; border: 1px solid #1e293b; color: white; font-size: 12px; font-weight: bold; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; margin-bottom: 8px; }
+        .lab-btn:hover { background-color: #1e293b; }
+        .submit-btn { width: 100%; background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 0; border-radius: 8px; text-transform: uppercase; tracking-wider; cursor: pointer; transition: background 0.2s; }
+        .submit-btn:hover { background-color: #eab308; }
+        footer { bg-color: #000000; text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto; }
     </style>
 </head>
-<body class="font-sans antialiased min-h-screen flex flex-col">
+<body>
 
-    <!-- BRAND COCKPIT HEADER NAVIGATION -->
-    <header class="max-w-7xl mx-auto w-full pt-8 pb-4 px-6 flex flex-col md:flex-row justify-between items-center border-b border-gray-900 gap-4">
-        <div class="flex items-center gap-3">
-            <span class="text-3xl">👑</span>
+    <!-- BRAND COCKPIT HEADER -->
+    <header>
+        <div class="brand-block">
+            <span style="font-size: 30px;">👑</span>
             <div>
-                <h1 class="text-xl font-black uppercase tracking-wider text-white">Sultana <span class="sultana-gold">Nexus™</span></h1>
-                <p class="text-[10px] text-gray-400 uppercase tracking-widest">Enterprise Dental Core Operating Suite</p>
+                <h1 class="brand-title">Sultana <span class="sultana-gold">Nexus™</span></h1>
+                <p class="brand-sub">Enterprise Dental Core Operating Suite</p>
             </div>
         </div>
-        <!-- RIGID SYSTEM SWITCH ENGINE MODULE TABS -->
-        <div class="flex flex-wrap gap-2 justify-center">
+        <!-- HIGH-SPEED ARCHITECTURE SYSTEM MODULE TABS -->
+        <div class="tabs-row">
             <button id="tab-chartmax" class="module-tab active" onclick="switchModule('chartmax')">📊 ChartMax</button>
             <button id="tab-aligniq" class="module-tab" onclick="switchModule('aligniq')">💎 AlignIQ</button>
             <button id="tab-endoapex" class="module-tab" onclick="switchModule('endoapex')">🔬 EndoApex</button>
@@ -46,91 +88,25 @@
     </header>
 
     <!-- LIVE MODULAR INTERFACE CONTAINER CANVAS -->
-    <main class="flex-grow max-w-7xl mx-auto w-full p-6">
-        <div id="module-display" class="app-container p-6 shadow-2xl">
-            <!-- DENTAL ENGINE CODE MODULE MARKUP GENERATES HERE -->
-        </div>
-    </main>
+    <main>
+        <div class="app-container">
+            
+            <!-- PANEL 1: SULTANA CHARTMAX -->
+            <div id="panel-chartmax" class="nexus-panel active">
+                <h2 class="panel-title">📊 Sultana ChartMax™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">odental core sandbox v24.3</span></h2>
+                <p class="panel-sub">Haga clic en una pieza anatómica dental para registrar patologías clínicas o iniciar un expediente digital.</p>
+                <div class="grid-32" id="chartmax-grid-target">
+                    <!-- STATIC LOOP GENERATED INSTANTLY BY LOCAL ENGINE -->
+                </div>
+            </div>
 
-    <!-- METRIC COMPLIANCE LEGAL FOOTER -->
-    <footer class="bg-black text-center py-6 text-[10px] border-t border-gray-900 px-6 text-gray-500">
-        <p class="font-bold text-gray-400 mb-1">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Todos los Derechos Reservados.</p>
-        <p>Sultana Nexus™ executes open-source architecture virtualization overlays inside sandboxed client networks. All storage layers sync natively with physical local appliance vaults.</p>
-    </footer>
-
-    <!-- STABLE CONTROL INTERFACE SYSTEM SCRIPT -->
-    <script>
-        // Pre-build the 32 anatomical tooth grid map row variables to bypass nested loop errors
-        let toothGridHTML = '';
-        for (let i = 1; i <= 32; i++) {
-            toothGridHTML += `
-                <div id="tooth-${i}" onclick="toggleTooth(${i})" class="tooth-btn">
-                    <div class="text-[10px] font-mono text-gray-500 mb-1">${i}</div>
-                    <span class="text-xl block my-1">🦷</span>
+            <!-- PANEL 2: SULTANA ALIGNIQ -->
+            <div id="panel-aligniq" class="nexus-panel">
+                <h2 class="panel-title">💎 Sultana AlignIQ™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">three.js mesh vector engine</span></h2>
+                <p class="panel-sub">Arrastre el archivo .STL del escaneo intraoral para inicializar el cálculo de alineadores invisibles.</p>
+                <div class="dropzone-box">
+                    <span style="font-size: 40px; display: block; margin-bottom: 12px;">📐</span>
+                    <p style="margin: 0; font-size: 14px; font-weight: bold; color: #e2e8f0;">Arrastre y Suelte el Modelo 3D Aquí</p>
+                    <p style="margin: 4px 0 0 0; font-size: 11px; color: #475569;">Formatos admitidos de alta resolución: .STL / .PLY</p>
                 </div>
-            `;
-        }
-
-        const modules = {
-            chartmax: `
-                <div class="space-y-4">
-                    <h2 class="text-lg font-bold uppercase text-white tracking-wide border-b border-gray-800 pb-2">📊 Sultana ChartMax™ <span class="text-xs font-normal text-gray-400 lowercase ml-2">odental core sandbox v24.3</span></h2>
-                    <p class="text-xs text-gray-400">Haga clic en una pieza anatómica dental para registrar patologías clínicas o iniciar un expediente digital.</p>
-                    <div class="grid grid-cols-4 sm:grid-cols-8 md:grid-cols-16 gap-2 pt-4">
-                        ` + toothGridHTML + `
-                    </div>
-                </div>
-            `,
-            aligniq: `
-                <div class="space-y-4 flex flex-col h-full justify-between">
-                    <div>
-                        <h2 class="text-lg font-bold uppercase text-white tracking-wide border-b border-gray-800 pb-2">💎 Sultana AlignIQ™ <span class="text-xs font-normal text-gray-400 lowercase ml-2">three.js mesh vector engine</span></h2>
-                        <p class="text-xs text-gray-400">Arrastre el archivo .STL del escaneo intraoral para inicializar el cálculo de alineadores invisibles.</p>
-                    </div>
-                    <div class="border-2 border-dashed border-gray-800 bg-gray-950 rounded-xl p-12 text-center hover:border-gold transition-colors flex flex-col items-center justify-center my-6 min-h-[220px]">
-                        <span class="text-4xl mb-3">📐</span>
-                        <p class="text-sm font-bold text-gray-300">Arrastre y Suelte el Modelo 3D Aquí</p>
-                        <p class="text-[11px] text-gray-500 mt-1">Formatos admitidos de alta resolución: .STL / .PLY</p>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-gray-950 p-4 rounded-lg border border-gray-900">
-                        <div><label class="text-[10px] uppercase font-bold text-gray-500">Traducción Vector X</label><input type="range" class="w-full accent-yellow-600 mt-1"></div>
-                        <div><label class="text-[10px] uppercase font-bold text-gray-500">Rotación Vector Y</label><input type="range" class="w-full accent-yellow-600 mt-1"></div>
-                        <div><label class="text-[10px] uppercase font-bold text-gray-500">Grosor de Placa (mm)</label><input type="range" class="w-full accent-yellow-600 mt-1"></div>
-                    </div>
-                </div>
-            `,
-            endoapex: `
-                <div class="space-y-4 h-full flex flex-col justify-between">
-                    <div>
-                        <h2 class="text-lg font-bold uppercase text-white tracking-wide border-b border-gray-800 pb-2">🔬 Sultana EndoApex™ <span class="text-xs font-normal text-gray-400 lowercase ml-2">html5 ohif slice loader</span></h2>
-                        <p class="text-xs text-gray-400">Visualizador multi-planar activo. Indexando archivos DICOM en tiempo real desde el almacenamiento local appliance.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-grow my-4">
-                        <div class="bg-black border border-gray-800 rounded p-4 text-center flex flex-col justify-between min-h-[220px]">
-                            <span class="text-[10px] uppercase font-bold text-gray-500 tracking-wider block text-left">Vista Axial (Superior)</span>
-                            <span class="text-3xl block my-auto text-gray-800">🩻</span>
-                            <span class="text-[9px] text-gray-600 block text-right">Slice 124/256</span>
-                        </div>
-                        <div class="bg-black border border-gray-800 rounded p-4 text-center flex flex-col justify-between min-h-[220px]">
-                            <span class="text-[10px] uppercase font-bold text-gray-500 tracking-wider block text-left">Vista Sagital (Perfil)</span>
-                            <span class="text-3xl block my-auto text-gray-800">🩻</span>
-                            <span class="text-[9px] text-gray-600 block text-right">Slice 089/256</span>
-                        </div>
-                        <div class="bg-black border border-gray-800 rounded p-4 text-center flex flex-col justify-between min-h-[220px]">
-                            <span class="text-[10px] uppercase font-bold text-gray-500 tracking-wider block text-left">Vista Coronal (Frontal)</span>
-                            <span class="text-3xl block my-auto text-gray-800">🩻</span>
-                            <span class="text-[9px] text-gray-600 block text-right">Slice 112/256</span>
-                        </div>
-                    </div>
-                </div>
-            `,
-            periomap: `
-                <div class="space-y-4">
-                    <h2 class="text-lg font-bold uppercase text-white tracking-wide border-b border-gray-800 pb-2">📈 Sultana PerioMap™ <span class="text-xs font-normal text-gray-400 lowercase ml-2">periodontal matrix array</span></h2>
-                    <p class="text-xs text-gray-400">Registre la profundidad de bolsa periodontal (valores ≥ 4 mm se marcarán automáticamente en alerta roja corporativa).</p>
-                    <div class="overflow-x-auto mt-4 rounded-lg border border-gray-800">
-                        <table class="w-full text-left border-collapse bg-gray-950">
-                            <thead>
-                                <tr class="bg-gray-900 text-gray-400 text-[10px] uppercase font-bold tracking-wider border-b border-gray-800">
-                                    <th class="p-3 text-center">Pieza</th>
-                                    <th class="p-3">V-Mesial</th><th class="p-3">V-Centro</th><th class="p-3">V-Distal</th>
+                <div class="sliders-box">
