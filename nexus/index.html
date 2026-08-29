@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sultana Nexus™ | Enterprise Dental Operating Suite</title>
-    <!-- CORE FRAMEWORK INTEGRATION -->
+    <!-- CORE SYSTEM INTEGRATION: TAILWIND STYLING CORE -->
     <script src="https://jsdelivr.net"></script>
     <style>
         body { background-color: #030712; color: #ffffff; }
@@ -20,11 +20,13 @@
         .module-tab:hover { border-color: #d4af37; color: #ffffff; }
         .module-tab.active { border-color: #d4af37; background-color: #1e1b4b; color: #d4af37; }
         .app-container { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; min-height: 480px; }
+        .tooth-btn { border: 1px solid #1e293b; background-color: #111827; border-radius: 6px; padding: 12px; text-center: center; cursor: pointer; transition: all 0.2s ease; }
+        .tooth-btn:hover { border-color: #d4af37; }
     </style>
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col">
 
-    <!-- BRAND COCKPIT HEADER -->
+    <!-- BRAND COCKPIT HEADER NAVIGATION -->
     <header class="max-w-7xl mx-auto w-full pt-8 pb-4 px-6 flex flex-col md:flex-row justify-between items-center border-b border-gray-900 gap-4">
         <div class="flex items-center gap-3">
             <span class="text-3xl">👑</span>
@@ -33,7 +35,7 @@
                 <p class="text-[10px] text-gray-400 uppercase tracking-widest">Enterprise Dental Core Operating Suite</p>
             </div>
         </div>
-        <!-- RIGID SWITCH INTERFACE BUTTON ARRAYS -->
+        <!-- RIGID SYSTEM SWITCH ENGINE MODULE TABS -->
         <div class="flex flex-wrap gap-2 justify-center">
             <button id="tab-chartmax" class="module-tab active" onclick="switchModule('chartmax')">📊 ChartMax</button>
             <button id="tab-aligniq" class="module-tab" onclick="switchModule('aligniq')">💎 AlignIQ</button>
@@ -43,33 +45,39 @@
         </div>
     </header>
 
-    <!-- WORKSPACE CANVAS REAL ESTATE -->
+    <!-- LIVE MODULAR INTERFACE CONTAINER CANVAS -->
     <main class="flex-grow max-w-7xl mx-auto w-full p-6">
         <div id="module-display" class="app-container p-6 shadow-2xl">
-            <!-- ENGINE MODULE CONTENT AUTOMATICALLY MATERIALIZES HERE -->
+            <!-- DENTAL ENGINE CODE MODULE MARKUP GENERATES HERE -->
         </div>
     </main>
 
-    <!-- COHORT METRIC COMPLIANCE FOOTER -->
+    <!-- METRIC COMPLIANCE LEGAL FOOTER -->
     <footer class="bg-black text-center py-6 text-[10px] border-t border-gray-900 px-6 text-gray-500">
         <p class="font-bold text-gray-400 mb-1">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Todos los Derechos Reservados.</p>
         <p>Sultana Nexus™ executes open-source architecture virtualization overlays inside sandboxed client networks. All storage layers sync natively with physical local appliance vaults.</p>
     </footer>
 
-    <!-- STABLE CONTROL APPLICATION ENGINE CODE SCRIPT -->
+    <!-- STABLE CONTROL INTERFACE SYSTEM SCRIPT -->
     <script>
+        // Pre-build the 32 anatomical tooth grid map row variables to bypass nested loop errors
+        let toothGridHTML = '';
+        for (let i = 1; i <= 32; i++) {
+            toothGridHTML += `
+                <div id="tooth-${i}" onclick="toggleTooth(${i})" class="tooth-btn">
+                    <div class="text-[10px] font-mono text-gray-500 mb-1">${i}</div>
+                    <span class="text-xl block my-1">🦷</span>
+                </div>
+            `;
+        }
+
         const modules = {
             chartmax: `
                 <div class="space-y-4">
                     <h2 class="text-lg font-bold uppercase text-white tracking-wide border-b border-gray-800 pb-2">📊 Sultana ChartMax™ <span class="text-xs font-normal text-gray-400 lowercase ml-2">odental core sandbox v24.3</span></h2>
                     <p class="text-xs text-gray-400">Haga clic en una pieza anatómica dental para registrar patologías clínicas o iniciar un expediente digital.</p>
                     <div class="grid grid-cols-4 sm:grid-cols-8 md:grid-cols-16 gap-2 pt-4">
-                        ${Array.from({length: 32}, (_, i) => `
-                            <div id="tooth-${i+1}" onclick="toggleTooth(${i+1})" class="border border-gray-800 bg-gray-900 rounded p-3 text-center cursor-pointer hover:border-yellow-500 transition-colors">
-                                <div class="text-[10px] font-mono text-gray-500 mb-1">${i+1}</div>
-                                <span class="text-xl block my-1">🦷</span>
-                            </div>
-                        `).join('')}
+                        ` + toothGridHTML + `
                     </div>
                 </div>
             `,
@@ -126,7 +134,3 @@
                                 <tr class="bg-gray-900 text-gray-400 text-[10px] uppercase font-bold tracking-wider border-b border-gray-800">
                                     <th class="p-3 text-center">Pieza</th>
                                     <th class="p-3">V-Mesial</th><th class="p-3">V-Centro</th><th class="p-3">V-Distal</th>
-                                    <th class="p-3">L-Mesial</th><th class="p-3">L-Centro</th><th class="p-3">L-Distal</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-xs divide-y divide-gray-900">
