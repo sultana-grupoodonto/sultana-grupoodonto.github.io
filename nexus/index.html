@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sultana Nexus™ | Enterprise Dental Operating Suite</title>
-    <!-- 🔌 INTERNAL SYSTEM FALLBACK CSS STRUCTURING CORE -->
     <style>
         body { background-color: #030712; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; }
         .sultana-gold { color: #d4af37; }
-        .bg-sultana-gold { background-color: #d4af37; color: #030712; }
         header { max-width: 1200px; width: 92%; margin: 0 auto; padding: 32px 0 16px 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; gap: 16px; }
         @media (min-width: 768px) { header { flex-direction: row; } }
         .brand-block { display: flex; align-items: center; gap: 12px; }
@@ -22,7 +20,7 @@
         .app-container { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; min-height: 480px; box-sizing: border-box; }
         .nexus-panel { display: none; }
         .nexus-panel.active { display: block; }
-        .panel-title { margin: 0 0 8px 0; font-size: 18px; font-weight: 800; text-transform: uppercase; tracking-wide; border-b: 1px solid #1e293b; padding-bottom: 8px; }
+        .panel-title { margin: 0 0 8px 0; font-size: 18px; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #1e293b; padding-bottom: 8px; }
         .panel-sub { margin: 0 0 16px 0; font-size: 12px; color: #94a3b8; }
         .grid-32 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding-top: 16px; }
         @media (min-width: 480px) { .grid-32 { grid-template-columns: repeat(8, 1fr); } }
@@ -31,7 +29,7 @@
         .tooth-btn:hover { border-color: #d4af37; }
         .tooth-num { font-size: 9px; font-family: monospace; color: #64748b; margin-bottom: 4px; }
         .tooth-icon { font-size: 20px; display: block; }
-        .dropzone-box { border: 2px dashed #1e293b; background-color: #020617; border-radius: 12px; padding: 48px 24px; text-align: center; margin: 24px 0; transition: border-color 0.2s; }
+        .dropzone-box { border: 2px dashed #1e293b; background-color: #020617; border-radius: 12px; padding: 48px 24px; text-align: center; margin: 24px 0; }
         .dropzone-box:hover { border-color: #d4af37; }
         .sliders-box { display: grid; grid-template-columns: 1fr; gap: 16px; background-color: #020617; padding: 16px; border-radius: 8px; border: 1px solid #1e293b; }
         @media (min-width: 600px) { .sliders-box { grid-template-columns: repeat(3, 1fr); } }
@@ -40,8 +38,8 @@
         .slider-input { width: 100%; accent-color: #b45309; }
         .grid-3-way { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 16px 0; }
         @media (min-width: 768px) { .grid-3-way { grid-template-columns: repeat(3, 1fr); } }
-        .xray-window { bg-color: #000000; border: 1px solid #1e293b; background-color: #000000; border-radius: 6px; padding: 16px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
-        .xray-title { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; tracking-wider; margin: 0; }
+        .xray-window { border: 1px solid #1e293b; background-color: #000000; border-radius: 6px; padding: 16px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
+        .xray-title { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; margin: 0; }
         .xray-icon { font-size: 32px; color: #1e293b; text-align: center; margin: auto; display: block; }
         .xray-meta { font-size: 9px; color: #334155; text-align: right; }
         .perio-table-wrap { overflow-x: auto; margin-top: 16px; border: 1px solid #1e293b; border-radius: 8px; }
@@ -51,9 +49,9 @@
         .perio-tr { border-bottom: 1px solid #0f172a; }
         .perio-tr:hover { background-color: #0f172a; }
         .perio-td { padding: 10px; }
-        .perio-input { width: 40px; background-color: #111827; border: 1px solid #1e293b; text-align: center; color: #ffffff; padding: 4px 0; rounded: 4px; outline: none; border-radius: 4px; }
+        .perio-input { width: 40px; background-color: #111827; border: 1px solid #1e293b; text-align: center; color: #ffffff; padding: 4px 0; border-radius: 4px; outline: none; }
         .perio-input:focus { border-color: #d4af37; }
-        .lab-layout { display: grid; grid-template-columns: 1fr; gap: 24px; pt-4; margin-top: 16px; }
+        .lab-layout { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 16px; }
         @media (min-width: 768px) { .lab-layout { grid-template-columns: 3fr 1fr; } }
         .cad-viewport { background-color: #000000; border: 1px solid #1e293b; border-radius: 12px; min-height: 320px; display: flex; align-items: center; justify-content: center; position: relative; }
         .cad-badge { position: absolute; bottom: 12px; left: 12px; background-color: rgba(15,23,42,0.8); padding: 4px 12px; border-radius: 4px; font-size: 10px; font-family: monospace; color: #64748b; border: 1px solid #1e293b; }
@@ -61,9 +59,9 @@
         .sidebar-title { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; margin: 0 0 12px 0; }
         .lab-btn { width: 100%; background-color: #111827; border: 1px solid #1e293b; color: white; font-size: 12px; font-weight: bold; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; margin-bottom: 8px; }
         .lab-btn:hover { background-color: #1e293b; }
-        .submit-btn { width: 100%; background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 0; border-radius: 8px; text-transform: uppercase; tracking-wider; cursor: pointer; transition: background 0.2s; }
+        .submit-btn { width: 100%; background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 0; border-radius: 8px; text-transform: uppercase; tracking-wider; cursor: pointer; }
         .submit-btn:hover { background-color: #eab308; }
-        footer { bg-color: #000000; text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto; }
+        footer { text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto; }
     </style>
 </head>
 <body>
@@ -77,7 +75,7 @@
                 <p class="brand-sub">Enterprise Dental Core Operating Suite</p>
             </div>
         </div>
-        <!-- HIGH-SPEED ARCHITECTURE SYSTEM MODULE TABS -->
+        <!-- HEADER MODULE NAVIGATION TABS -->
         <div class="tabs-row">
             <button id="tab-chartmax" class="module-tab active" onclick="switchModule('chartmax')">📊 ChartMax</button>
             <button id="tab-aligniq" class="module-tab" onclick="switchModule('aligniq')">💎 AlignIQ</button>
@@ -96,7 +94,7 @@
                 <h2 class="panel-title">📊 Sultana ChartMax™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">odental core sandbox v24.3</span></h2>
                 <p class="panel-sub">Haga clic en una pieza anatómica dental para registrar patologías clínicas o iniciar un expediente digital.</p>
                 <div class="grid-32" id="chartmax-grid-target">
-                    <!-- STATIC LOOP GENERATED INSTANTLY BY LOCAL ENGINE -->
+                    <!-- GRAPHICAL TILES INJECTED DYNAMICALLY BY ACTIVE SCRIPT -->
                 </div>
             </div>
 
@@ -110,3 +108,5 @@
                     <p style="margin: 4px 0 0 0; font-size: 11px; color: #475569;">Formatos admitidos de alta resolución: .STL / .PLY</p>
                 </div>
                 <div class="sliders-box">
+                    <div class="slider-group"><span class="slider-label">Traducción Vector X</span><input type="range" class="slider-input"></div>
+                    <div class="slider-group"><span class="slider-label">Rotación Vector Y</span><input type="range" class="slider-input"></div>
