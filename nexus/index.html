@@ -77,7 +77,6 @@
                 <p class="brand-sub">Enterprise Dental Core Operating Suite</p>
             </div>
         </div>
-        <!-- HEADER MODULE NAVIGATION TABS -->
         <div class="tabs-row">
             <button id="tab-chartmax" class="module-tab active" onclick="switchModule('chartmax')">📊 ChartMax</button>
             <button id="tab-aligniq" class="module-tab" onclick="switchModule('aligniq')">💎 AlignIQ</button>
@@ -136,7 +135,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- PANEL 4: SULTANA PERIOMAP -->
             <div id="panel-periomap" class="nexus-panel">
                 <h2 class="panel-title">📈 Sultana PerioMap™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">periodontal matrix array</span></h2>
@@ -177,7 +175,7 @@
 
             <!-- PANEL 6: LIVE DEMO INTAKE DRAWER -->
             <div id="panel-demo" class="nexus-panel">
-                <h2 class="panel-title">💾 Servidor de Base de Datos Activo <span style="font-size:11px; font-weight:normal; color:#22c55e; text-transform:lowercase; margin-left:8px;">● cloud database engine ready</span></h2>
+                <h2 class="panel-title">💾 Servidor de Base de Datos Activo <span style="font-size:11px; font-weight:normal; color:#22c55e; text-transform:lowercase; margin-left:8px;">● ready</span></h2>
                 <p class="panel-sub">Ingrese un registro clínico real para simular el almacenamiento.</p>
                 <div>
                     <div style="margin-bottom: 12px;">
@@ -203,13 +201,13 @@
     <footer>
         <p style="font-weight: bold; color: #64748b; margin: 0 0 4px 0;">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Todos los Derechos Reservados.</p>
     </footer>
-        <!-- STABLE CONTROL APPLICATION ENGINE SCRIPT -->
+       <!-- STABLE CONTROL APPLICATION ENGINE SCRIPT -->
     <script>
-        // 🔑 CONNECTION VALUES ARE PRE-BAKED RIGHT HERE
+        // 🔑 HARD-CODED CLOUD DATABASE API ROUTING HOOKS
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
         
-        // Initialize backend logic connector variables safely
+        // Initialize active database logic wrapper parameters safely
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         // Render the 32 tooth maps instantly on screen safely
@@ -280,8 +278,8 @@
             }
         }
 
-        // 🚀 LIVE CLOUD HANDSHAKE CORE ENGINE DATA LOOPS
-        async function saveToCloudMock() {
+        // Asynchronous Cloud Database Core Engine Data Sync Loop
+        async function saveToCloud() {
             var name = document.getElementById('patient-name').value;
             var phone = document.getElementById('patient-phone').value;
             var need = document.getElementById('patient-need').value;
@@ -289,14 +287,13 @@
 
             if (!name || !phone || !need) {
                 statusLog.style.color = '#ef4444';
-                statusLog.innerText = "❌ Error: Por favor complete todos los campos antes de enviar.";
+                statusLog.innerText = "❌ Error: Por favor complete todos los campos.";
                 return;
             }
 
             statusLog.style.color = '#eab308';
             statusLog.innerText = "🔄 Transmitiendo datos criptográficamente al servidor PostgreSQL...";
 
-            // Injects data row straight to your live Supabase data tables
             const { data, error } = await supabaseClient
                 .from('pacientes')
                 .insert([{ nombre: name, telefono: phone, tratamiento: need }]);
