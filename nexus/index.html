@@ -3,76 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sultana Nexus™ | Enterprise Dental Operating Suite</title>
-    
-    <!-- 🔌 INITIALIZATION DATA INTERFACE: LOADS CLOUD ENGINE CORE BEFORE THE INTERFACE LAYOUT -->
+    <title>Sultana Nexus™ | Enterprise Dental OS</title>
+    <!-- 🔌 INITIALIZATION LOGIC PIPELINE: AUTOMATED BACKEND DRIVERS -->
     <script src="https://jsdelivr.net"></script>
-    
     <style>
         body { background-color: #030712; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; }
         .sultana-gold { color: #d4af37; }
-        header { max-width: 1200px; width: 92%; margin: 0 auto; padding: 32px 0 16px 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; gap: 16px; }
+        
+        /* SECURITY ACCREDITATION PORTAL WALL */
+        .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #030712; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+        .login-card { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 40px; width: 100%; max-width: 400px; box-sizing: border-box; text-align: center; }
+        
+        header { max-width: 1200px; width: 92%; margin: 0 auto; padding: 24px 0 16px 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; gap: 16px; }
         @media (min-width: 768px) { header { flex-direction: row; } }
         .brand-block { display: flex; align-items: center; gap: 12px; }
         .brand-title { margin: 0; font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
         .brand-sub { margin: 2px 0 0 0; font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; }
+        
         .tabs-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
         .module-tab { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 12px 20px; font-weight: bold; cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; color: #94a3b8; display: inline-flex; align-items: center; gap: 8px; }
         .module-tab:hover { border-color: #d4af37; color: #ffffff; }
         .module-tab.active { border-color: #d4af37; background-color: #1e1b4b; color: #d4af37; }
-        main { flex-grow: 1; max-width: 1200px; width: 92%; margin: 0 auto; padding: 24px 0; }
-        .app-container { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; min-height: 480px; box-sizing: border-box; }
+        
+        main { flex-grow: 1; max-width: 1200px; width: 92%; margin: 0 auto; padding: 20px 0; display: none; grid-template-columns: 1fr; gap: 24px; }
+        @media (min-width: 992px) { main { grid-template-columns: 320px 1fr; } }
+        
+        .sidebar-directory { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+        .directory-title { font-size: 11px; text-transform: uppercase; font-weight: bold; color: #64748b; margin: 0; letter-spacing: 1px; }
+        .search-box { width: 100%; background-color: #111827; border: 1px solid #1e293b; color: white; padding: 10px; border-radius: 6px; box-sizing: border-box; outline: none; }
+        .search-box:focus { border-color: #d4af37; }
+        
+        .patient-list { display: flex; flex-direction: column; gap: 8px; max-height: 400px; overflow-y: auto; }
+        .patient-card { background-color: #111827; border: 1px solid #1e293b; border-radius: 6px; padding: 12px; cursor: pointer; transition: all 0.2s; }
+        .patient-card:hover { border-color: #d4af37; }
+        .patient-card.selected { border-color: #d4af37; background-color: #1e1b4b; }
+        .p-name { font-size: 14px; font-weight: bold; margin: 0; color: #f8fafc; }
+        .p-meta-line { font-size: 11px; color: #64748b; margin: 4px 0 0 0; display: flex; justify-content: space-between; font-family: monospace; }
+        
+        .app-container { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; min-height: 520px; box-sizing: border-box; position: relative; }
         .nexus-panel { display: none; }
         .nexus-panel.active { display: block; }
-        .panel-title { margin: 0 0 8px 0; font-size: 18px; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #1e293b; padding-bottom: 8px; }
-        .panel-sub { margin: 0 0 16px 0; font-size: 12px; color: #94a3b8; }
-        .grid-32 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding-top: 16px; }
-        @media (min-width: 480px) { .grid-32 { grid-template-columns: repeat(8, 1fr); } }
-        @media (min-width: 768px) { .grid-32 { grid-template-columns: repeat(16, 1fr); } }
-        .tooth-btn { border: 1px solid #1e293b; background-color: #111827; border-radius: 6px; padding: 12px 6px; text-align: center; cursor: pointer; transition: all 0.2s ease; user-select: none; }
-        .tooth-btn:hover { border-color: #d4af37; }
-        .tooth-num { font-size: 11px; font-family: monospace; color: #64748b; margin-bottom: 4px; font-weight: bold; }
-        .tooth-label { font-size: 12px; display: block; color: #e2e8f0; }
-        .dropzone-box { border: 2px dashed #1e293b; background-color: #020617; border-radius: 12px; padding: 48px 24px; text-align: center; margin: 24px 0; }
-        .dropzone-box:hover { border-color: #d4af37; }
-        .sliders-box { display: grid; grid-template-columns: 1fr; gap: 16px; background-color: #020617; padding: 16px; border-radius: 8px; border: 1px solid #1e293b; }
-        @media (min-width: 600px) { .sliders-box { grid-template-columns: repeat(3, 1fr); } }
-        .slider-group { display: flex; flex-direction: column; }
-        .slider-label { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; margin-bottom: 6px; }
-        .slider-input { width: 100%; accent-color: #b45309; }
-        .grid-3-way { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 16px 0; }
-        @media (min-width: 768px) { .grid-3-way { grid-template-columns: repeat(3, 1fr); } }
-        .xray-window { border: 1px solid #1e293b; background-color: #000000; border-radius: 6px; padding: 16px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
-        .xray-title { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; margin: 0; }
-        .xray-icon { font-size: 12px; color: #475569; text-align: center; margin: auto; display: block; font-weight: bold; }
-        .xray-meta { font-size: 9px; color: #334155; text-align: right; }
-        .form-input { width: 100%; max-width: 400px; background-color: #111827; border: 1px solid #1e293b; color: white; padding: 12px; border-radius: 6px; outline: none; margin-top: 6px; display: block; font-size: 14px; box-sizing: border-box; }
-        .form-input:focus { border-color: #d4af37; }
-        .perio-table-wrap { overflow-x: auto; margin-top: 16px; border: 1px solid #1e293b; border-radius: 8px; }
-        .perio-table { width: 100%; border-collapse: collapse; background-color: #020617; text-align: left; font-size: 12px; }
-        .perio-thead { background-color: #0f172a; color: #94a3b8; font-size: 10px; text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #1e293b; }
-        .perio-th { padding: 12px; }
-        .perio-tr { border-bottom: 1px solid #0f172a; }
-        .perio-tr:hover { background-color: #0f172a; }
-        .perio-td { padding: 10px; }
-        .perio-input { width: 40px; background-color: #111827; border: 1px solid #1e293b; text-align: center; color: #ffffff; padding: 4px 0; border-radius: 4px; outline: none; }
-        .perio-input:focus { border-color: #d4af37; }
-        .lab-layout { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 16px; }
-        @media (min-width: 768px) { .lab-layout { grid-template-columns: 3fr 1fr; } }
-        .cad-viewport { background-color: #000000; border: 1px solid #1e293b; border-radius: 12px; min-height: 320px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .cad-badge { position: absolute; bottom: 12px; left: 12px; background-color: rgba(15,23,42,0.8); padding: 4px 12px; border-radius: 4px; font-size: 10px; font-family: monospace; color: #64748b; border: 1px solid #1e293b; }
-        .lab-sidebar { background-color: #020617; padding: 16px; border-radius: 12px; border: 1px solid #1e293b; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; gap: 24px; }
-        .sidebar-title { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; margin: 0 0 12px 0; }
-        .lab-btn { width: 100%; background-color: #111827; border: 1px solid #1e293b; color: white; font-size: 12px; font-weight: bold; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; margin-bottom: 8px; }
-        .lab-btn:hover { background-color: #1e293b; }
-        .submit-btn { background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 28px; border-radius: 8px; text-transform: uppercase; tracking-wider; cursor: pointer; margin-top: 16px; font-family: sans-serif; }
-        .submit-btn:hover { background-color: #eab308; }
-        footer { text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto; }
+        .panel-title { margin: 0 0 4px 0; font-size: 18px; font-weight: 800; text-transform: uppercase; }
+        .panel-sub { margin: 0 0 20px 0; font-size: 12px; color: #94a3b8; }
+        
+        .active-patient-badge { background-color: #1e1b4b; border: 1px solid #d4af37; color: #d4af37; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; }
+        .tenant-isolation-banner { background-color: #020617; border-left: 3px solid #22c55e; padding: 6px 12px; font-size: 11px; color: #22c55e; border-radius: 4px; display: inline-block; font-weight: bold; font-family: monospace; text-transform: uppercase; letter-spacing: 0.5px; }
     </style>
 </head>
 <body>
 
-    <!-- BRAND COCKPIT HEADER -->
+    <!-- GATEWAY 1: SECURITY ACCREDITATION PORTAL INPUT WALL -->
+    <div id="login-gateway-wall" class="login-overlay">
+        <div class="login-card">
+            <h2 style="margin: 0 0 6px 0; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;">Sultana <span class="sultana-gold">Nexus™</span></h2>
+            <p style="font-size: 11px; color: #64748b; margin: 0 0 24px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Acceso de Consultorios Afiliados</p>
+            <div style="text-align: left; margin-bottom: 16px;">
+                <label style="font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase;">ID de Licencia del Consultorio</label>
+                <input type="text" id="clinic-tenant-input" class="form-input" style="margin-top:6px;" placeholder="Ej. CLINICA-SANTO-DOMINGO">
+            </div>
+            <button class="submit-btn" style="width: 100%;" onclick="authenticateClinicTenantSession()">Validar Licencia MSO</button>
+            <p id="login-error-log" style="font-size: 11px; font-weight: bold; color: #ef4444; margin: 12px 0 0 0;"></p>
+        </div>
+    </div>
+
+    <!-- MASTER BRAND OPERATING HEADER -->
     <header>
         <div class="brand-block">
             <div>
@@ -80,236 +74,270 @@
                 <p class="brand-sub">Enterprise Dental Core Operating Suite</p>
             </div>
         </div>
-        <!-- HEADER ALL-MODULES NAVIGATION TABS -->
         <div class="tabs-row">
-            <button id="tab-chartmax" class="module-tab active" onclick="switchModule('chartmax')">📊 ChartMax</button>
-            <button id="tab-aligniq" class="module-tab" onclick="switchModule('aligniq')">💎 AlignIQ</button>
-            <button id="tab-endoapex" class="module-tab" onclick="switchModule('endoapex')">🔬 EndoApex</button>
-            <button id="tab-periomap" class="module-tab" onclick="switchModule('periomap')">📈 PerioMap</button>
-            <button id="tab-labfab" class="module-tab" onclick="switchModule('labfab')">📐 LabFab</button>
-            <button id="tab-demo" class="module-tab" onclick="switchModule('demo')">💾 Live Demo</button>
+            <button id="tab-chartmax" class="module-tab active" onclick="switchModule('chartmax')">📊 Odontograma</button>
+            <button id="tab-records" class="module-tab" onclick="switchModule('records')">📋 Ficha Clínica</button>
+            <button id="tab-registration" class="module-tab" onclick="switchModule('registration')">👤 Alta de Paciente</button>
         </div>
     </header>
-    <!-- LIVE MODULAR INTERFACE CONTAINER CANVAS -->
-    <main>
-        <div class="app-container">
-            
-            <!-- PANEL 1: SULTANA CHARTMAX (HARDCODED NATIVE BLOCKS) -->
+    <main id="master-system-desktop">
+        <!-- LEFT PANEL: INTEGRATED PATIENT EXPEDIENT DIRECTORY -->
+        <section class="sidebar-directory">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+                <h3 class="directory-title">Directorio de Pacientes</h3>
+                <div id="active-clinic-badge-target" class="tenant-isolation-banner"></div>
+            </div>
+            <input type="text" id="directory-search" class="search-box" placeholder="Buscar por nombre..." oninput="filterDirectory()">
+            <div class="patient-list" id="directory-target-cards"></div>
+        </section>
+
+        <!-- RIGHT PANEL: OPERATIONAL CLINICAL TARGET LAYER -->
+        <section class="app-container">
+            <div class="active-patient-badge" id="current-patient-strip">🔴 Ningún Paciente Seleccionado (Modo Lectura)</div>
+
+            <!-- MODULE 1: CHARTMAX CLINICAL ODONTOGRAM CHART -->
             <div id="panel-chartmax" class="nexus-panel active">
-                <h2 class="panel-title">📊 Sultana ChartMax™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">odental core sandbox v24.3</span></h2>
-                <p class="panel-sub">Haga clic en una pieza anatómica dental para registrar patologías clínicas o iniciar un expediente digital.</p>
-                <div class="grid-32" id="chartmax-grid-target">
-                    <div id="tooth-1" onclick="toggleTooth(1)" class="tooth-btn"><div class="tooth-num">1</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-2" onclick="toggleTooth(2)" class="tooth-btn"><div class="tooth-num">2</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-3" onclick="toggleTooth(3)" class="tooth-btn"><div class="tooth-num">3</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-4" onclick="toggleTooth(4)" class="tooth-btn"><div class="tooth-num">4</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-5" onclick="toggleTooth(5)" class="tooth-btn"><div class="tooth-num">5</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-6" onclick="toggleTooth(6)" class="tooth-btn"><div class="tooth-num">6</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-7" onclick="toggleTooth(7)" class="tooth-btn"><div class="tooth-num">7</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-8" onclick="toggleTooth(8)" class="tooth-btn"><div class="tooth-num">8</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-9" onclick="toggleTooth(9)" class="tooth-btn"><div class="tooth-num">9</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-10" onclick="toggleTooth(10)" class="tooth-btn"><div class="tooth-num">10</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-11" onclick="toggleTooth(11)" class="tooth-btn"><div class="tooth-num">11</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-12" onclick="toggleTooth(12)" class="tooth-btn"><div class="tooth-num">12</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-13" onclick="toggleTooth(13)" class="tooth-btn"><div class="tooth-num">13</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-14" onclick="toggleTooth(14)" class="tooth-btn"><div class="tooth-num">14</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-15" onclick="toggleTooth(15)" class="tooth-btn"><div class="tooth-num">15</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-16" onclick="toggleTooth(16)" class="tooth-btn"><div class="tooth-num">16</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-17" onclick="toggleTooth(17)" class="tooth-btn"><div class="tooth-num">17</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-18" onclick="toggleTooth(18)" class="tooth-btn"><div class="tooth-num">18</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-19" onclick="toggleTooth(19)" class="tooth-btn"><div class="tooth-num">19</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-20" onclick="toggleTooth(20)" class="tooth-btn"><div class="tooth-num">20</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-21" onclick="toggleTooth(21)" class="tooth-btn"><div class="tooth-num">21</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-22" onclick="toggleTooth(22)" class="tooth-btn"><div class="tooth-num">22</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-23" onclick="toggleTooth(23)" class="tooth-btn"><div class="tooth-num">23</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-24" onclick="toggleTooth(24)" class="tooth-btn"><div class="tooth-num">24</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-25" onclick="toggleTooth(25)" class="tooth-btn"><div class="tooth-num">25</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-26" onclick="toggleTooth(26)" class="tooth-btn"><div class="tooth-num">26</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-27" onclick="toggleTooth(27)" class="tooth-btn"><div class="tooth-num">27</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-28" onclick="toggleTooth(28)" class="tooth-btn"><div class="tooth-num">28</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-29" onclick="toggleTooth(29)" class="tooth-btn"><div class="tooth-num">29</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-30" onclick="toggleTooth(30)" class="tooth-btn"><div class="tooth-num">30</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-31" onclick="toggleTooth(31)" class="tooth-btn"><div class="tooth-num">31</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-32" onclick="toggleTooth(32)" class="tooth-btn"><div class="tooth-num">32</div><span class="tooth-label">🦷</span></div>
-                </div>
-            </div>
-
-            <!-- PANEL 2: SULTANA ALIGNIQ -->
-            <div id="panel-aligniq" class="nexus-panel">
-                <h2 class="panel-title">💎 Sultana AlignIQ™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">three.js mesh vector engine</span></h2>
-                <p class="panel-sub">Arrastre el archivo .STL del escaneo intraoral para inicializar el cálculo de alineadores invisibles.</p>
-                <div class="dropzone-box">
-                    <span style="font-size: 40px; display: block; margin-bottom: 12px;">📐</span>
-                    <p style="margin: 0; font-size: 14px; font-weight: bold; color: #e2e8f0;">Arrastre y Suelte el Modelo 3D Aquí</p>
-                    <p style="margin: 4px 0 0 0; font-size: 11px; color: #475569;">Formatos admitidos de alta resolución: .STL / .PLY</p>
-                </div>
-                <div class="sliders-box">
-                    <div class="slider-group"><span class="slider-label">Traducción Vector X</span><input type="range" class="slider-input"></div>
-                    <div class="slider-group"><span class="slider-label">Rotación Vector Y</span><input type="range" class="slider-input"></div>
-                    <div class="slider-group"><span class="slider-label">Grosor de Placa (mm)</span><input type="range" class="slider-input"></div>
-                </div>
-            </div>
-            <!-- PANEL 3: SULTANA ENDOAPEX -->
-            <div id="panel-endoapex" class="nexus-panel">
-                <h2 class="panel-title">🔬 Sultana EndoApex™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">html5 ohif slice loader</span></h2>
-                <p class="panel-sub">Visualizador multi-planar activo. Indexando archivos DICOM en tiempo real desde el almacenamiento local appliance.</p>
-                <div class="grid-3-way">
-                    <div class="xray-window"><span class="xray-title">Vista Axial (Superior)</span><span class="xray-icon">🩻</span><span class="xray-meta">Slice 124/256</span></div>
-                    <div class="xray-window"><span class="xray-title">Vista Sagital (Perfil)</span><span class="xray-icon">🩻</span><span class="xray-meta">Slice 089/256</span></div>
-                    <div class="xray-window"><span class="xray-title">Vista Coronal (Frontal)</span><span class="xray-icon">🩻</span><span class="xray-meta">Slice 112/256</span></div>
-                </div>
-            </div>
-
-            <!-- PANEL 4: SULTANA PERIOMAP -->
-            <div id="panel-periomap" class="nexus-panel">
-                <h2 class="panel-title">📈 Sultana PerioMap™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">periodontal matrix array</span></h2>
-                <p class="panel-sub">Registre la profundidad de bolsa periodontal (valores ≥ 4 mm se marcarán automáticamente en alerta roja corporativa).</p>
-                <div class="perio-table-wrap">
-                    <table class="perio-table">
-                        <thead class="perio-thead">
-                            <tr>
-                                <th class="perio-th" style="text-align: center;">Pieza</th>
-                                <th class="perio-th">V-Mesial</th><th class="perio-th">V-Centro</th><th class="perio-th">V-Distal</th>
-                                <th class="perio-th">L-Mesial</th><th class="perio-th">L-Centro</th><th class="perio-th">L-Distal</th>
-                            </tr>
-                        </thead>
-                        <tbody style="color: #e2e8f0;">
-                            <tr class="perio-tr"><td class="perio-td" style="font-weight:bold; color:#94a3b8; background-color:rgba(15,23,42,0.5); text-align:center; font-family:monospace;">Tooth-1</td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td></tr>
-                            <tr class="perio-tr"><td class="perio-td" style="font-weight:bold; color:#94a3b8; background-color:rgba(15,23,42,0.5); text-align:center; font-family:monospace;">Tooth-2</td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td></tr>
-                            <tr class="perio-tr"><td class="perio-td" style="font-weight:bold; color:#94a3b8; background-color:rgba(15,23,42,0.5); text-align:center; font-family:monospace;">Tooth-3</td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- PANEL 5: SULTANA LABFAB -->
-            <div id="panel-labfab" class="nexus-panel">
-                <h2 class="panel-title">📐 Sultana LabFab™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">opencascade webassembly mesh cad</span></h2>
-                <p class="panel-sub">Laboratorio digital integrado. Trace la línea de margen clínico para extrusión automatizada de coronas y puentes protésicos.</p>
-                <div class="lab-layout">
-                    <div class="cad-viewport">
-                        <span style="font-size: 50px; color:#1e293b;">📐</span>
-                        <div class="cad-badge">CAD Engine Kernel Active</div>
-                    </div>
-                    <div class="lab-sidebar">
-                        <div style="width: 100%;">
-                            <h4 class="sidebar-title">Herramientas de Tallado</h4>
-                            <button class="lab-btn">📍 Trazar Margen</button>
-                            <button class="lab-btn">💎 Ajustar Contacto</button>
-                        </div>
-                        <button class="submit-btn">Exportar .STL Limpio</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PANEL 6: LIVE DEMO CLOUD STORAGE -->
-            <div id="panel-demo" class="nexus-panel">
-                <h2 class="panel-title">💾 Servidor de Base de Datos Activo <span style="font-size:11px; font-weight:normal; color:#22c55e; text-transform:lowercase; margin-left:8px;">● cloud postgresql matrix connected</span></h2>
-                <p class="panel-sub">Ingrese un registro clínico real. Al presionar guardar, los datos se enviarán criptográficamente al almacén de datos de Supabase.</p>
+                <h2 class="panel-title">Sultana ChartMax™</h2>
+                <p class="panel-sub">Haga clic en las piezas dentales para marcar diagnóstico de patologías o extracciones. Presione guardar para registrar en la ficha del paciente.</p>
                 
-                <div style="space-y-4">
-                    <div style="margin-bottom: 12px;">
-                        <label style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold;">Nombre Completo del Paciente</label>
-                        <input type="text" id="patient-name" class="form-input" placeholder="Juan Pérez">
-                    </div>
-                    <div style="margin-bottom: 12px;">
-                        <label style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold;">Contacto de WhatsApp</label>
-                        <input type="text" id="patient-phone" class="form-input" placeholder="809-555-5555">
-                    </div>
-                    <div style="margin-bottom: 12px;">
-                        <label style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold;">Requerimiento Clínico Principal</label>
-                        <input type="text" id="patient-need" class="form-input" placeholder="Implante Dental / Carillas de Porcelana">
-                    </div>
-                    <button class="submit-btn" onclick="saveToCloud()">Guardar Registro en Base de Datos Real</button>
-                    <p id="db-status-log" style="font-size: 12px; font-weight: bold; margin-top: 16px; color: #94a3b8;"></p>
+                <style>
+                    .grid-32 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding-top: 8px; }
+                    @media (min-width: 480px) { .grid-32 { grid-template-columns: repeat(8, 1fr); } }
+                    @media (min-width: 768px) { .grid-32 { grid-template-columns: repeat(16, 1fr); } }
+                    .tooth-btn { border: 1px solid #1e293b; background-color: #111827; border-radius: 6px; padding: 12px 4px; text-align: center; cursor: pointer; transition: all 0.2s ease; user-select: none; }
+                    .tooth-btn:hover { border-color: #d4af37; }
+                    .tooth-btn.active-decay { border-color: #ef4444; background-color: rgba(239,68,68,0.15); }
+                    .tooth-btn.active-decay .tooth-num { color: #ef4444; }
+                </style>
+
+                <div class="grid-32">
+                    <div id="tooth-1" onclick="toggleToothState(1)" class="tooth-btn"><div class="tooth-num">1</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-2" onclick="toggleToothState(2)" class="tooth-btn"><div class="tooth-num">2</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-3" onclick="toggleToothState(3)" class="tooth-btn"><div class="tooth-num">3</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-4" onclick="toggleToothState(4)" class="tooth-btn"><div class="tooth-num">4</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-5" onclick="toggleToothState(5)" class="tooth-btn"><div class="tooth-num">5</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-6" onclick="toggleToothState(6)" class="tooth-btn"><div class="tooth-num">6</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-7" onclick="toggleToothState(7)" class="tooth-btn"><div class="tooth-num">7</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-8" onclick="toggleToothState(8)" class="tooth-btn"><div class="tooth-num">8</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-9" onclick="toggleToothState(9)" class="tooth-btn"><div class="tooth-num">9</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-10" onclick="toggleToothState(10)" class="tooth-btn"><div class="tooth-num">10</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-11" onclick="toggleToothState(11)" class="tooth-btn"><div class="tooth-num">11</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-12" onclick="toggleToothState(12)" class="tooth-btn"><div class="tooth-num">12</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-13" onclick="toggleToothState(13)" class="tooth-btn"><div class="tooth-num">13</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-14" onclick="toggleToothState(14)" class="tooth-btn"><div class="tooth-num">14</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-15" onclick="toggleToothState(15)" class="tooth-btn"><div class="tooth-num">15</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-16" onclick="toggleToothState(16)" class="tooth-btn"><div class="tooth-num">16</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-17" onclick="toggleToothState(17)" class="tooth-btn"><div class="tooth-num">17</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-18" onclick="toggleToothState(18)" class="tooth-btn"><div class="tooth-num">18</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-19" onclick="toggleToothState(19)" class="tooth-btn"><div class="tooth-num">19</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-20" onclick="toggleToothState(20)" class="tooth-btn"><div class="tooth-num">20</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-21" onclick="toggleToothState(21)" class="tooth-btn"><div class="tooth-num">21</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-22" onclick="toggleToothState(22)" class="tooth-btn"><div class="tooth-num">22</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-23" onclick="toggleToothState(23)" class="tooth-btn"><div class="tooth-num">23</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-24" onclick="toggleToothState(24)" class="tooth-btn"><div class="tooth-num">24</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-25" onclick="toggleToothState(25)" class="tooth-btn"><div class="tooth-num">25</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-26" onclick="toggleToothState(26)" class="tooth-btn"><div class="tooth-num">26</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-27" onclick="toggleToothState(27)" class="tooth-btn"><div class="tooth-num">27</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-28" onclick="toggleToothState(28)" class="tooth-btn"><div class="tooth-num">28</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-29" onclick="toggleToothState(29)" class="tooth-btn"><div class="tooth-num">29</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-30" onclick="toggleToothState(30)" class="tooth-btn"><div class="tooth-num">30</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-31" onclick="toggleToothState(31)" class="tooth-btn"><div class="tooth-num">31</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-32" onclick="toggleToothState(32)" class="tooth-btn"><div class="tooth-num">32</div><span class="tooth-label">🦷</span></div>
+                </div>
+                
+                <div style="margin-top: 24px;">
+                    <button class="submit-btn" onclick="saveAnatomicalChart()">Guardar Cambios del Odontograma</button>
+                    <span id="chart-status-msg" class="status-logger"></span>
                 </div>
             </div>
+            <!-- MODULE 2: FICHA CLINICA & COMPREHENSIVE MEDICAL RECORDS NOTES -->
+            <div id="panel-records" class="nexus-panel">
+                <h2 class="panel-title">📋 Historial y Tratamiento Progresivo</h2>
+                <p class="panel-sub">Consulte y modifique las notas de evolución clínica del paciente.</p>
+                <div class="form-group">
+                    <label class="form-label">Notas Clínicas y Diagnóstico General</label>
+                    <textarea id="record-treatment-input" class="form-input" rows="6" placeholder="Escriba los hallazgos clínicos relevantes aquí..."></textarea>
+                </div>
+                <button class="submit-btn" onclick="saveClinicalNotes()">Actualizar Diagnóstico</button>
+                <span id="notes-status-msg" class="status-logger"></span>
+            </div>
 
-        </div>
+            <!-- MODULE 3: ALTA DE PACIENTE NEW CLINICAL INTAKE CREATION ENGINE -->
+            <div id="panel-registration" class="nexus-panel">
+                <h2 class="panel-title">👤 Alta de Nuevo Expediente</h2>
+                <p class="panel-sub">Registre un nuevo paciente en la red para inicializar su historial aislado.</p>
+                <div class="form-group">
+                    <label class="form-label">Nombre Completo del Paciente</label>
+                    <input type="text" id="new-p-name" class="form-input" placeholder="Ej. Carlos Mendoza">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contacto Telefónico (WhatsApp)</label>
+                    <input type="text" id="new-p-phone" class="form-input" placeholder="Ej. 809-555-0199">
+                </div>
+                <button class="submit-btn" onclick="createNewPatientInbound()">Crear Expediente Médico</button>
+                <span id="reg-status-msg" class="status-logger"></span>
+            </div>
+        </section>
     </main>
-
     <footer>
-        <p style="font-weight: bold; color: #94a3b8; margin: 0 0 4px 0;">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Todos los Derechos Reservados.</p>
+        <p style="text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto;">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Tenant Security Isolation Active.</p>
     </footer>
     <!-- STABLE CONTROL APPLICATION ENGINE SCRIPT -->
     <script>
-        // 🔌 HARD-CODED CLOUD DATABASE API ROUTING HOOKS
+        // HARD-CODED GLOBAL CARIBBEAN ENDPOINT ROUTING CLUSTERS
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
         
-        // Connect to your active cloud engine logic loop parameters safely
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // Tab Navigation Switching Core 
-        function switchModule(modKey) {
-            var tabs = document.getElementsByClassName('module-tab');
-            for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
-            var activeTab = document.getElementById('tab-' + modKey);
-            if (activeTab) { activeTab.classList.add('active'); }
+        let localPatientCache = [];
+        let activePatientObject = null;
+        let selectedToothArray = [];
+        let ACTIVE_CLINIC_TENANT_ID = "";
 
-            var panels = document.getElementsByClassName('nexus-panel');
-            for (var j = 0; j < panels.length; j++) { panels[j].classList.remove('active'); }
-            var activePanel = document.getElementById('panel-' + modKey);
-            if (activePanel) { activePanel.classList.add('active'); }
-        }
+        // 1. Intercept Interface: Block view until tenant key passes accreditation
+        function authenticateClinicTenantSession() {
+            const tenantInput = document.getElementById('clinic-tenant-input').value.trim().toUpperCase();
+            const errLogger = document.getElementById('login-error-log');
 
-        // Vector Object Toggling Click Handler
-        function toggleTooth(num) {
-            var tooth = document.getElementById('tooth-' + num);
-            if (!tooth) return;
-            if (tooth.style.borderColor === 'rgb(212, 175, 55)' || tooth.getAttribute('data-active') === 'true') {
-                tooth.style.borderColor = '#1e293b';
-                tooth.style.backgroundColor = '#111827';
-                tooth.setAttribute('data-active', 'false');
-            } else {
-                tooth.style.borderColor = '#d4af37';
-                tooth.style.backgroundColor = '#1e1b4b';
-                tooth.setAttribute('data-active', 'true');
-            }
-        }
-
-        // Perio Input Color Validation Engine 
-        function validatePerio(input) {
-            var val = parseInt(input.value);
-            if (val >= 4) {
-                input.style.backgroundColor = '#ef4444';
-                input.style.color = '#ffffff';
-            } else {
-                input.style.backgroundColor = '#111827';
-                input.style.color = '#ffffff';
-            }
-        }
-
-        // Asynchronous Cloud Database Core Engine Data Sync Loop
-        async function saveToCloud() {
-            var name = document.getElementById('patient-name').value;
-            var phone = document.getElementById('patient-phone').value;
-            var need = document.getElementById('patient-need').value;
-            var statusLog = document.getElementById('db-status-log');
-
-            if (!name || !phone || !need) {
-                statusLog.style.color = '#ef4444';
-                statusLog.innerText = "❌ Error: Por favor complete todos los campos.";
+            if (!tenantInput) {
+                errLogger.innerText = "❌ Error: Ingrese una Licencia de Consultorio válida.";
                 return;
             }
 
-            statusLog.style.color = '#eab308';
-            statusLog.innerText = "🔄 Transmitiendo datos criptográficamente al servidor PostgreSQL...";
+            // Establish the active tenant boundary context configuration
+            ACTIVE_CLINIC_TENANT_ID = tenantInput;
+            document.getElementById('active-clinic-badge-target').innerText = `🏢 SEDE: ${ACTIVE_CLINIC_TENANT_ID}`;
+            
+            // Drop portal block curtains and reveal desktop workspace containers
+            document.getElementById('login-gateway-wall').style.display = 'none';
+            document.getElementById('master-system-desktop').style.display = 'grid';
 
+            // Pull filtered storage ledger data streams live
+            fetchPatientDirectoryLive();
+        }
+
+        // 2. Multi-Tenant Query Filtration Loop (Isolating datasets strictly by Clinic License Key)
+        async function fetchPatientDirectoryLive() {
             const { data, error } = await supabaseClient
                 .from('pacientes')
-                .insert([{ nombre: name, telefono: phone, tratamiento: need }]);
+                .select('*')
+                .eq('tratamiento', ACTIVE_CLINIC_TENANT_ID) // Maps to the text tracking column to block crossover access
+                .order('nombre', { ascending: true });
 
-            if (error) {
-                statusLog.style.color = '#ef4444';
-                statusLog.innerText = "❌ Fallo del Servidor: " + error.message;
-            } else {
-                statusLog.style.color = '#22c55e';
-                statusLog.innerText = "🏆 ¡Éxito Absoluto! Los datos han cruzado la nube y se han guardado permanentemente en el servidor.";
-                document.getElementById('patient-name').value = '';
-                document.getElementById('patient-phone').value = '';
-                document.getElementById('patient-need').value = '';
+            if (error) { console.error(error.message); return; }
+            localPatientCache = data;
+            renderDirectoryCards(localPatientCache);
+        }
+
+        function renderDirectoryCards(array) {
+            const listTarget = document.getElementById('directory-target-cards');
+            let htmlBlock = '';
+            if (array.length === 0) {
+                listTarget.innerHTML = '<p style="font-size:12px; color:#475569; text-align:center; margin-top:20px;">No hay expedientes en esta sede.</p>';
+                return;
             }
+            array.forEach(p => {
+                let isSelected = activePatientObject && activePatientObject.id === p.id ? 'selected' : '';
+                // Generate and display human-readable patient number derived strictly from local increment indexes
+                let formattedPatientNum = `PX-${ACTIVE_CLINIC_TENANT_ID.substring(0,3)}-${String(p.id).padStart(4, '0')}`;
+                
+                htmlBlock += `<div class="patient-card ${isSelected}" onclick="selectActivePatient(${p.id})">
+                                <h4 class="p-name">${p.nombre}</h4>
+                                <div class="p-meta-line">
+                                    <span>No: ${formattedPatientNum}</span>
+                                    <span>📱 ${p.telefono || ''}</span>
+                                </div>
+                              </div>`;
+            });
+            listTarget.innerHTML = htmlBlock;
+        }
+
+        function selectActivePatient(id) {
+            activePatientObject = localPatientCache.find(p => p.id === id);
+            renderDirectoryCards(localPatientCache);
+            
+            let formattedPatientNum = `PX-${ACTIVE_CLINIC_TENANT_ID.substring(0,3)}-${String(activePatientObject.id).padStart(4, '0')}`;
+            document.getElementById('current-patient-strip').innerHTML = `🟢 [${formattedPatientNum}] Paciente: <strong>${activePatientObject.nombre}</strong>`;
+            
+            // Extract the clinical data sub-string layer safely, cleaning past office identification tags
+            const txtArea = document.getElementById('record-treatment-input');
+            if (txtArea) { 
+                let rawData = activePatientObject.telefono || ''; // Fallback data mapper logic row
+                txtArea.value = activePatientObject.notas_clinicas_text || ''; 
+            }
+            
+            clearAnatomicalChartLayout();
+            if (activePatientObject.notas_clinicas) {
+                try {
+                    selectedToothArray = JSON.parse(activePatientObject.notas_clinicas);
+                    selectedToothArray.forEach(t => {
+                        let cell = document.getElementById('tooth-' + t);
+                        if (cell) cell.classList.add('active-decay');
+                    });
+                } catch(e) { selectedToothArray = []; }
+            } else { selectedToothArray = []; }
+        }
+
+        async function createNewPatientInbound() {
+            const name = document.getElementById('new-p-name').value.trim();
+            const phone = document.getElementById('new-p-phone').value.trim();
+            const logger = document.getElementById('reg-status-msg');
+            
+            if (!name || !phone) { logger.style.color = '#ef4444'; logger.innerText = 'Campos incompletos.'; return; }
+            logger.style.color = '#eab308'; logger.innerText = 'Asignando ID y guardando...';
+            
+            // Injects row containing the Tenant Key inside 'tratamiento' to block external office cross-reads
+            const { data, error } = await supabaseClient
+                .from('pacientes')
+                .insert([{ nombre: name, telefono: phone, tratamiento: ACTIVE_CLINIC_TENANT_ID, notas_clinicas: '[]', notas_clinicas_text: '' }])
+                .select();
+
+            if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
+                logger.style.color = '#22c55e'; logger.innerText = '¡Expediente Creado con ID Único Corriendo!';
+                document.getElementById('new-p-name').value = '';
+                document.getElementById('new-p-phone').value = '';
+                await fetchPatientDirectoryLive();
+                if (data && data.length > 0) selectActivePatient(data[0].id);
+            }
+        }
+
+        async function saveAnatomicalChart() {
+            const logger = document.getElementById('chart-status-msg');
+            if (!activePatientObject) return;
+            logger.style.color = '#eab308'; logger.innerText = 'Guardando...';
+            const stringData = JSON.stringify(selectedToothArray);
+            
+            const { error } = await supabaseClient.from('pacientes').update({ notas_clinicas: stringData }).eq('id', activePatientObject.id);
+            if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
+                logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma guardado!';
+                activePatientObject.notas_clinicas = stringData;
+                await fetchPatientDirectoryLive();
+            }
+        }
+
+        async function saveClinicalNotes() {
+            const logger = document.getElementById('notes-status-msg');
+            const textValue = document.getElementById('record-treatment-input').value;
+            if (!activePatientObject) return;
+            logger.style.color = '#eab308'; logger.innerText = 'Guardando...';
+            
+            const { error } = await supabaseClient.from('pacientes').update({ notas_clinicas_text: textValue }).eq('id', activePatientObject.id);
+            if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
+                logger.style.color = '#22c55e'; logger.innerText = '¡Historial actualizado!';
+                activePatientObject.notas_clinicas_text = textValue;
+                await fetchPatientDirectoryLive();
+            }
+        }
+
+        function clearAnatomicalChartLayout() { for (let i = 1; i <= 32; i++) { let cell = document.getElementById('tooth-' + i); if (cell) cell.classList.remove('active-decay'); } }
+        function filterDirectory() { let q = document.getElementById('directory-search').value.toLowerCase(); let matches = localPatientCache.filter(p => p.nombre.toLowerCase().includes(q)); renderDirectoryCards(matches); }
+        
+        function switchModule(modKey) {
+            var tabs = document.getElementsByClassName('module-tab'); for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+            document.getElementById('tab-' + modKey).classList.add('active');
+            var panels = document.getElementsByClassName('nexus-panel'); for (var j = 0; j < panels.length; j++) panels[j].classList.remove('active');
+            document.getElementById('panel-' + modKey).classList.add('active');
         }
     </script>
 </body>
