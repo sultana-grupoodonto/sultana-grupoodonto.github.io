@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sultana Nexus™ | Live Cloud Demo Environment</title>
-    <!-- 🔌 CORE DATA HANDSHAKE ENGINE: SUPABASE SCRIPT DRIVER OVERLAY -->
+    
+    <!-- 🔌 INITIALIZATION SCRIPT: THIS MUST LOAD BEFORE EVERYTHING ELSE -->
     <script src="https://jsdelivr.net"></script>
+    
     <style>
         body { background-color: #030712; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; }
         .sultana-gold { color: #d4af37; }
@@ -31,9 +33,9 @@
         .tooth-btn:hover { border-color: #d4af37; }
         .tooth-num { font-size: 9px; font-family: monospace; color: #64748b; margin-bottom: 4px; }
         .tooth-icon { font-size: 20px; display: block; }
-        .form-input { width: 100%; max-width: 400px; background-color: #111827; border: 1px solid #1e293b; color: white; padding: 12px; border-radius: 6px; outline: none; margin-top: 6px; display: block; }
+        .form-input { width: 100%; max-width: 400px; background-color: #111827; border: 1px solid #1e293b; color: white; padding: 12px; border-radius: 6px; outline: none; margin-top: 6px; display: block; font-size: 14px; }
         .form-input:focus { border-color: #d4af37; }
-        .submit-btn { background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 28px; border-radius: 8px; text-transform: uppercase; tracking-wider; cursor: pointer; margin-top: 16px; }
+        .submit-btn { background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 28px; border-radius: 8px; text-transform: uppercase; tracking-wider; cursor: pointer; margin-top: 16px; font-family: sans-serif; }
         .submit-btn:hover { background-color: #eab308; }
         footer { text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto; }
     </style>
@@ -54,7 +56,6 @@
             <button id="tab-demo" class="module-tab" onclick="switchModule('demo')">💾 Live Database Demo</button>
         </div>
     </header>
-
     <!-- LIVE MODULAR VIEWSPACE VIEWPORT -->
     <main>
         <div class="app-container">
@@ -95,15 +96,14 @@
     <footer>
         <p style="font-weight: bold; color: #94a3b8; margin: 0 0 4px 0;">&copy; 2026 Sultana Dental Group MSO • Live Demo Environment.</p>
     </footer>
-
     <!-- STABLE CONTROL INTERFACE SYSTEM ACTION SCRIPTS -->
     <script>
-        // 🔑 EXTRA INJECT TARGET BLOCK FOR SULTANA CORE INFRASTRUCTURE CONNECTIVITY
+        // 🔑 CONNECTION VALUES ARE PRE-BAKED RIGHT HERE
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
         
-        // Connect to your active cloud engine logic loop parameters
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // Initialize backend logic connector variables
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         // Render the 32 tooth maps instantly on screen
         var gridTarget = document.getElementById('chartmax-grid-target');
@@ -142,7 +142,7 @@
             }
         }
 
-        // 🚀 THE ASYNCHRONOUS BACK-END CLOUD INTERACTIVE CONNECTION OVERLAY
+        // 🚀 LIVE CLOUD HANDSHAKE CORE ENGINE DATA LOOPS
         async function saveToCloud() {
             var name = document.getElementById('patient-name').value;
             var phone = document.getElementById('patient-phone').value;
@@ -150,3 +150,30 @@
             var statusLog = document.getElementById('db-status-log');
 
             if (!name || !phone || !need) {
+                statusLog.style.color = '#ef4444';
+                statusLog.innerText = "❌ Error: Por favor complete todos los campos antes de enviar.";
+                return;
+            }
+
+            statusLog.style.color = '#eab308';
+            statusLog.innerText = "🔄 Transmitiendo datos criptográficamente al servidor PostgreSQL...";
+
+            // Injects data row straight to your live Supabase data tables
+            const { data, error } = await supabaseClient
+                .from('pacientes')
+                .insert([{ nombre: name, telefono: phone, tratamiento: need }]);
+
+            if (error) {
+                statusLog.style.color = '#ef4444';
+                statusLog.innerText = "❌ Fallo del Servidor: " + error.message;
+            } else {
+                statusLog.style.color = '#22c55e';
+                statusLog.innerText = "🏆 ¡Éxito Absoluto! Los datos han cruzado la nube y se han guardado permanentemente en el servidor.";
+                document.getElementById('patient-name').value = '';
+                document.getElementById('patient-phone').value = '';
+                document.getElementById('patient-need').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
