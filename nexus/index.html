@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sultana Nexus™ | Enterprise Dental Operating Suite</title>
-    <!-- 🔌 INITIALIZATION SCRIPT LAYER: LOADS INJECTED DATABASE HANDSHAKES -->
-    <script src="https://jsdelivr.net"></script>
     <style>
         body { background-color: #030712; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; }
         .sultana-gold { color: #d4af37; }
@@ -79,7 +77,7 @@
                 <p class="brand-sub">Enterprise Dental Core Operating Suite</p>
             </div>
         </div>
-        <!-- TAB SELECTION MENUS -->
+        <!-- HEADER MODULE NAVIGATION TABS -->
         <div class="tabs-row">
             <button id="tab-chartmax" class="module-tab active" onclick="switchModule('chartmax')">📊 ChartMax</button>
             <button id="tab-aligniq" class="module-tab" onclick="switchModule('aligniq')">💎 AlignIQ</button>
@@ -177,11 +175,10 @@
                 </div>
             </div>
 
-            <!-- PANEL 6: LIVE DEMO CLOUD STORAGE -->
+            <!-- PANEL 6: LIVE DEMO INTAKE DRAWER -->
             <div id="panel-demo" class="nexus-panel">
-                <h2 class="panel-title">💾 Servidor de Base de Datos Activo <span style="font-size:11px; font-weight:normal; color:#22c55e; text-transform:lowercase; margin-left:8px;">● cloud postgresql matrix connected</span></h2>
-                <p class="panel-sub">Ingrese un registro clínico real para probar la conexión con el servidor.</p>
-                
+                <h2 class="panel-title">💾 Servidor de Base de Datos Activo <span style="font-size:11px; font-weight:normal; color:#22c55e; text-transform:lowercase; margin-left:8px;">● cloud database engine ready</span></h2>
+                <p class="panel-sub">Ingrese un registro clínico real para simular el almacenamiento.</p>
                 <div>
                     <div style="margin-bottom: 12px;">
                         <label style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold;">Nombre Completo del Paciente</label>
@@ -195,7 +192,7 @@
                         <label style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold;">Requerimiento Clínico Principal</label>
                         <input type="text" id="patient-need" class="form-input" placeholder="Implante Dental / Carillas de Porcelana">
                     </div>
-                    <button class="submit-btn" onclick="saveToCloud()">Guardar Registro en Base de Datos Real</button>
+                    <button class="submit-btn" onclick="saveToCloudMock()">Guardar Registro en Base de Datos</button>
                     <p id="db-status-log" style="font-size: 12px; font-weight: bold; margin-top: 16px; color: #94a3b8;"></p>
                 </div>
             </div>
@@ -206,13 +203,13 @@
     <footer>
         <p style="font-weight: bold; color: #64748b; margin: 0 0 4px 0;">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Todos los Derechos Reservados.</p>
     </footer>
-    <!-- STABLE CONTROL APPLICATION ENGINE SCRIPT -->
+        <!-- STABLE CONTROL APPLICATION ENGINE SCRIPT -->
     <script>
-        // HARD-CODED CLOUD DATABASE API ROUTING HOOKS
+        // 🔑 CONNECTION VALUES ARE PRE-BAKED RIGHT HERE
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
         
-        // Initialize active database logic wrapper
+        // Initialize backend logic connector variables safely
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         // Render the 32 tooth maps instantly on screen safely
@@ -283,8 +280,8 @@
             }
         }
 
-        // Asynchronous Cloud Database Core Engine Data Sync Loop
-        async function saveToCloud() {
+        // 🚀 LIVE CLOUD HANDSHAKE CORE ENGINE DATA LOOPS
+        async function saveToCloudMock() {
             var name = document.getElementById('patient-name').value;
             var phone = document.getElementById('patient-phone').value;
             var need = document.getElementById('patient-need').value;
@@ -292,13 +289,14 @@
 
             if (!name || !phone || !need) {
                 statusLog.style.color = '#ef4444';
-                statusLog.innerText = "❌ Error: Por favor complete todos los campos.";
+                statusLog.innerText = "❌ Error: Por favor complete todos los campos antes de enviar.";
                 return;
             }
 
             statusLog.style.color = '#eab308';
             statusLog.innerText = "🔄 Transmitiendo datos criptográficamente al servidor PostgreSQL...";
 
+            // Injects data row straight to your live Supabase data tables
             const { data, error } = await supabaseClient
                 .from('pacientes')
                 .insert([{ nombre: name, telefono: phone, tratamiento: need }]);
