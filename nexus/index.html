@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sultana Nexus™ | Enterprise Dental Operating Suite</title>
     
-    <!-- 🔌 INITIALIZATION DATA INTERFACE: LOADS CLOUD CLIENT LIBS FIRST -->
+    <!-- 🔌 INITIALIZATION DATA INTERFACE: LOADS CLOUD ENGINE CORE BEFORE THE INTERFACE LAYOUT -->
     <script src="https://jsdelivr.net"></script>
     
     <style>
@@ -31,8 +31,8 @@
         @media (min-width: 768px) { .grid-32 { grid-template-columns: repeat(16, 1fr); } }
         .tooth-btn { border: 1px solid #1e293b; background-color: #111827; border-radius: 6px; padding: 12px 6px; text-align: center; cursor: pointer; transition: all 0.2s ease; user-select: none; }
         .tooth-btn:hover { border-color: #d4af37; }
-        .tooth-num { font-size: 9px; font-family: monospace; color: #64748b; margin-bottom: 4px; }
-        .tooth-icon { font-size: 20px; display: block; }
+        .tooth-num { font-size: 11px; font-family: monospace; color: #64748b; margin-bottom: 4px; font-weight: bold; }
+        .tooth-label { font-size: 12px; display: block; color: #e2e8f0; }
         .dropzone-box { border: 2px dashed #1e293b; background-color: #020617; border-radius: 12px; padding: 48px 24px; text-align: center; margin: 24px 0; }
         .dropzone-box:hover { border-color: #d4af37; }
         .sliders-box { display: grid; grid-template-columns: 1fr; gap: 16px; background-color: #020617; padding: 16px; border-radius: 8px; border: 1px solid #1e293b; }
@@ -44,7 +44,7 @@
         @media (min-width: 768px) { .grid-3-way { grid-template-columns: repeat(3, 1fr); } }
         .xray-window { border: 1px solid #1e293b; background-color: #000000; border-radius: 6px; padding: 16px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
         .xray-title { font-size: 10px; text-transform: uppercase; font-weight: bold; color: #64748b; margin: 0; }
-        .xray-icon { font-size: 32px; color: #1e293b; text-align: center; margin: auto; display: block; }
+        .xray-icon { font-size: 12px; color: #475569; text-align: center; margin: auto; display: block; font-weight: bold; }
         .xray-meta { font-size: 9px; color: #334155; text-align: right; }
         .form-input { width: 100%; max-width: 400px; background-color: #111827; border: 1px solid #1e293b; color: white; padding: 12px; border-radius: 6px; outline: none; margin-top: 6px; display: block; font-size: 14px; box-sizing: border-box; }
         .form-input:focus { border-color: #d4af37; }
@@ -75,12 +75,12 @@
     <!-- BRAND COCKPIT HEADER -->
     <header>
         <div class="brand-block">
-            <span style="font-size: 30px;">👑</span>
             <div>
                 <h1 class="brand-title">Sultana <span class="sultana-gold">Nexus™</span></h1>
                 <p class="brand-sub">Enterprise Dental Core Operating Suite</p>
             </div>
         </div>
+        <!-- HEADER ALL-MODULES NAVIGATION TABS -->
         <div class="tabs-row">
             <button id="tab-chartmax" class="module-tab active" onclick="switchModule('chartmax')">📊 ChartMax</button>
             <button id="tab-aligniq" class="module-tab" onclick="switchModule('aligniq')">💎 AlignIQ</button>
@@ -94,11 +94,44 @@
     <main>
         <div class="app-container">
             
-            <!-- PANEL 1: SULTANA CHARTMAX -->
+            <!-- PANEL 1: SULTANA CHARTMAX (HARDCODED NATIVE BLOCKS) -->
             <div id="panel-chartmax" class="nexus-panel active">
                 <h2 class="panel-title">📊 Sultana ChartMax™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">odental core sandbox v24.3</span></h2>
                 <p class="panel-sub">Haga clic en una pieza anatómica dental para registrar patologías clínicas o iniciar un expediente digital.</p>
-                <div class="grid-32" id="chartmax-grid-target"></div>
+                <div class="grid-32" id="chartmax-grid-target">
+                    <div id="tooth-1" onclick="toggleTooth(1)" class="tooth-btn"><div class="tooth-num">1</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-2" onclick="toggleTooth(2)" class="tooth-btn"><div class="tooth-num">2</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-3" onclick="toggleTooth(3)" class="tooth-btn"><div class="tooth-num">3</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-4" onclick="toggleTooth(4)" class="tooth-btn"><div class="tooth-num">4</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-5" onclick="toggleTooth(5)" class="tooth-btn"><div class="tooth-num">5</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-6" onclick="toggleTooth(6)" class="tooth-btn"><div class="tooth-num">6</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-7" onclick="toggleTooth(7)" class="tooth-btn"><div class="tooth-num">7</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-8" onclick="toggleTooth(8)" class="tooth-btn"><div class="tooth-num">8</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-9" onclick="toggleTooth(9)" class="tooth-btn"><div class="tooth-num">9</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-10" onclick="toggleTooth(10)" class="tooth-btn"><div class="tooth-num">10</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-11" onclick="toggleTooth(11)" class="tooth-btn"><div class="tooth-num">11</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-12" onclick="toggleTooth(12)" class="tooth-btn"><div class="tooth-num">12</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-13" onclick="toggleTooth(13)" class="tooth-btn"><div class="tooth-num">13</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-14" onclick="toggleTooth(14)" class="tooth-btn"><div class="tooth-num">14</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-15" onclick="toggleTooth(15)" class="tooth-btn"><div class="tooth-num">15</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-16" onclick="toggleTooth(16)" class="tooth-btn"><div class="tooth-num">16</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-17" onclick="toggleTooth(17)" class="tooth-btn"><div class="tooth-num">17</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-18" onclick="toggleTooth(18)" class="tooth-btn"><div class="tooth-num">18</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-19" onclick="toggleTooth(19)" class="tooth-btn"><div class="tooth-num">19</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-20" onclick="toggleTooth(20)" class="tooth-btn"><div class="tooth-num">20</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-21" onclick="toggleTooth(21)" class="tooth-btn"><div class="tooth-num">21</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-22" onclick="toggleTooth(22)" class="tooth-btn"><div class="tooth-num">22</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-23" onclick="toggleTooth(23)" class="tooth-btn"><div class="tooth-num">23</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-24" onclick="toggleTooth(24)" class="tooth-btn"><div class="tooth-num">24</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-25" onclick="toggleTooth(25)" class="tooth-btn"><div class="tooth-num">25</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-26" onclick="toggleTooth(26)" class="tooth-btn"><div class="tooth-num">26</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-27" onclick="toggleTooth(27)" class="tooth-btn"><div class="tooth-num">27</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-28" onclick="toggleTooth(28)" class="tooth-btn"><div class="tooth-num">28</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-29" onclick="toggleTooth(29)" class="tooth-btn"><div class="tooth-num">29</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-30" onclick="toggleTooth(30)" class="tooth-btn"><div class="tooth-num">30</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-31" onclick="toggleTooth(31)" class="tooth-btn"><div class="tooth-num">31</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-32" onclick="toggleTooth(32)" class="tooth-btn"><div class="tooth-num">32</div><span class="tooth-label">🦷</span></div>
+                </div>
             </div>
 
             <!-- PANEL 2: SULTANA ALIGNIQ -->
@@ -116,29 +149,17 @@
                     <div class="slider-group"><span class="slider-label">Grosor de Placa (mm)</span><input type="range" class="slider-input"></div>
                 </div>
             </div>
-
             <!-- PANEL 3: SULTANA ENDOAPEX -->
             <div id="panel-endoapex" class="nexus-panel">
                 <h2 class="panel-title">🔬 Sultana EndoApex™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">html5 ohif slice loader</span></h2>
                 <p class="panel-sub">Visualizador multi-planar activo. Indexando archivos DICOM en tiempo real desde el almacenamiento local appliance.</p>
                 <div class="grid-3-way">
-                    <div class="xray-window">
-                        <span class="xray-title">Vista Axial (Superior)</span>
-                        <span class="xray-icon">🩻</span>
-                        <span class="xray-meta">Slice 124/256</span>
-                    </div>
-                    <div class="xray-window">
-                        <span class="xray-title">Vista Sagital (Perfil)</span>
-                        <span class="xray-icon">🩻</span>
-                        <span class="xray-meta">Slice 089/256</span>
-                    </div>
-                    <div class="xray-window">
-                        <span class="xray-title">Vista Coronal (Frontal)</span>
-                        <span class="xray-icon">🩻</span>
-                        <span class="xray-meta">Slice 112/256</span>
-                    </div>
+                    <div class="xray-window"><span class="xray-title">Vista Axial (Superior)</span><span class="xray-icon">🩻</span><span class="xray-meta">Slice 124/256</span></div>
+                    <div class="xray-window"><span class="xray-title">Vista Sagital (Perfil)</span><span class="xray-icon">🩻</span><span class="xray-meta">Slice 089/256</span></div>
+                    <div class="xray-window"><span class="xray-title">Vista Coronal (Frontal)</span><span class="xray-icon">🩻</span><span class="xray-meta">Slice 112/256</span></div>
                 </div>
             </div>
+
             <!-- PANEL 4: SULTANA PERIOMAP -->
             <div id="panel-periomap" class="nexus-panel">
                 <h2 class="panel-title">📈 Sultana PerioMap™ <span style="font-size:11px; font-weight:normal; color:#64748b; text-transform:lowercase; margin-left:8px;">periodontal matrix array</span></h2>
@@ -152,7 +173,11 @@
                                 <th class="perio-th">L-Mesial</th><th class="perio-th">L-Centro</th><th class="perio-th">L-Distal</th>
                             </tr>
                         </thead>
-                        <tbody id="perio-target-rows" style="color: #e2e8f0;"></tbody>
+                        <tbody style="color: #e2e8f0;">
+                            <tr class="perio-tr"><td class="perio-td" style="font-weight:bold; color:#94a3b8; background-color:rgba(15,23,42,0.5); text-align:center; font-family:monospace;">Tooth-1</td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td></tr>
+                            <tr class="perio-tr"><td class="perio-td" style="font-weight:bold; color:#94a3b8; background-color:rgba(15,23,42,0.5); text-align:center; font-family:monospace;">Tooth-2</td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td></tr>
+                            <tr class="perio-tr"><td class="perio-td" style="font-weight:bold; color:#94a3b8; background-color:rgba(15,23,42,0.5); text-align:center; font-family:monospace;">Tooth-3</td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td><td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td></tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -180,7 +205,7 @@
             <!-- PANEL 6: LIVE DEMO CLOUD STORAGE -->
             <div id="panel-demo" class="nexus-panel">
                 <h2 class="panel-title">💾 Servidor de Base de Datos Activo <span style="font-size:11px; font-weight:normal; color:#22c55e; text-transform:lowercase; margin-left:8px;">● cloud postgresql matrix connected</span></h2>
-                <p class="panel-sub">Ingrese un registro clínico real. Al presionar guardar, los datos se enviarán criptográficamente al almacén de datos central de Supabase.</p>
+                <p class="panel-sub">Ingrese un registro clínico real. Al presionar guardar, los datos se enviarán criptográficamente al almacén de datos de Supabase.</p>
                 
                 <div style="space-y-4">
                     <div style="margin-bottom: 12px;">
@@ -214,34 +239,6 @@
         
         // Connect to your active cloud engine logic loop parameters safely
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        // Render the 32 tooth maps instantly on screen safely
-        var gridTarget = document.getElementById('chartmax-grid-target');
-        if (gridTarget) {
-            var blockHTML = '';
-            for (var i = 1; i <= 32; i++) {
-                blockHTML += '<div id="tooth-' + i + '" onclick="toggleTooth(' + i + ')" class="tooth-btn">' +
-                                '<div class="tooth-num">' + i + '</div>' +
-                                '<span class="tooth-icon">🦷</span>' +
-                             '</div>';
-            }
-            gridTarget.innerHTML = blockHTML;
-        }
-
-        // Render the Perio dynamic chart rows natively
-        var perioTarget = document.getElementById('perio-target-rows');
-        if (perioTarget) {
-            var tableHTML = '';
-            for (var r = 1; r <= 8; r++) {
-                tableHTML += '<tr class="perio-tr">' +
-                                '<td class="perio-td" style="font-weight:bold; color:#94a3b8; background-color:rgba(15,23,42,0.5); text-align:center; font-family:monospace;">Tooth-' + r + '</td>';
-                for (var c = 1; c <= 6; c++) {
-                    tableHTML += '<td class="perio-td"><input type="text" maxlength="1" oninput="validatePerio(this)" class="perio-input"></td>';
-                }
-                tableHTML += '</tr>';
-            }
-            perioTarget.innerHTML = tableHTML;
-        }
 
         // Tab Navigation Switching Core 
         function switchModule(modKey) {
