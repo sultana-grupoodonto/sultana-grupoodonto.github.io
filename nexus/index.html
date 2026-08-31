@@ -27,7 +27,7 @@
         .module-tab:hover { border-color: #d4af37; color: #ffffff; }
         .module-tab.active { border-color: #d4af37; background-color: #1e1b4b; color: #d4af37; }
         
-        main { flex-grow: 1; max-width: 1200px; width: 92%; margin: 0 auto; padding: 20px 0; display: none; grid-template-columns: 1fr; gap: 24px; }
+        main { max-width: 1200px; width: 92%; margin: 0 auto; padding: 20px 0; display: none; grid-template-columns: 1fr; gap: 24px; }
         @media (min-width: 992px) { main { grid-template-columns: 320px 1fr; } }
         
         .sidebar-directory { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
@@ -62,7 +62,7 @@
 <body>
     <!-- SECCIÓN INTERFAZ DE AUTENTICACIÓN -->
     <div id="login-gateway-wall" class="login-overlay">
-        <!-- FORMULARIO DE LOGEO TRADICIONAL -->
+        <!-- FORMULARIO DE ACCESO TRADICIONAL -->
         <div class="login-card" id="view-mode-signin">
             <h2 style="margin: 0 0 4px 0; text-transform: uppercase; font-weight: 900;">Sultana <span class="sultana-gold">Nexus™</span></h2>
             <p style="font-size: 10px; color: #64748b; margin: 0 0 24px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Acceso de Consultorios Afiliados</p>
@@ -218,7 +218,6 @@
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
         const CORPORATE_MASTER_REGISTRATION_PASSWORD = "SULTANA-LAUNCH-2026";
 
-        // Native instantiation parameter layout
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         let localPatientCache = []; let activePatientObject = null; let selectedToothArray = []; let ACTIVE_CLINIC_TENANT_ID = "";
 
@@ -263,7 +262,7 @@
                 logger.style.color = '#ef4444'; logger.innerText = "❌ Fallo: " + error.message;
             } else {
                 logger.style.color = '#22c55e';
-                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID, use este código en la pantalla de login para entrar.</span>';
+                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID y úselo en la pantalla de login para entrar.</span>';
                 document.getElementById('reg-master-password').value = '';
                 document.getElementById('reg-clinic-name').value = '';
                 document.getElementById('reg-clinic-phone').value = '';
@@ -382,3 +381,4 @@
 
             const { error } = await supabaseClient.from('pacientes').update({ notas_clinicas: stringData }).eq('id', activePatientObject.id);
             if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
+                logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma guardado!';
