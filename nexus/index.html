@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sultana Nexus™ | Sistema Dental Corporativo</title>
     
-    <!-- 🔌 CONECTOR GLOBAL: CARGA DE LIBRERÍAS DE BASE DE DATOS DE ALTA VELOCIDAD -->
+    <!-- 🔌 INITIALIZATION PIPELINE: AUTOMATED BACKEND DRIVERS -->
     <script src="https://jsdelivr.net"></script>
     
     <style>
         body { background-color: #030712; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; }
         .sultana-gold { color: #d4af37; }
         
-        /* CAPA DE SEGURIDAD: PANTALLA DE ACCESO CONTROLADO */
+        /* SECURITY PORTAL INTERFACE LAYER CODE DESIGN */
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #030712; z-index: 9999; display: flex; align-items: center; justify-content: center; overflow-y: auto; padding: 20px; box-sizing: border-box; }
         .login-card { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 40px; width: 100%; max-width: 420px; box-sizing: border-box; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); }
         
@@ -60,9 +60,9 @@
     </style>
 </head>
 <body>
-    <!-- CAPA DE CONTROL DE ACCESO SEGURIZADO -->
+    <!-- SECCIÓN INTERFAZ DE AUTENTICACIÓN -->
     <div id="login-gateway-wall" class="login-overlay">
-        <!-- VISTA A: INICIO DE SESIÓN TRADICIONAL -->
+        <!-- VISTA MODO INICIO DE SESIÓN -->
         <div class="login-card" id="view-mode-signin">
             <h2 style="margin: 0 0 4px 0; text-transform: uppercase; font-weight: 900;">Sultana <span class="sultana-gold">Nexus™</span></h2>
             <p style="font-size: 10px; color: #64748b; margin: 0 0 24px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Acceso de Consultorios Afiliados</p>
@@ -75,7 +75,7 @@
             <p id="login-error-log" style="font-size: 11px; font-weight: bold; color: #ef4444; margin: 12px 0 0 0;"></p>
         </div>
 
-        <!-- VISTA B: PORTAL DE AUTO-REGISTRO AUTOMATIZADO -->
+        <!-- VISTA MODO ALTA DE NUEVA CLÍNICA -->
         <div class="login-card" id="view-mode-signup" style="display: none;">
             <h2 style="margin: 0 0 4px 0; text-transform: uppercase; font-weight: 900; color:#22c55e;">Registro <span class="sultana-gold">Nexus™</span></h2>
             <p style="font-size: 10px; color: #64748b; margin: 0 0 20px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Alta de Sede Autónoma en la Nube</p>
@@ -97,7 +97,7 @@
         </div>
     </div>
 
-    <!-- PANEL PRINCIPAL DEL SISTEMA -->
+    <!-- CABECERA DEL OPERADOR MAESTRO -->
     <header>
         <div class="brand-block">
             <div>
@@ -112,7 +112,7 @@
         </div>
     </header>
     <main id="master-system-desktop">
-        <!-- PANEL IZQUIERDO: DIRECTORIO UNIFICADO DE PACIENTES -->
+        <!-- DIRECTORIO DE PACIENTES FILTRADO -->
         <section class="sidebar-directory">
             <div style="display: flex; flex-direction: column; gap: 6px;">
                 <h3 class="directory-title">Directorio de Pacientes</h3>
@@ -122,14 +122,23 @@
             <div class="patient-list" id="directory-target-cards"></div>
         </section>
 
-        <!-- PANEL DERECHO: CONTENEDOR DE TRABAJO CLÍNICO -->
+        <!-- CONTENEDOR DE PANELES ACTIVOS -->
         <section class="app-container">
             <div class="active-patient-badge" id="current-patient-strip">🔴 Ningún Paciente Seleccionado (Modo Lectura)</div>
 
-            <!-- MODULO 1: SULTANA CHARTMAX (MAPA DENTAL ESTÁTICO COMPLETO) -->
+            <!-- MODULO 1: SULTANA CHARTMAX ODONTOGRAMA ESTÁTICO -->
             <div id="panel-chartmax" class="nexus-panel active">
                 <h2 class="panel-title">Sultana ChartMax™</h2>
                 <p class="panel-sub">Haga clic en las piezas dentales para marcar diagnóstico de patologías o extracciones. Presione guardar para registrar.</p>
+                
+                <style>
+                    .grid-32 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding-top: 8px; }
+                    @media (min-width: 480px) { .grid-32 { grid-template-columns: repeat(8, 1fr); } }
+                    @media (min-width: 768px) { .grid-32 { grid-template-columns: repeat(16, 1fr); } }
+                    .tooth-btn { border: 1px solid #1e293b; background-color: #111827; border-radius: 6px; padding: 12px 4px; text-align: center; cursor: pointer; transition: all 0.2s ease; user-select: none; }
+                    .tooth-btn:hover { border-color: #d4af37; }
+                </style>
+
                 <div class="grid-32">
                     <div id="tooth-1" onclick="toggleToothState(1)" class="tooth-btn"><div class="tooth-num">1</div><span class="tooth-label">🦷</span></div>
                     <div id="tooth-2" onclick="toggleToothState(2)" class="tooth-btn"><div class="tooth-num">2</div><span class="tooth-label">🦷</span></div>
@@ -170,10 +179,10 @@
                 </div>
             </div>
 
-            <!-- MODULO 2: FICHA CLINICA & EVOLUCIÓN CRONOLÓGICA -->
+            <!-- MODULO 2: HISTORIAL Y NOTAS DE EVOLUCIÓN -->
             <div id="panel-records" class="nexus-panel">
                 <h2 class="panel-title">📋 Historial y Tratamiento Progresivo</h2>
-                <p class="panel-sub">Consulte y modifique las notas de evolución clínica del paciente seleccionado.</p>
+                <p class="panel-sub">Consulte y modifique las notas de evolución clínica del paciente.</p>
                 <div class="form-group">
                     <label class="form-label">Notas Clínicas y Diagnóstico General</label>
                     <textarea id="record-treatment-input" class="form-input" rows="6" placeholder="Escriba los hallazgos clínicos relevantes aquí..."></textarea>
@@ -182,13 +191,13 @@
                 <span id="notes-status-msg" class="status-logger"></span>
             </div>
 
-            <!-- MODULO 3: ALTA DE PACIENTE CON ID HISTÓRICO ÚNICO -->
+            <!-- MODULO 3: REGISTRO DE PACIENTES POR SEDE -->
             <div id="panel-registration" class="nexus-panel">
                 <h2 class="panel-title">👤 Alta de Nuevo Expediente</h2>
-                <p class="panel-sub">Registre un nuevo paciente en la red para inicializar su historial aislado.</p>
+                <p class="panel-sub">Registre un nuevo paciente en la red para inicializar su odontograma.</p>
                 <div class="form-group">
                     <label class="form-label">Nombre Completo del Paciente</label>
-                    <input type="text" id="new-p-name" class="form-input" placeholder="Ej. Juan Pérez">
+                    <input type="text" id="new-p-name" class="form-input" placeholder="Ej. Carlos Mendoza">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Contacto Telefónico (WhatsApp)</label>
@@ -200,14 +209,14 @@
         </section>
     </main>
     <footer>
-        <p style="text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto;">&copy; 2026 Sultana Dental Group MSO • División de Sistemas. Aislamiento Criptográfico Activo.</p>
+        <p style="text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto;">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Tenant Security Isolation Active.</p>
     </footer>
-    <!-- MOTOR DE LOGICA DE ENTRADA Y COMUNICACIÓN ASÍNCRONA -->
+    <!-- MOTOR DE LOGICA DE ENTRADA Y COMUNICACIÓN ASÍNCRONA CORREGIDO -->
     <script>
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
         
-        // CLAVE MAESTRA CORPORATIVA DE ACTIVACIÓN DE SEDES
+        // 🔒 CLAVE CORPORATIVA MAESTRA PARA APORTAR SEGURIDAD
         const CORPORATE_MASTER_REGISTRATION_PASSWORD = "SULTANA-LAUNCH-2026";
 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -242,11 +251,14 @@
 
             logger.style.color = '#eab308'; logger.innerText = "🔄 Generando llaves de cifrado MSO...";
 
-            let generatedTenantKey = "SULTANA-" + clinicName.substring(0, 6).toUpperCase().replace(/\s+/g, '-') + Math.floor(10 + Math.random() * 90);
+            // Clean string evaluation logic variables safely
+            let safeNameString = clinicName.substring(0, 6).toUpperCase().replace(/[^A-Z0-9]/g, '');
+            let randomNum = Math.floor(10 + Math.random() * 90);
+            let generatedTenantKey = "SULTANA-" + safeNameString + randomNum;
 
             const { error } = await supabaseClient
                 .from('pacientes')
-                .insert([{ nombre: 'LICENCIA CORES ACTIVACIÓN: ' + clinicName, telefono: clinicPhone, tratamiento: generatedTenantKey, notas_clinicas: '[]' }]);
+                .insert([{ nombre: 'LICENCIA CORES ACTIVACIÓN: ' + clinicName, telefono: clinicPhone, tratamiento: generatedTenantKey, notas_clinicas: '[]', notas_clinicas_text: '' }]);
 
             if (error) {
                 logger.style.color = '#ef4444'; logger.innerText = "❌ Fallo: " + error.message;
@@ -347,7 +359,7 @@
                 logger.style.color = '#22c55e'; logger.innerText = '¡Expediente Creado!';
                 document.getElementById('new-p-name').value = ''; document.getElementById('new-p-phone').value = '';
                 await fetchPatientDirectoryLive();
-                if (data && data.length > 0) selectActivePatient(data[0].id);
+                if (data && data.length > 0) selectActivePatient(data.id);
             }
         }
 
@@ -371,5 +383,3 @@
 
             const { error } = await supabaseClient.from('pacientes').update({ notas_clinicas: stringData }).eq('id', activePatientObject.id);
             if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
-                logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma guardado!';
-                activePatientObject.notas_clinicas = stringData; await fetchPatientDirectoryLive();
