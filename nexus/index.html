@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sultana Nexus™ | Enterprise Dental EHR</title>
-    <!-- 🔌 INITIALIZATION DATA PIPELINE: AUTOMATED BACKEND DRIVERS -->
+    <title>Sultana Nexus™ | Sistema Dental Corporativo</title>
+    
+    <!-- 🔌 CONECTOR GLOBAL: CARGA DE LIBRERÍAS DE BASE DE DATOS DE ALTA VELOCIDAD -->
     <script src="https://jsdelivr.net"></script>
+    
     <style>
         body { background-color: #030712; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; }
         .sultana-gold { color: #d4af37; }
         
-        /* SECURITY ACCREDITATION WALL OVERLAYS */
+        /* CAPA DE SEGURIDAD: PANTALLA DE ACCESO CONTROLADO */
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #030712; z-index: 9999; display: flex; align-items: center; justify-content: center; overflow-y: auto; padding: 20px; box-sizing: border-box; }
         .login-card { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 40px; width: 100%; max-width: 420px; box-sizing: border-box; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); }
         
@@ -43,7 +45,7 @@
         .app-container { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; min-height: 520px; box-sizing: border-box; position: relative; }
         .nexus-panel { display: none; }
         .nexus-panel.active { display: block; }
-        .panel-title { margin: 0; font-size: 18px; font-weight: 800; text-transform: uppercase; }
+        .panel-title { margin: 0 0 4px 0; font-size: 18px; font-weight: 800; text-transform: uppercase; }
         .panel-sub { margin: 0 0 20px 0; font-size: 12px; color: #94a3b8; }
         
         .active-patient-badge { background-color: #1e1b4b; border: 1px solid #d4af37; color: #d4af37; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; }
@@ -58,44 +60,44 @@
     </style>
 </head>
 <body>
-    <!-- SECURITY PORTAL INTERFACE LAYER -->
+    <!-- CAPA DE CONTROL DE ACCESO SEGURIZADO -->
     <div id="login-gateway-wall" class="login-overlay">
-        <!-- SCREEN CONTEXT A: STANDARD ACCESS GATE -->
+        <!-- VISTA A: INICIO DE SESIÓN TRADICIONAL -->
         <div class="login-card" id="view-mode-signin">
             <h2 style="margin: 0 0 4px 0; text-transform: uppercase; font-weight: 900;">Sultana <span class="sultana-gold">Nexus™</span></h2>
             <p style="font-size: 10px; color: #64748b; margin: 0 0 24px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Acceso de Consultorios Afiliados</p>
             <div style="text-align: left; margin-bottom: 16px;">
-                <label style="font-size: 11px; color: #64748b; font-weight: bold; text-transform: uppercase;">ID de Licencia del Consultorio</label>
-                <input type="text" id="clinic-tenant-input" class="form-input" style="margin-top:6px;" placeholder="Ej. SULTANA-01">
+                <label class="form-label">ID de Licencia del Consultorio</label>
+                <input type="text" id="clinic-tenant-input" class="form-input" style="margin-top:6px;" placeholder="Ej. SULTANA-SANTO-DOMINGO">
             </div>
             <button class="submit-btn" style="width: 100%;" onclick="authenticateClinicTenantSession()">Validar Licencia MSO</button>
             <p style="font-size: 12px; margin-top: 20px; color: #64748b;">¿Nueva clínica afiliada? <a href="#" class="sultana-gold" style="font-weight:bold; text-decoration:none;" onclick="toggleAuthGateMode('register')">Regístrese aquí</a></p>
             <p id="login-error-log" style="font-size: 11px; font-weight: bold; color: #ef4444; margin: 12px 0 0 0;"></p>
         </div>
 
-        <!-- SCREEN CONTEXT B: SELF-REGISTRATION INBOUND ENGINE -->
+        <!-- VISTA B: PORTAL DE AUTO-REGISTRO AUTOMATIZADO -->
         <div class="login-card" id="view-mode-signup" style="display: none;">
             <h2 style="margin: 0 0 4px 0; text-transform: uppercase; font-weight: 900; color:#22c55e;">Registro <span class="sultana-gold">Nexus™</span></h2>
             <p style="font-size: 10px; color: #64748b; margin: 0 0 20px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Alta de Sede Autónoma en la Nube</p>
             <div style="text-align: left; margin-bottom: 12px;">
-                <label style="font-size: 10px; color: #64748b; font-weight: bold; text-transform: uppercase;">Código de Activación Global</label>
+                <label class="form-label">Código de Activación Global</label>
                 <input type="password" id="reg-master-password" class="form-input" style="margin-top:4px;" placeholder="Clave Maestra Corporativa">
             </div>
             <div style="text-align: left; margin-bottom: 12px;">
-                <label style="font-size: 10px; color: #64748b; font-weight: bold; text-transform: uppercase;">Nombre de la Sede / Clínica</label>
+                <label class="form-label">Nombre de la Sede / Clínica</label>
                 <input type="text" id="reg-clinic-name" class="form-input" style="margin-top:4px;" placeholder="Ej. Odonto Integral Santiago">
             </div>
             <div style="text-align: left; margin-bottom: 16px;">
-                <label style="font-size: 10px; color: #64748b; font-weight: bold; text-transform: uppercase;">WhatsApp Oficial del Centro</label>
+                <label class="form-label">WhatsApp Oficial del Centro</label>
                 <input type="text" id="reg-clinic-phone" class="form-input" style="margin-top:4px;" placeholder="Ej. 809-555-4321">
             </div>
-            <button class="submit-btn" style="width: 100%; background-color:#22c55e; color:#030712;" onclick="executeAutonomousClinicRegistration()">Generar Credenciales y Activar</button>
-            <p style="font-size: 12px; margin-top: 16px; color: #64748b;"><a href="#" class="sultana-gold" style="text-decoration:none;" onclick="toggleAuthGateMode('login')">← Volver al login</a></p>
+            <button class="submit-btn" style="width: 100%; background-color:#22c55e; color:#030712;" onclick="executeAutonomousClinicRegistration()">Generar Credenciales y Activar Sede</button>
+            <p style="font-size: 12px; margin-top: 16px; color: #64748b;"><a href="#" class="sultana-gold" style="text-decoration:none;" onclick="toggleAuthGateMode('login')">← Volver al inicio de sesión</a></p>
             <p id="reg-error-log" style="font-size: 11px; font-weight: bold; margin-top: 12px;"></p>
         </div>
     </div>
 
-    <!-- MAIN DASHBOARD LAYER -->
+    <!-- PANEL PRINCIPAL DEL SISTEMA -->
     <header>
         <div class="brand-block">
             <div>
@@ -109,8 +111,8 @@
             <button id="tab-registration" class="module-tab" onclick="switchModule('registration')">👤 Alta de Paciente</button>
         </div>
     </header>
-
     <main id="master-system-desktop">
+        <!-- PANEL IZQUIERDO: DIRECTORIO UNIFICADO DE PACIENTES -->
         <section class="sidebar-directory">
             <div style="display: flex; flex-direction: column; gap: 6px;">
                 <h3 class="directory-title">Directorio de Pacientes</h3>
@@ -120,9 +122,11 @@
             <div class="patient-list" id="directory-target-cards"></div>
         </section>
 
+        <!-- PANEL DERECHO: CONTENEDOR DE TRABAJO CLÍNICO -->
         <section class="app-container">
             <div class="active-patient-badge" id="current-patient-strip">🔴 Ningún Paciente Seleccionado (Modo Lectura)</div>
 
+            <!-- MODULO 1: SULTANA CHARTMAX (MAPA DENTAL ESTÁTICO COMPLETO) -->
             <div id="panel-chartmax" class="nexus-panel active">
                 <h2 class="panel-title">Sultana ChartMax™</h2>
                 <p class="panel-sub">Haga clic en las piezas dentales para marcar diagnóstico de patologías o extracciones. Presione guardar para registrar.</p>
@@ -156,10 +160,20 @@
                     <div id="tooth-27" onclick="toggleToothState(27)" class="tooth-btn"><div class="tooth-num">27</div><span class="tooth-label">🦷</span></div>
                     <div id="tooth-28" onclick="toggleToothState(28)" class="tooth-btn"><div class="tooth-num">28</div><span class="tooth-label">🦷</span></div>
                     <div id="tooth-29" onclick="toggleToothState(29)" class="tooth-btn"><div class="tooth-num">29</div><span class="tooth-label">🦷</span></div>
-            <!-- MODULE 2: FICHA CLINICA & COMPREHENSIVE MEDICAL RECORDS NOTES -->
+                    <div id="tooth-30" onclick="toggleToothState(30)" class="tooth-btn"><div class="tooth-num">30</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-31" onclick="toggleToothState(31)" class="tooth-btn"><div class="tooth-num">31</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-32" onclick="toggleToothState(32)" class="tooth-btn"><div class="tooth-num">32</div><span class="tooth-label">🦷</span></div>
+                </div>
+                <div style="margin-top: 24px;">
+                    <button class="submit-btn" onclick="saveAnatomicalChart()">Guardar Cambios del Odontograma</button>
+                    <span id="chart-status-msg" class="status-logger"></span>
+                </div>
+            </div>
+
+            <!-- MODULO 2: FICHA CLINICA & EVOLUCIÓN CRONOLÓGICA -->
             <div id="panel-records" class="nexus-panel">
                 <h2 class="panel-title">📋 Historial y Tratamiento Progresivo</h2>
-                <p class="panel-sub">Consulte y modifique las notas de evolución clínica del paciente.</p>
+                <p class="panel-sub">Consulte y modifique las notas de evolución clínica del paciente seleccionado.</p>
                 <div class="form-group">
                     <label class="form-label">Notas Clínicas y Diagnóstico General</label>
                     <textarea id="record-treatment-input" class="form-input" rows="6" placeholder="Escriba los hallazgos clínicos relevantes aquí..."></textarea>
@@ -168,13 +182,13 @@
                 <span id="notes-status-msg" class="status-logger"></span>
             </div>
 
-            <!-- MODULE 3: ALTA DE PACIENTE NEW CLINICAL INTAKE CREATION ENGINE -->
+            <!-- MODULO 3: ALTA DE PACIENTE CON ID HISTÓRICO ÚNICO -->
             <div id="panel-registration" class="nexus-panel">
                 <h2 class="panel-title">👤 Alta de Nuevo Expediente</h2>
-                <p class="panel-sub">Registre un nuevo paciente en la red para inicializar su odontograma.</p>
+                <p class="panel-sub">Registre un nuevo paciente en la red para inicializar su historial aislado.</p>
                 <div class="form-group">
                     <label class="form-label">Nombre Completo del Paciente</label>
-                    <input type="text" id="new-p-name" class="form-input" placeholder="Ej. Carlos Mendoza">
+                    <input type="text" id="new-p-name" class="form-input" placeholder="Ej. Juan Pérez">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Contacto Telefónico (WhatsApp)</label>
@@ -186,15 +200,14 @@
         </section>
     </main>
     <footer>
-        <p style="text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto;">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Tenant Security Isolation Active.</p>
+        <p style="text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto;">&copy; 2026 Sultana Dental Group MSO • División de Sistemas. Aislamiento Criptográfico Activo.</p>
     </footer>
-    <!-- STABLE CONTROL APPLICATION ENGINE SCRIPT -->
+    <!-- MOTOR DE LOGICA DE ENTRADA Y COMUNICACIÓN ASÍNCRONA -->
     <script>
-        // HARD-CODED GLOBAL CARIBBEAN ENDPOINT ROUTING CLUSTERS
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
         
-        // 🔒 SECURITY KEY DEFINITIONS FOR REGISTRATION AND PORTAL GATES
+        // CLAVE MAESTRA CORPORATIVA DE ACTIVACIÓN DE SEDES
         const CORPORATE_MASTER_REGISTRATION_PASSWORD = "SULTANA-LAUNCH-2026";
 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -233,13 +246,13 @@
 
             const { error } = await supabaseClient
                 .from('pacientes')
-                .insert([{ nombre: `LICENCIA CORES ACTIVACIÓN: ${clinicName}`, telefono: clinicPhone, tratamiento: generatedTenantKey, notas_clinicas: '[]', notas_clinicas_text: '' }]);
+                .insert([{ nombre: 'LICENCIA CORES ACTIVACIÓN: ' + clinicName, telefono: clinicPhone, tratamiento: generatedTenantKey, notas_clinicas: '[]' }]);
 
             if (error) {
                 logger.style.color = '#ef4444'; logger.innerText = "❌ Fallo: " + error.message;
             } else {
                 logger.style.color = '#22c55e';
-                logger.innerHTML = `🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">${generatedTenantKey}</strong><br><br><span style="color:#64748b; font-size:11px;">Use este código en el login para entrar a su entorno privado.</span>`;
+                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID y úselo en la pantalla de login para entrar a su entorno privado.</span>';
                 document.getElementById('reg-master-password').value = '';
                 document.getElementById('reg-clinic-name').value = '';
                 document.getElementById('reg-clinic-phone').value = '';
@@ -251,7 +264,7 @@
             const errLogger = document.getElementById('login-error-log');
             if (!tenantInput) { errLogger.innerText = "❌ Ingrese una Licencia."; return; }
 
-            errLogger.style.color = '#eab308'; errLogger.innerText = "🔄 Validando credenciales con la red central...";
+            errLogger.style.color = '#eab308'; errLogger.innerText = "🔄 Validando credenciales con la red central MSO...";
 
             const { data, error } = await supabaseClient.from('pacientes').select('*').eq('tratamiento', tenantInput);
             if (error || !data || data.length === 0) {
@@ -260,7 +273,7 @@
             }
 
             ACTIVE_CLINIC_TENANT_ID = tenantInput;
-            document.getElementById('active-clinic-badge-target').innerText = `🏢 LICENCIA: ${ACTIVE_CLINIC_TENANT_ID}`;
+            document.getElementById('active-clinic-badge-target').innerText = '🏢 LICENCIA: ' + ACTIVE_CLINIC_TENANT_ID;
             document.getElementById('login-gateway-wall').style.display = 'none';
             document.getElementById('master-system-desktop').style.display = 'grid';
             fetchPatientDirectoryLive();
@@ -288,11 +301,11 @@
             }
             array.forEach(p => {
                 let isSelected = activePatientObject && activePatientObject.id === p.id ? 'selected' : '';
-                let formattedPatientNum = `PX-${ACTIVE_CLINIC_TENANT_ID.substring(8,11)}-${String(p.id).padStart(4, '0')}`;
-                htmlBlock += `<div class="patient-card ${isSelected}" onclick="selectActivePatient(${p.id})">
-                                <h4 class="p-name">${p.nombre}</h4>
-                                <div class="p-meta-line"><span>No: ${formattedPatientNum}</span><span>📱 ${p.telefono || ''}</span></div>
-                              </div>`;
+                let formattedPatientNum = 'PX-' + ACTIVE_CLINIC_TENANT_ID.substring(8,11) + '-' + String(p.id).padStart(4, '0');
+                htmlBlock += '<div class="patient-card ' + isSelected + '" onclick="selectActivePatient(' + p.id + ')">' +
+                                '<h4 class="p-name">' + p.nombre + '</h4>' +
+                                '<div class="p-meta-line"><span>No: ' + formattedPatientNum + '</span><span>📱 ' + (p.telefono || '') + '</span></div>' +
+                             '</div>';
             });
             listTarget.innerHTML = htmlBlock;
         }
@@ -300,8 +313,8 @@
         function selectActivePatient(id) {
             activePatientObject = localPatientCache.find(p => p.id === id);
             renderDirectoryCards(localPatientCache);
-            let formattedPatientNum = `PX-${ACTIVE_CLINIC_TENANT_ID.substring(8,11)}-${String(activePatientObject.id).padStart(4, '0')}`;
-            document.getElementById('current-patient-strip').innerHTML = `🟢 [${formattedPatientNum}] Paciente: <strong>${activePatientObject.nombre}</strong>`;
+            let formattedPatientNum = 'PX-' + ACTIVE_CLINIC_TENANT_ID.substring(8,11) + '-' + String(activePatientObject.id).padStart(4, '0');
+            document.getElementById('current-patient-strip').innerHTML = '🟢 [' + formattedPatientNum + '] Paciente: <strong>' + activePatientObject.nombre + '</strong>';
             
             const txtArea = document.getElementById('record-treatment-input');
             if (txtArea) { txtArea.value = activePatientObject.notas_clinicas_text || ''; }
@@ -312,7 +325,7 @@
                     selectedToothArray = JSON.parse(activePatientObject.notas_clinicas);
                     selectedToothArray.forEach(t => {
                         let cell = document.getElementById('tooth-' + t);
-                        if (cell) cell.classList.add('active-decay');
+                        if (cell) cell.style.backgroundColor = '#ef4444';
                     });
                 } catch(e) { selectedToothArray = []; }
             } else { selectedToothArray = []; }
@@ -334,7 +347,20 @@
                 logger.style.color = '#22c55e'; logger.innerText = '¡Expediente Creado!';
                 document.getElementById('new-p-name').value = ''; document.getElementById('new-p-phone').value = '';
                 await fetchPatientDirectoryLive();
-                if (data && data.length > 0) selectActivePatient(data.id);
+                if (data && data.length > 0) selectActivePatient(data[0].id);
+            }
+        }
+
+        function toggleToothState(num) {
+            if (!activePatientObject) { alert('Seleccione un paciente primero.'); return; }
+            let cell = document.getElementById('tooth-' + num);
+            let idx = selectedToothArray.indexOf(num);
+            if (idx > -1) {
+                selectedToothArray.splice(idx, 1);
+                cell.style.backgroundColor = '#111827';
+            } else {
+                selectedToothArray.push(num);
+                cell.style.backgroundColor = '#ef4444';
             }
         }
 
@@ -347,13 +373,3 @@
             if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
                 logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma guardado!';
                 activePatientObject.notas_clinicas = stringData; await fetchPatientDirectoryLive();
-            }
-        }
-
-        async function saveClinicalNotes() {
-            const logger = document.getElementById('notes-status-msg');
-            const textValue = document.getElementById('record-treatment-input').value;
-            if (!activePatientObject) return;
-            logger.style.color = '#eab308'; logger.innerText = 'Guardando...';
-
-            const { error } = await supabaseClient.from('pacientes').update({ notas_clinicas_text: textValue }).eq('id', activePatientObject.id);
