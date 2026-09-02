@@ -202,7 +202,7 @@
     <footer>
         <p style="text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto;">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Tenant Security Isolation Active.</p>
     </footer>
-    <!-- MOTOR DE LOGICA DE ENTRADA CENTRAL CON CONFLICTOS DE ENRUTAMIENTO RESUELTOS -->
+    <!-- MOTOR DE LOGICA DE ENTRADA CORREGIDO CON NOMBRE DE FUNCIÓN SINCRONIZADO -->
     <script>
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
@@ -240,7 +240,7 @@
                 logger.style.color = '#ef4444'; logger.innerText = "❌ Fallo: " + error.message;
             } else {
                 logger.style.color = '#22c55e';
-                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID, limpie el hash de la URL e ingréselo en el login.</span>';
+                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID, limpie el hash de la URL e ingréselo en el login para entrar.</span>';
                 document.getElementById('reg-master-password').value = '';
                 document.getElementById('reg-clinic-name').value = '';
                 document.getElementById('reg-clinic-phone').value = '';
