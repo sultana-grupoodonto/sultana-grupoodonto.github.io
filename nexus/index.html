@@ -8,30 +8,79 @@
     <!-- 🔌 INITIALIZATION LOGIC PIPELINE: AUTOMATED BACKEND CORE DRIVERS -->
     <script src="https://unpkg.com"></script>
     
+    <!-- ⚙️ PRE-COMPILED SCRIPT CORES: INJECTED HIGHER IN ARCHITECTURE TO PREVENT TIMEOUTS -->
+    <script>
+        const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
+        const CORPORATE_MASTER_REGISTRATION_PASSWORD = "SULTANA-LAUNCH-2026";
+
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        let localPatientCache = []; let activePatientObject = null; let selectedToothArray = []; let ACTIVE_CLINIC_TENANT_ID = "";
+
+        function toggleAuthGateMode(mode) {
+            const signinCard = document.getElementById('view-mode-signin');
+            const signupCard = document.getElementById('view-mode-signup');
+            document.getElementById('login-error-log').innerText = '';
+            document.getElementById('reg-error-log').innerText = '';
+            if (mode === 'register') {
+                if(signinCard) signinCard.style.display = 'none';
+                if(signupCard) signupCard.style.display = 'block';
+            } else {
+                if(signupCard) signupCard.style.display = 'none';
+                if(signinCard) signinCard.style.display = 'block';
+            }
+        }
+
+        async function executeAutonomousClinicRegistration() {
+            const masterPass = document.getElementById('reg-master-password').value.trim();
+            const clinicName = document.getElementById('reg-clinic-name').value.trim();
+            const clinicPhone = document.getElementById('reg-clinic-phone').value.trim();
+            const logger = document.getElementById('reg-error-log');
+
+            if (masterPass !== CORPORATE_MASTER_REGISTRATION_PASSWORD) {
+                logger.style.color = '#ef4444'; logger.innerText = "❌ Clave Maestra de Activación Incorrecta.";
+                return;
+            }
+            if (!clinicName || !clinicPhone) {
+                logger.style.color = '#ef4444'; logger.innerText = "❌ Por favor complete todos los campos.";
+                return;
+            }
+
+            logger.style.color = '#eab308'; logger.innerText = "🔄 Generando llaves de cifrado MSO...";
+
+            let cleanName = clinicName.substring(0, 6).toUpperCase().replace(/[^A-Z0-9]/g, '');
+            let randomNum = Math.floor(10 + Math.random() * 90);
+            let generatedTenantKey = "SULTANA-" + cleanName + randomNum;
+
+            const { error } = await supabaseClient
+                .from('pacientes')
+                .insert([{ nombre: 'LICENCIA CORES ACTIVACIÓN: ' + clinicName, telefono: clinicPhone, tratamiento: generatedTenantKey, notas_clinicas: '[]', notas_clinicas_text: '' }]);
+
+            if (error) {
+                logger.style.color = '#ef4444'; logger.innerText = "❌ Fallo: " + error.message;
+            } else {
+                logger.style.color = '#22c55e';
+                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID y úselo en la pantalla de login para entrar.</span>';
+                document.getElementById('reg-master-password').value = '';
+                document.getElementById('reg-clinic-name').value = '';
+                document.getElementById('reg-clinic-phone').value = '';
+            }
+        }
+    </script>
     <style>
         body { background-color: #030712; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; }
         .sultana-gold { color: #d4af37; }
-        
-        /* 🛡️ TARGET-BASED FLAT LOGIN CARD CSS SYSTEM (INDESTRUCTIBLE ROUTER) */
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #030712; z-index: 9999; display: flex; align-items: center; justify-content: center; overflow-y: auto; padding: 20px; box-sizing: border-box; }
         .login-card { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 40px; width: 100%; max-width: 420px; box-sizing: border-box; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); }
-        
-        #view-mode-signup { display: none; }
-        /* When URL contains #registro, natively hide signin and show signup via CSS */
-        :target #view-mode-signin { display: none; }
-        :target #view-mode-signup { display: block; }
-        
         header { max-width: 1200px; width: 92%; margin: 0 auto; padding: 24px 0 16px 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; gap: 16px; }
         @media (min-width: 768px) { header { flex-direction: row; } }
         .brand-block { display: flex; align-items: center; gap: 12px; }
         .brand-title { margin: 0; font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
         .brand-sub { margin: 2px 0 0 0; font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; }
-        
         .tabs-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
         .module-tab { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 12px 20px; font-weight: bold; cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; color: #94a3b8; display: inline-flex; align-items: center; gap: 8px; }
         .module-tab:hover { border-color: #d4af37; color: #ffffff; }
         .module-tab.active { border-color: #d4af37; background-color: #1e1b4b; color: #d4af37; }
-        
         main { max-width: 1200px; width: 92%; margin: 0 auto; padding: 20px 0; display: none; grid-template-columns: 1fr; gap: 24px; }
         @media (min-width: 992px) { main { grid-template-columns: 320px 1fr; } }
         .sidebar-directory { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
@@ -44,13 +93,11 @@
         .patient-card.selected { border-color: #d4af37; background-color: #1e1b4b; }
         .p-name { font-size: 14px; font-weight: bold; margin: 0; color: #f8fafc; }
         .p-meta-line { font-size: 11px; color: #64748b; margin: 4px 0 0 0; display: flex; justify-content: space-between; font-family: monospace; }
-        
         .app-container { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; min-height: 520px; box-sizing: border-box; position: relative; }
         .nexus-panel { display: none; }
         .nexus-panel.active { display: block; }
         .panel-title { margin: 0 0 4px 0; font-size: 18px; font-weight: 800; text-transform: uppercase; }
         .panel-sub { margin: 0 0 20px 0; font-size: 12px; color: #94a3b8; }
-        
         .active-patient-badge { background-color: #1e1b4b; border: 1px solid #d4af37; color: #d4af37; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; }
         .tenant-isolation-banner { background-color: #020617; border-left: 3px solid #22c55e; padding: 6px 12px; font-size: 11px; color: #22c55e; border-radius: 4px; display: inline-block; font-weight: bold; font-family: monospace; text-transform: uppercase; letter-spacing: 0.5px; }
         .form-group { margin-bottom: 16px; }
@@ -64,9 +111,7 @@
 </head>
 <body>
 
-    <!-- CAPA DE SEGURIDAD CON ENRUTAMIENTO POR HASH NATIVO (CSS) -->
-    <div id="registro" class="login-overlay">
-        <!-- CARD CONTEXTO A: LOGIN TRADICIONAL -->
+    <div id="login-gateway-wall" class="login-overlay">
         <div class="login-card" id="view-mode-signin">
             <h2 style="margin: 0 0 4px 0; text-transform: uppercase; font-weight: 900;">Sultana <span class="sultana-gold">Nexus™</span></h2>
             <p style="font-size: 10px; color: #64748b; margin: 0 0 24px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Acceso de Consultorios Afiliados</p>
@@ -75,12 +120,11 @@
                 <input type="text" id="clinic-tenant-input" class="form-input" style="margin-top:6px;" placeholder="Ej. SULTANA-SANTO-DOMINGO">
             </div>
             <button class="submit-btn" style="width: 100%;" onclick="authenticateClinicTenantSession()">Validar Licencia MSO</button>
-            <p style="font-size: 12px; margin-top: 20px; color: #64748b;">¿Nueva clínica afiliada? <a href="#registro" class="sultana-gold" style="font-weight:bold; text-decoration:none;">Regístrese aquí</a></p>
+            <p style="font-size: 12px; margin-top: 20px; color: #64748b;">¿Nueva clínica afiliada? <button class="sultana-gold" style="font-weight:bold; background:none; border:none; cursor:pointer; font-size:12px; padding:0;" onclick="toggleAuthGateMode('register')">Regístrese aquí</button></p>
             <p id="login-error-log" style="font-size: 11px; font-weight: bold; color: #ef4444; margin: 12px 0 0 0;"></p>
         </div>
 
-        <!-- CARD CONTEXTO B: REGISTRO AUTÓNOMO -->
-        <div class="login-card" id="view-mode-signup">
+        <div class="login-card" id="view-mode-signup" style="display: none;">
             <h2 style="margin: 0 0 4px 0; text-transform: uppercase; font-weight: 900; color:#22c55e;">Registro <span class="sultana-gold">Nexus™</span></h2>
             <p style="font-size: 10px; color: #64748b; margin: 0 0 20px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Alta de Sede Autónoma en la Nube</p>
             <div style="text-align: left; margin-bottom: 12px;">
@@ -96,12 +140,11 @@
                 <input type="text" id="reg-clinic-phone" class="form-input" style="margin-top:4px;" placeholder="Ej. 809-555-4321">
             </div>
             <button class="submit-btn" style="width: 100%; background-color:#22c55e; color:#030712;" onclick="executeAutonomousClinicRegistration()">Generar Credenciales y Activar Sede</button>
-            <p style="font-size: 12px; margin-top: 16px; color: #64748b;"><a href="#" class="sultana-gold" style="text-decoration:none;">← Volver al inicio de sesión</a></p>
+            <p style="font-size: 12px; margin-top: 16px; color: #64748b;"><button class="sultana-gold" style="background:none; border:none; cursor:pointer;" onclick="toggleAuthGateMode('login')">← Volver al inicio de sesión</button></p>
             <p id="reg-error-log" style="font-size: 11px; font-weight: bold; margin-top: 12px;"></p>
         </div>
     </div>
 
-    <!-- CABECERA DEL SISTEMA -->
     <header>
         <div class="brand-block">
             <div>
@@ -131,39 +174,46 @@
             <div id="panel-chartmax" class="nexus-panel active">
                 <h2 class="panel-title">Sultana ChartMax™</h2>
                 <p class="panel-sub">Haga clic en las piezas dentales para marcar diagnóstico de patologías o extracciones. Presione guardar para registrar.</p>
+                <style>
+                    .grid-32 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding-top: 8px; }
+                    @media (min-width: 480px) { .grid-32 { grid-template-columns: repeat(8, 1fr); } }
+                    @media (min-width: 768px) { .grid-32 { grid-template-columns: repeat(16, 1fr); } }
+                    .tooth-btn { border: 1px solid #1e293b; background-color: #111827; border-radius: 6px; padding: 12px 4px; text-align: center; cursor: pointer; transition: all 0.2s ease; user-select: none; }
+                    .tooth-btn:hover { border-color: #d4af37; }
+                </style>
                 <div class="grid-32">
-                    <div id="tooth-1" onclick="toggleToothState(1)" class="tooth-btn"><div class="tooth-num">1</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-2" onclick="toggleToothState(2)" class="tooth-btn"><div class="tooth-num">2</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-3" onclick="toggleToothState(3)" class="tooth-btn"><div class="tooth-num">3</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-4" onclick="toggleToothState(4)" class="tooth-btn"><div class="tooth-num">4</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-5" onclick="toggleToothState(5)" class="tooth-btn"><div class="tooth-num">5</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-6" onclick="toggleToothState(6)" class="tooth-btn"><div class="tooth-num">6</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-7" onclick="toggleToothState(7)" class="tooth-btn"><div class="tooth-num">7</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-8" onclick="toggleToothState(8)" class="tooth-btn"><div class="tooth-num">8</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-9" onclick="toggleToothState(9)" class="tooth-btn"><div class="tooth-num">9</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-10" onclick="toggleToothState(10)" class="tooth-btn"><div class="tooth-num">10</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-11" onclick="toggleToothState(11)" class="tooth-btn"><div class="tooth-num">11</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-12" onclick="toggleToothState(12)" class="tooth-btn"><div class="tooth-num">12</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-13" onclick="toggleToothState(13)" class="tooth-btn"><div class="tooth-num">13</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-14" onclick="toggleToothState(14)" class="tooth-btn"><div class="tooth-num">14</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-15" onclick="toggleToothState(15)" class="tooth-btn"><div class="tooth-num">15</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-16" onclick="toggleToothState(16)" class="tooth-btn"><div class="tooth-num">16</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-17" onclick="toggleToothState(17)" class="tooth-btn"><div class="tooth-num">17</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-18" onclick="toggleToothState(18)" class="tooth-btn"><div class="tooth-num">18</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-19" onclick="toggleToothState(19)" class="tooth-btn"><div class="tooth-num">19</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-20" onclick="toggleToothState(20)" class="tooth-btn"><div class="tooth-num">20</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-21" onclick="toggleToothState(21)" class="tooth-btn"><div class="tooth-num">21</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-22" onclick="toggleToothState(22)" class="tooth-btn"><div class="tooth-num">22</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-23" onclick="toggleToothState(23)" class="tooth-btn"><div class="tooth-num">23</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-24" onclick="toggleToothState(24)" class="tooth-btn"><div class="tooth-num">24</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-25" onclick="toggleToothState(25)" class="tooth-btn"><div class="tooth-num">25</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-26" onclick="toggleToothState(26)" class="tooth-btn"><div class="tooth-num">26</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-27" onclick="toggleToothState(27)" class="tooth-btn"><div class="tooth-num">27</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-28" onclick="toggleToothState(28)" class="tooth-btn"><div class="tooth-num">28</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-29" onclick="toggleToothState(29)" class="tooth-btn"><div class="tooth-num">29</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-30" onclick="toggleToothState(30)" class="tooth-btn"><div class="tooth-num">30</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-31" onclick="toggleToothState(31)" class="tooth-btn"><div class="tooth-num">31</div><span class="tooth-label">🦷</span></div>
-                    <div id="tooth-32" onclick="toggleToothState(32)" class="tooth-btn"><div class="tooth-num">32</div><span class="tooth-label">🦷</span></div>
+                    <div id="tooth-1" onclick="toggleToothState(1)" class="tooth-btn"><div class="tooth-num">1</div><span>🦷</span></div>
+                    <div id="tooth-2" onclick="toggleToothState(2)" class="tooth-btn"><div class="tooth-num">2</div><span>🦷</span></div>
+                    <div id="tooth-3" onclick="toggleToothState(3)" class="tooth-btn"><div class="tooth-num">3</div><span>🦷</span></div>
+                    <div id="tooth-4" onclick="toggleToothState(4)" class="tooth-btn"><div class="tooth-num">4</div><span>🦷</span></div>
+                    <div id="tooth-5" onclick="toggleToothState(5)" class="tooth-btn"><div class="tooth-num">5</div><span>🦷</span></div>
+                    <div id="tooth-6" onclick="toggleToothState(6)" class="tooth-btn"><div class="tooth-num">6</div><span>🦷</span></div>
+                    <div id="tooth-7" onclick="toggleToothState(7)" class="tooth-btn"><div class="tooth-num">7</div><span>🦷</span></div>
+                    <div id="tooth-8" onclick="toggleToothState(8)" class="tooth-btn"><div class="tooth-num">8</div><span>🦷</span></div>
+                    <div id="tooth-9" onclick="toggleToothState(9)" class="tooth-btn"><div class="tooth-num">9</div><span>🦷</span></div>
+                    <div id="tooth-10" onclick="toggleToothState(10)" class="tooth-btn"><div class="tooth-num">10</div><span>🦷</span></div>
+                    <div id="tooth-11" onclick="toggleToothState(11)" class="tooth-btn"><div class="tooth-num">11</div><span>🦷</span></div>
+                    <div id="tooth-12" onclick="toggleToothState(12)" class="tooth-btn"><div class="tooth-num">12</div><span>🦷</span></div>
+                    <div id="tooth-13" onclick="toggleToothState(13)" class="tooth-btn"><div class="tooth-num">13</div><span>🦷</span></div>
+                    <div id="tooth-14" onclick="toggleToothState(14)" class="tooth-btn"><div class="tooth-num">14</div><span>🦷</span></div>
+                    <div id="tooth-15" onclick="toggleToothState(15)" class="tooth-btn"><div class="tooth-num">15</div><span>🦷</span></div>
+                    <div id="tooth-16" onclick="toggleToothState(16)" class="tooth-btn"><div class="tooth-num">16</div><span>🦷</span></div>
+                    <div id="tooth-17" onclick="toggleToothState(17)" class="tooth-btn"><div class="tooth-num">17</div><span>🦷</span></div>
+                    <div id="tooth-18" onclick="toggleToothState(18)" class="tooth-btn"><div class="tooth-num">18</div><span>🦷</span></div>
+                    <div id="tooth-19" onclick="toggleToothState(19)" class="tooth-btn"><div class="tooth-num">19</div><span>🦷</span></div>
+                    <div id="tooth-20" onclick="toggleToothState(20)" class="tooth-btn"><div class="tooth-num">20</div><span>🦷</span></div>
+                    <div id="tooth-21" onclick="toggleToothState(21)" class="tooth-btn"><div class="tooth-num">21</div><span>🦷</span></div>
+                    <div id="tooth-22" onclick="toggleToothState(22)" class="tooth-btn"><div class="tooth-num">22</div><span>🦷</span></div>
+                    <div id="tooth-23" onclick="toggleToothState(23)" class="tooth-btn"><div class="tooth-num">23</div><span>🦷</span></div>
+                    <div id="tooth-24" onclick="toggleToothState(24)" class="tooth-btn"><div class="tooth-num">24</div><span>🦷</span></div>
+                    <div id="tooth-25" onclick="toggleToothState(25)" class="tooth-btn"><div class="tooth-num">25</div><span>🦷</span></div>
+                    <div id="tooth-26" onclick="toggleToothState(26)" class="tooth-btn"><div class="tooth-num">26</div><span>🦷</span></div>
+                    <div id="tooth-27" onclick="toggleToothState(27)" class="tooth-btn"><div class="tooth-num">27</div><span>🦷</span></div>
+                    <div id="tooth-28" onclick="toggleToothState(28)" class="tooth-btn"><div class="tooth-num">28</div><span>🦷</span></div>
+                    <div id="tooth-29" onclick="toggleToothState(29)" class="tooth-btn"><div class="tooth-num">29</div><span>🦷</span></div>
+                    <div id="tooth-30" onclick="toggleToothState(30)" class="tooth-btn"><div class="tooth-num">30</div><span>🦷</span></div>
+                    <div id="tooth-31" onclick="toggleToothState(31)" class="tooth-btn"><div class="tooth-num">31</div><span>🦷</span></div>
+                    <div id="tooth-32" onclick="toggleToothState(32)" class="tooth-btn"><div class="tooth-num">32</div><span>🦷</span></div>
                 </div>
                 <div style="margin-top: 24px;">
                     <button class="submit-btn" onclick="saveAnatomicalChart()">Guardar Cambios del Odontograma</button>
@@ -202,55 +252,12 @@
     <footer>
         <p style="text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto;">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Tenant Security Isolation Active.</p>
     </footer>
-    <!-- MOTOR DE LOGICA DE ENTRADA CORREGIDO CON NOMBRE DE FUNCIÓN SINCRONIZADO -->
+    <!-- MOTOR SECUNDARIO: MANEJADORES DE SINCRONIZACIÓN ASÍNCRONA POST-HTML -->
     <script>
-        const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
-        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
-        const CORPORATE_MASTER_REGISTRATION_PASSWORD = "SULTANA-LAUNCH-2026";
-
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        let localPatientCache = []; let activePatientObject = null; let selectedToothArray = []; let ACTIVE_CLINIC_TENANT_ID = "";
-
-        async function executeAutonomousClinicRegistration() {
-            const masterPass = document.getElementById('reg-master-password').value.trim();
-            const clinicName = document.getElementById('reg-clinic-name').value.trim();
-            const clinicPhone = document.getElementById('reg-clinic-phone').value.trim();
-            const logger = document.getElementById('reg-error-log');
-
-            if (masterPass !== CORPORATE_MASTER_REGISTRATION_PASSWORD) {
-                logger.style.color = '#ef4444'; logger.innerText = "❌ Clave Maestra de Activación Incorrecta.";
-                return;
-            }
-            if (!clinicName || !clinicPhone) {
-                logger.style.color = '#ef4444'; logger.innerText = "❌ Por favor complete todos los campos.";
-                return;
-            }
-
-            logger.style.color = '#eab308'; logger.innerText = "🔄 Generando llaves de cifrado MSO...";
-
-            let cleanName = clinicName.substring(0, 6).toUpperCase().replace(/[^A-Z0-9]/g, '');
-            let randomNum = Math.floor(10 + Math.random() * 90);
-            let generatedTenantKey = "SULTANA-" + cleanName + randomNum;
-
-            const { error } = await supabaseClient
-                .from('pacientes')
-                .insert([{ nombre: 'LICENCIA CORES ACTIVACIÓN: ' + clinicName, telefono: clinicPhone, tratamiento: generatedTenantKey, notas_clinicas: '[]', notas_clinicas_text: '' }]);
-
-            if (error) {
-                logger.style.color = '#ef4444'; logger.innerText = "❌ Fallo: " + error.message;
-            } else {
-                logger.style.color = '#22c55e';
-                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID, limpie el hash de la URL e ingréselo en el login para entrar.</span>';
-                document.getElementById('reg-master-password').value = '';
-                document.getElementById('reg-clinic-name').value = '';
-                document.getElementById('reg-clinic-phone').value = '';
-            }
-        }
-
         async function authenticateClinicTenantSession() {
             const tenantInput = document.getElementById('clinic-tenant-input').value.trim().toUpperCase();
             const errLogger = document.getElementById('login-error-log');
-            if (!tenantInput) { errLogger.style.color = '#ef4444'; errLogger.innerText = "❌ Ingrese una Licencia."; return; }
+            if (!tenantInput) { errLogger.style.color = '#ef4444'; errLogger.innerText = "❌ Ingrese una Licencia MSO."; return; }
 
             errLogger.style.color = '#eab308'; errLogger.innerText = "🔄 Validando credenciales con la red central MSO...";
 
@@ -335,7 +342,7 @@
                 logger.style.color = '#22c55e'; logger.innerText = '¡Expediente Creado!';
                 document.getElementById('new-p-name').value = ''; document.getElementById('new-p-phone').value = '';
                 await fetchPatientDirectoryLive();
-                if (data && data.length > 0) selectActivePatient(data.id);
+                if (data && data.length > 0) selectActivePatient(data[0].id);
             }
         }
 
@@ -345,10 +352,10 @@
             let idx = selectedToothArray.indexOf(num);
             if (idx > -1) {
                 selectedToothArray.splice(idx, 1);
-                cell.style.backgroundColor = '#111827';
+                if(cell) cell.style.backgroundColor = '#111827';
             } else {
                 selectedToothArray.push(num);
-                cell.style.backgroundColor = '#ef4444';
+                if(cell) cell.style.backgroundColor = '#ef4444';
             }
         }
 
@@ -371,3 +378,15 @@
             logger.style.color = '#eab308'; logger.innerText = 'Guardando...';
 
             const { error } = await supabaseClient.from('pacientes').update({ notas_clinicas_text: textValue }).eq('id', activePatientObject.id);
+            if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
+                logger.style.color = '#22c55e'; logger.innerText = '¡Historial actualizado!';
+                activePatientObject.notas_clinicas_text = textValue; await fetchPatientDirectoryLive();
+            }
+        }
+
+        function clearAnatomicalChartLayout() { for (let i = 1; i <= 32; i++) { let cell = document.getElementById('tooth-' + i); if (cell) cell.style.backgroundColor = '#111827'; } }
+        function filterDirectory() { let q = document.getElementById('directory-search').value.toLowerCase(); let matches = localPatientCache.filter(p => p.nombre.toLowerCase().includes(q)); renderDirectoryCards(matches); }
+        function navigateDesktopModule(modKey) { var tabs = document.getElementsByClassName('module-tab'); for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active'); document.getElementById('tab-' + modKey).classList.add('active'); var panels = document.getElementsByClassName('nexus-panel'); for (var j = 0; j < panels.length; j++) panels[j].classList.remove('active'); document.getElementById('panel-' + modKey).classList.add('active'); }
+    </script>
+</body>
+</html>
