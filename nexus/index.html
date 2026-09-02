@@ -12,9 +12,14 @@
         body { background-color: #030712; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; }
         .sultana-gold { color: #d4af37; }
         
-        /* SECURITY PORTAL INTERFACE GATE LOCK OVERLAYS */
+        /* 🛡️ TARGET-BASED FLAT LOGIN CARD CSS SYSTEM */
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #030712; z-index: 9999; display: flex; align-items: center; justify-content: center; overflow-y: auto; padding: 20px; box-sizing: border-box; }
-        .login-card { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 40px; width: 100%; max-width: 420px; box-sizing: border-box; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); }
+        .login-card { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 40px; width: 100%; max-width: 420px; box-sizing: border-box; text-align: center; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); display: none; }
+        
+        /* Default CSS State View Router: Operates natively without script compilation requirements */
+        #view-mode-signin { display: block; }
+        :target #view-mode-signin { display: none; }
+        :target #view-mode-signup { display: block; }
         
         header { max-width: 1200px; width: 92%; margin: 0 auto; padding: 24px 0 16px 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; gap: 16px; }
         @media (min-width: 768px) { header { flex-direction: row; } }
@@ -60,9 +65,10 @@
     </style>
 </head>
 <body>
-    <!-- SECCIÓN INTERFAZ DE AUTENTICACIÓN MULTI-CONSULTORIO -->
-    <div id="login-gateway-wall" class="login-overlay">
-        <!-- FORMULARIO DE ACCESO DIRECTO -->
+    <!-- INTERFAZ CENTRAL DE AUTENTICACIÓN MULTI-CONSULTORIO -->
+    <div id="registro" class="login-overlay">
+        
+        <!-- PANELES DE ENTRADA DIRECTA TRADICIONAL -->
         <div class="login-card" id="view-mode-signin">
             <h2 style="margin: 0 0 4px 0; text-transform: uppercase; font-weight: 900;">Sultana <span class="sultana-gold">Nexus™</span></h2>
             <p style="font-size: 10px; color: #64748b; margin: 0 0 24px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Acceso de Consultorios Afiliados</p>
@@ -71,12 +77,12 @@
                 <input type="text" id="clinic-tenant-input" class="form-input" style="margin-top:6px;" placeholder="Ej. SULTANA-SANTO-DOMINGO">
             </div>
             <button class="submit-btn" style="width: 100%;" onclick="authenticateClinicTenantSession()">Validar Licencia MSO</button>
-            <p style="font-size: 12px; margin-top: 20px; color: #64748b;">¿Nueva clínica afiliada? <button class="sultana-gold" style="font-weight:bold; background:none; border:none; cursor:pointer; font-size:12px; padding:0;" onclick="toggleAuthGateMode('register')">Regístrese aquí</button></p>
+            <p style="font-size: 12px; margin-top: 20px; color: #64748b;">¿Nueva clínica afiliada? <a href="#registro" class="sultana-gold" style="font-weight:bold; text-decoration:none;">Regístrese aquí</a></p>
             <p id="login-error-log" style="font-size: 11px; font-weight: bold; color: #ef4444; margin: 12px 0 0 0;"></p>
         </div>
 
-        <!-- FORMULARIO DE REGISTRO EN LA NUBE SOBERANA -->
-        <div class="login-card" id="view-mode-signup" style="display: none;">
+        <!-- PANELES DE ALTA SOBERANA AUTOMÁTICA -->
+        <div class="login-card" id="view-mode-signup">
             <h2 style="margin: 0 0 4px 0; text-transform: uppercase; font-weight: 900; color:#22c55e;">Registro <span class="sultana-gold">Nexus™</span></h2>
             <p style="font-size: 10px; color: #64748b; margin: 0 0 20px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Alta de Sede Autónoma en la Nube</p>
             <div style="text-align: left; margin-bottom: 12px;">
@@ -92,7 +98,7 @@
                 <input type="text" id="reg-clinic-phone" class="form-input" style="margin-top:4px;" placeholder="Ej. 809-555-4321">
             </div>
             <button class="submit-btn" style="width: 100%; background-color:#22c55e; color:#030712;" onclick="executeAutonomousClinicRegistration()">Generar Credenciales y Activar Sede</button>
-            <p style="font-size: 12px; margin-top: 16px; color: #64748b;"><button class="sultana-gold" style="background:none; border:none; cursor:pointer;" onclick="toggleAuthGateMode('login')">← Volver al inicio de sesión</button></p>
+            <p style="font-size: 12px; margin-top: 16px; color: #64748b;"><a href="index.html" class="sultana-gold" style="text-decoration:none;">← Volver al inicio de sesión</a></p>
             <p id="reg-error-log" style="font-size: 11px; font-weight: bold; margin-top: 12px;"></p>
         </div>
     </div>
@@ -112,7 +118,7 @@
         </div>
     </header>
     <main id="master-system-desktop">
-        <!-- DIRECTORY SIDEBAR WORKSPACE LAYER -->
+        <!-- DIRECTORIO LATERAL DE PACIENTES -->
         <section class="sidebar-directory">
             <div style="display: flex; flex-direction: column; gap: 6px;">
                 <h3 class="directory-title">Directorio de Pacientes</h3>
@@ -221,17 +227,160 @@
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         let localPatientCache = []; let activePatientObject = null; let selectedToothArray = []; let ACTIVE_CLINIC_TENANT_ID = "";
 
-        function toggleAuthGateMode(mode) {
-            document.getElementById('login-error-log').innerText = '';
-            document.getElementById('reg-error-log').innerText = '';
-            if (mode === 'register') {
-                document.getElementById('view-mode-signin').style.display = 'none';
-                document.getElementById('view-mode-signup').style.display = 'block';
+        async function executeAutonomousClinicRegistration() {
+            const masterPass = document.getElementById('reg-master-password').value.trim();
+            const clinicName = document.getElementById('reg-clinic-name').value.trim();
+            const clinicPhone = document.getElementById('reg-clinic-phone').value.trim();
+            const logger = document.getElementById('reg-error-log');
+
+            if (masterPass !== CORPORATE_MASTER_REGISTRATION_PASSWORD) {
+                logger.style.color = '#ef4444'; logger.innerText = "❌ Clave Maestra de Activación Incorrecta.";
+                return;
+            }
+            if (!clinicName || !clinicPhone) {
+                logger.style.color = '#ef4444'; logger.innerText = "❌ Por favor complete todos los campos.";
+                return;
+            }
+
+            logger.style.color = '#eab308'; logger.innerText = "🔄 Generando llaves de cifrado MSO...";
+
+            let cleanName = clinicName.substring(0, 6).toUpperCase().replace(/[^A-Z0-9]/g, '');
+            let randomNum = Math.floor(10 + Math.random() * 90);
+            let generatedTenantKey = "SULTANA-" + cleanName + randomNum;
+
+            const { error } = await supabaseClient
+                .from('pacientes')
+                .insert([{ nombre: 'LICENCIA CORES ACTIVACIÓN: ' + clinicName, telefono: clinicPhone, tratamiento: generatedTenantKey, notas_clinicas: '[]', notas_clinicas_text: '' }]);
+
+            if (error) {
+                logger.style.color = '#ef4444'; logger.innerText = "❌ Fallo: " + error.message;
             } else {
-                document.getElementById('view-mode-signup').style.display = 'none';
-                document.getElementById('view-mode-signin').style.display = 'block';
+                logger.style.color = '#22c55e';
+                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID, recargue la página y úselo en la pantalla de login para entrar.</span>';
+                document.getElementById('reg-master-password').value = '';
+                document.getElementById('reg-clinic-name').value = '';
+                document.getElementById('reg-clinic-phone').value = '';
             }
         }
+
+        async function authenticateClinicTenantSession() {
+            const tenantInput = document.getElementById('clinic-tenant-input').value.trim().toUpperCase();
+            const errLogger = document.getElementById('login-error-log');
+            if (!tenantInput) { errLogger.style.color = '#ef4444'; errLogger.innerText = "❌ Ingrese una Licencia."; return; }
+
+            errLogger.style.color = '#eab308'; errLogger.innerText = "🔄 Validando credenciales con la red central MSO...";
+
+            const { data, error } = await supabaseClient.from('pacientes').select('*').eq('tratamiento', tenantInput);
+            if (error || !data || data.length === 0) {
+                errLogger.style.color = '#ef4444'; errLogger.innerText = "❌ Licencia Inválida. Verifique el código o registre su sede.";
+                return;
+            }
+
+            ACTIVE_CLINIC_TENANT_ID = tenantInput;
+            document.getElementById('active-clinic-badge-target').innerText = '🏢 LICENCIA: ' + ACTIVE_CLINIC_TENANT_ID;
+            document.getElementById('login-gateway-wall').style.display = 'none';
+            document.getElementById('master-system-desktop').style.display = 'grid';
+            fetchPatientDirectoryLive();
+        }
+
+        async function fetchPatientDirectoryLive() {
+            const { data, error } = await supabaseClient
+                .from('pacientes')
+                .select('*')
+                .eq('tratamiento', ACTIVE_CLINIC_TENANT_ID)
+                .not('nombre', 'ilike', 'LICENCIA%')
+                .order('nombre', { ascending: true });
+
+            if (error) { console.error(error.message); return; }
+            localPatientCache = data;
+            renderDirectoryCards(localPatientCache);
+        }
+
+        function renderDirectoryCards(array) {
+            const listTarget = document.getElementById('directory-target-cards');
+            let htmlBlock = '';
+            if (array.length === 0) {
+                listTarget.innerHTML = '<p style="font-size:12px; color:#475569; text-align:center; margin-top:20px;">No hay expedientes registrados.</p>';
+                return;
+            }
+            array.forEach(p => {
+                let isSelected = activePatientObject && activePatientObject.id === p.id ? 'selected' : '';
+                let formattedPatientNum = 'PX-' + ACTIVE_CLINIC_TENANT_ID.substring(8,11) + '-' + String(p.id).padStart(4, '0');
+                htmlBlock += '<div class="patient-card ' + isSelected + '" onclick="selectActivePatient(' + p.id + ')">' +
+                                '<h4 class="p-name">' + p.nombre + '</h4>' +
+                                '<div class="p-meta-line"><span>No: ' + formattedPatientNum + '</span><span>📱 ' + (p.telefono || '') + '</span></div>' +
+                             '</div>';
+            });
+            listTarget.innerHTML = htmlBlock;
+        }
+
+        function selectActivePatient(id) {
+            activePatientObject = localPatientCache.find(p => p.id === id);
+            renderDirectoryCards(localPatientCache);
+            let formattedPatientNum = 'PX-' + ACTIVE_CLINIC_TENANT_ID.substring(8,11) + '-' + String(activePatientObject.id).padStart(4, '0');
+            document.getElementById('current-patient-strip').innerHTML = '🟢 [' + formattedPatientNum + '] Paciente: <strong>' + activePatientObject.nombre + '</strong>';
+            
+            const txtArea = document.getElementById('record-treatment-input');
+            if (txtArea) { txtArea.value = activePatientObject.notas_clinicas_text || ''; }
+            
+            clearAnatomicalChartLayout();
+            if (activePatientObject.notas_clinicas) {
+                try {
+                    selectedToothArray = JSON.parse(activePatientObject.notas_clinicas);
+                    selectedToothArray.forEach(t => {
+                        let cell = document.getElementById('tooth-' + t);
+                        if (cell) cell.style.backgroundColor = '#ef4444';
+                    });
+                } catch(e) { selectedToothArray = []; }
+            } else { selectedToothArray = []; }
+        }
+
+        async function createNewPatientInbound() {
+            const name = document.getElementById('new-p-name').value.trim();
+            const phone = document.getElementById('new-p-phone').value.trim();
+            const logger = document.getElementById('reg-status-msg');
+            if (!name || !phone) { logger.style.color = '#ef4444'; logger.innerText = 'Campos incompletos.'; return; }
+            logger.style.color = '#eab308'; logger.innerText = 'Asignando ID y guardando...';
+
+            const { data, error } = await supabaseClient
+                .from('pacientes')
+                .insert([{ nombre: name, telefono: phone, tratamiento: ACTIVE_CLINIC_TENANT_ID, notas_clinicas: '[]', notas_clinicas_text: '' }])
+                .select();
+
+            if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
+                logger.style.color = '#22c55e'; logger.innerText = '¡Expediente Creado!';
+                document.getElementById('new-p-name').value = ''; document.getElementById('new-p-phone').value = '';
+                await fetchPatientDirectoryLive();
+                if (data && data.length > 0) selectActivePatient(data.id);
+            }
+        }
+
+        function toggleToothState(num) {
+            if (!activePatientObject) { alert('Seleccione un paciente primero.'); return; }
+            let cell = document.getElementById('tooth-' + num);
+            let idx = selectedToothArray.indexOf(num);
+            if (idx > -1) {
+                selectedToothArray.splice(idx, 1);
+                cell.style.backgroundColor = '#111827';
+            } else {
+                selectedToothArray.push(num);
+                cell.style.backgroundColor = '#ef4444';
+            }
+        }
+
+        async function saveAnatomicalChart() {
+            const logger = document.getElementById('chart-status-msg'); if (!activePatientObject) return;
+            logger.style.color = '#eab308'; logger.innerText = 'Guardando...';
+            const stringData = JSON.stringify(selectedToothArray);
+
+            const { error } = await supabaseClient.from('pacientes').update({ notas_clinic    <!-- MOTOR DE LOGICA DE ENTRADA CORREGIDO CON PARSEO PLANO LITERAL -->
+    <script>
+        const SUPABASE_URL = "https://supabase.co";
+        const SUPABASE_KEY = "PASTE_YOUR_MASSIVE_ANON_PUBLIC_KEY_HERE";
+        const CORPORATE_MASTER_REGISTRATION_PASSWORD = "SULTANA-LAUNCH-2026";
+
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        let localPatientCache = []; let activePatientObject = null; let selectedToothArray = []; let ACTIVE_CLINIC_TENANT_ID = "";
 
         async function executeAutonomousClinicRegistration() {
             const masterPass = document.getElementById('reg-master-password').value.trim();
@@ -262,7 +411,7 @@
                 logger.style.color = '#ef4444'; logger.innerText = "❌ Fallo: " + error.message;
             } else {
                 logger.style.color = '#22c55e';
-                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID, use este código en la pantalla de login para entrar.</span>';
+                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID, recargue la página y úselo en la pantalla de login para entrar.</span>';
                 document.getElementById('reg-master-password').value = '';
                 document.getElementById('reg-clinic-name').value = '';
                 document.getElementById('reg-clinic-phone').value = '';
@@ -382,3 +531,28 @@
             const { error } = await supabaseClient.from('pacientes').update({ notas_clinicas: stringData }).eq('id', activePatientObject.id);
             if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
                 logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma guardado!';
+                activePatientObject.notas_clinicas = stringData; await fetchPatientDirectoryLive();
+            }
+        }
+
+        async function saveClinicalNotes() {
+            const logger = document.getElementById('notes-status-msg');
+            const textValue = document.getElementById('record-treatment-input').value;
+            if (!activePatientObject) return;
+            logger.style.color = '#eab308'; logger.innerText = 'Guardando...';
+
+            const { error } = await baseClient.from('pacientes').update({ notas_clinicas_text: textValue }).eq('id', activePatientObject.id);
+as: stringData }).eq('id', activePatientObject.id);
+            if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
+                logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma guardado!';
+                activePatientObject.notas_clinicas = stringData; await fetchPatientDirectoryLive();
+            }
+        }
+
+        async function saveClinicalNotes() {
+            const logger = document.getElementById('notes-status-msg');
+            const textValue = document.getElementById('record-treatment-input').value;
+            if (!activePatientObject) return;
+            logger.style.color = '#eab308'; logger.innerText = 'Guardando...';
+
+            const { error } = await supabaseClient.from('pacientes').update({ notas_clinicas_text: textValue }).eq('id', activePatientObject.id);
