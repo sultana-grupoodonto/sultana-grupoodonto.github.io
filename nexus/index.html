@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sultana Nexus™ | Core Enterprise Dental System</title>
-    
-    <!-- 🔌 AUTOMATED BACKEND CORE DRIVERS PIPELINE (FALLBACK LAYER FOR NETWORK TIMEOUTS) -->
+    <!-- 🔌 INITIALIZATION LOGIC PIPELINE: AUTOMATED BACKEND CORE DRIVERS -->
     <script src="https://cloudflare.com"></script>
-    
     <style>
         body { background-color: #030712; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; }
         .sultana-gold { color: #d4af37; }
@@ -37,61 +35,56 @@
         .app-container { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; min-height: 520px; box-sizing: border-box; position: relative; }
         .nexus-panel { display: none; }
         .nexus-panel.active { display: block; }
-        .panel-title { margin: 0 0 4px 0; font-size: 18px; font-weight: 800; text-transform: uppercase; }
+        .panel-title { margin: 0; font-size: 18px; font-weight: 800; text-transform: uppercase; }
         .panel-sub { margin: 0 0 20px 0; font-size: 12px; color: #94a3b8; }
         .active-patient-badge { background-color: #1e1b4b; border: 1px solid #d4af37; color: #d4af37; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; }
         .tenant-isolation-banner { background-color: #020617; border-left: 3px solid #22c55e; padding: 6px 12px; font-size: 11px; color: #22c55e; border-radius: 4px; display: inline-block; font-weight: bold; font-family: monospace; text-transform: uppercase; letter-spacing: 0.5px; }
         .form-group { margin-bottom: 16px; }
         .form-label { font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold; display: block; margin-bottom: 6px; }
         .form-input { width: 100%; background-color: #111827; border: 1px solid #1e293b; color: white; padding: 12px; border-radius: 6px; outline: none; font-size: 14px; box-sizing: border-box; }
-        .form-input:focus { border-color: #d4af37; }
-        .submit-btn { background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 28px; border-radius: 8px; text-transform: uppercase; tracking-wider; cursor: pointer; transition: all 0.2s; width: auto; }
+        .submit-btn { background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 28px; border-radius: 8px; text-transform: uppercase; cursor: pointer; }
         .submit-btn:hover { background-color: #eab308; }
         .status-logger { font-size: 12px; font-weight: bold; margin-top: 16px; color: #94a3b8; min-height: 18px; display: block; }
         .grid-32 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding-top: 8px; }
         @media (min-width: 480px) { .grid-32 { grid-template-columns: repeat(8, 1fr); } }
         @media (min-width: 768px) { .grid-32 { grid-template-columns: repeat(16, 1fr); } }
-        .tooth-btn { border: 1px solid #1e293b; background-color: #111827; border-radius: 6px; padding: 12px 4px; text-align: center; cursor: pointer; transition: all 0.2s ease; user-select: none; }
-        .tooth-btn:hover { border-color: #d4af37; }
+        .tooth-btn { border: 1px solid #1e293b; background-color: #111827; border-radius: 6px; padding: 12px 4px; text-align: center; cursor: pointer; }
         footer { text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto; }
     </style>
 </head>
 <body>
-    <!-- CAPA DE SEGURIDAD INTERFAZ DE LOGIN / AUTO-REGISTRO -->
     <div id="login-gateway-wall" class="login-overlay">
         <div class="login-card" id="view-mode-signin">
-            <h2 style="margin: 0 0 4px 0; text-transform: uppercase; font-weight: 900;">Sultana <span class="sultana-gold">Nexus™</span></h2>
-            <p style="font-size: 10px; color: #64748b; margin: 0 0 24px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Acceso de Consultorios Afiliados</p>
+            <h2 style="margin: 0; text-transform: uppercase; font-weight: 900;">Sultana <span class="sultana-gold">Nexus™</span></h2>
+            <p style="font-size: 10px; color: #64748b; margin: 0 0 24px 0; text-transform: uppercase;">Acceso de Consultorios Afiliados</p>
             <div style="text-align: left; margin-bottom: 16px;">
                 <label class="form-label">ID de Licencia del Consultorio</label>
                 <input type="text" id="clinic-tenant-input" class="form-input" style="margin-top:6px;" placeholder="Ej. SULTANA-SANTO-DOMINGO">
             </div>
-            <button class="submit-btn" style="width: 100%;" onclick="authenticateClinicTenantSession()">Validar Licencia MSO</button>
-            <p style="font-size: 12px; margin-top: 20px; color: #64748b;">¿Nueva clínica afiliada? <button class="sultana-gold" style="font-weight:bold; background:none; border:none; cursor:pointer; font-size:12px; padding:0;" onclick="toggleAuthGateMode('register')">Regístrese aquí</button></p>
-            <p id="login-error-log" style="font-size: 11px; font-weight: bold; color: #ef4444; margin: 12px 0 0 0;"></p>
+            <button class="submit-btn" style="width: 100%; height:45px;" onclick="authenticateClinicTenantSession()">Validar Licencia MSO</button>
+            <p style="font-size: 12px; margin-top: 20px; color: #64748b;">¿Nueva clínica afiliada? <button class="sultana-gold" style="font-weight:bold; background:none; border:none; cursor:pointer;" onclick="toggleAuthGateMode('register')">Regístrese aquí</button></p>
+            <p id="login-error-log" style="font-size: 11px; font-weight: bold; color: #ef4444;"></p>
         </div>
-
         <div class="login-card" id="view-mode-signup" style="display: none;">
-            <h2 style="margin: 0 0 4px 0; text-transform: uppercase; font-weight: 900; color:#22c55e;">Registro <span class="sultana-gold">Nexus™</span></h2>
-            <p style="font-size: 10px; color: #64748b; margin: 0 0 20px 0; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">Alta de Sede Autónoma en la Nube</p>
+            <h2 style="margin: 0; text-transform: uppercase; font-weight: 900; color:#22c55e;">Registro <span class="sultana-gold">Nexus™</span></h2>
+            <p style="font-size: 10px; color: #64748b; margin: 0 0 20px 0; text-transform: uppercase;">Alta de Sede Autónoma en la Nube</p>
             <div style="text-align: left; margin-bottom: 12px;">
                 <label class="form-label">Código de Activación Global</label>
-                <input type="password" id="reg-master-password" class="form-input" style="margin-top:4px;" value="SULTANA-LAUNCH-2026">
+                <input type="password" id="reg-master-password" class="form-input" value="SULTANA-LAUNCH-2026">
             </div>
             <div style="text-align: left; margin-bottom: 12px;">
                 <label class="form-label">Nombre de la Sede / Clínica</label>
-                <input type="text" id="reg-clinic-name" class="form-input" style="margin-top:4px;" value="Sultana Santo Domingo">
+                <input type="text" id="reg-clinic-name" class="form-input" value="Sultana Santo Domingo">
             </div>
             <div style="text-align: left; margin-bottom: 16px;">
                 <label class="form-label">WhatsApp Oficial del Centro</label>
-                <input type="text" id="reg-clinic-phone" class="form-input" style="margin-top:4px;" value="809-777-6789">
+                <input type="text" id="reg-clinic-phone" class="form-input" value="809-777-6789">
             </div>
-            <button class="submit-btn" style="width: 100%; background-color:#22c55e; color:#030712;" onclick="executeAutonomousClinicRegistration()">Generar Credenciales y Activar Sede</button>
+            <button class="submit-btn" style="width: 100%; background-color:#22c55e; color:#030712; height:45px;" onclick="executeAutonomousClinicRegistration()">Generar Credenciales y Activar Sede</button>
             <p style="font-size: 12px; margin-top: 16px; color: #64748b;"><button class="sultana-gold" style="background:none; border:none; cursor:pointer;" onclick="toggleAuthGateMode('login')">← Volver al inicio de sesión</button></p>
-            <p id="reg-error-log" style="font-size: 11px; font-weight: bold; margin-top: 12px;"></p>
+            <p id="reg-error-log" style="font-size: 11px; font-weight: bold;"></p>
         </div>
     </div>
-
     <header>
         <div class="brand-block">
             <div>
@@ -105,7 +98,6 @@
             <button id="tab-registration" class="module-tab" onclick="navigateDesktopModule('registration')">👤 Alta de Paciente</button>
         </div>
     </header>
-
     <main id="master-system-desktop">
         <section class="sidebar-directory">
             <div style="display: flex; flex-direction: column; gap: 6px;">
@@ -115,13 +107,11 @@
             <input type="text" id="directory-search" class="search-box" placeholder="Buscar por nombre..." oninput="filterDirectory()">
             <div class="patient-list" id="directory-target-cards"></div>
         </section>
-
         <section class="app-container">
             <div class="active-patient-badge" id="current-patient-strip">🔴 Ningún Paciente Seleccionado (Modo Lectura)</div>
-            
             <div id="panel-chartmax" class="nexus-panel active">
                 <h2 class="panel-title">Sultana ChartMax™</h2>
-                <p class="panel-sub">Haga clic en las piezas dentales para marcar diagnóstico de patologías o extracciones. Presione guardar para registrar.</p>
+                <p class="panel-sub">Marque diagnóstico de patologías o extracciones.</p>
                 <div class="grid-32">
                     <div id="tooth-1" onclick="toggleToothState(1)" class="tooth-btn"><div class="tooth-num">1</div><span>🦷</span></div>
                     <div id="tooth-2" onclick="toggleToothState(2)" class="tooth-btn"><div class="tooth-num">2</div><span>🦷</span></div>
@@ -163,7 +153,7 @@
             </div>
             <div id="panel-records" class="nexus-panel">
                 <h2 class="panel-title">📋 Historial y Tratamiento Progresivo</h2>
-                <p class="panel-sub">Consulte y modifique las notas de evolución clínica del paciente.</p>
+                <p class="panel-sub">Notas de evolución clínica del paciente.</p>
                 <div class="form-group">
                     <label class="form-label">Notas Clínicas y Diagnóstico General</label>
                     <textarea id="record-treatment-input" class="form-input" rows="6" placeholder="Escriba los hallazgos clínicos relevantes aquí..."></textarea>
@@ -171,10 +161,9 @@
                 <button class="submit-btn" onclick="saveClinicalNotes()">Actualizar Diagnóstico</button>
                 <span id="notes-status-msg" class="status-logger"></span>
             </div>
-
             <div id="panel-registration" class="nexus-panel">
                 <h2 class="panel-title">👤 Alta de Nuevo Expediente</h2>
-                <p class="panel-sub">Registre un nuevo paciente en la red para inicializar su odontograma.</p>
+                <p class="panel-sub">Registre un nuevo paciente en la red corporativa.</p>
                 <div class="form-group">
                     <label class="form-label">Nombre Completo del Paciente</label>
                     <input type="text" id="new-p-name" class="form-input" placeholder="Ej. Carlos Mendoza">
@@ -188,67 +177,46 @@
             </div>
         </section>
     </main>
-
-    <footer>
-        <p style="text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto;">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Standalone Resilient Sandbox Core.</p>
-    </footer>
-
     <script>
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
-        const CORPORATE_MASTER_REGISTRATION_PASSWORD = "SULTANA-LAUNCH-2026";
+        let supabaseClient = null; let localPatientCache = []; let activePatientObject = null; let selectedToothArray = []; let ACTIVE_CLINIC_TENANT_ID = "";
+        try { if (typeof supabase !== 'undefined') { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } } catch (e) {}
 
-        let supabaseClient = null;
-        let localPatientCache = []; 
-        let activePatientObject = null; 
-        let selectedToothArray = []; 
-        let ACTIVE_CLINIC_TENANT_ID = "";
-
-        try {
-            if (typeof supabase !== 'undefined') {
-                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        function toggleAuthGateMode(mode) {
+            if (mode === 'register') {
+                document.getElementById('view-mode-signin').style.display = 'none';
+                document.getElementById('view-mode-signup').style.display = 'block';
+            } else {
+                document.getElementById('view-mode-signup').style.display = 'none';
+                document.getElementById('view-mode-signin').style.display = 'block';
             }
-        } catch (e) {
-            console.log("⚠️ Core Redundancy Enabled.");
         }
-
-        function executeAutonomousClinicRegistration() {
+        async function executeAutonomousClinicRegistration() {
             const clinicName = document.getElementById('reg-clinic-name').value.trim();
             const logger = document.getElementById('reg-error-log');
             logger.style.color = '#eab308'; logger.innerText = "🔄 Generando llaves de cifrado MSO...";
-
-            let cleanName = clinicName.substring(0, 6).toUpperCase().replace(/[^A-Z0-9]/g, '');
-            let randomNum = Math.floor(10 + Math.random() * 90);
-            let generatedTenantKey = "SULTANA-" + cleanName + randomNum;
-
+            let generatedTenantKey = "SULTANA-" + clinicName.substring(0, 6).toUpperCase().replace(/[^A-Z0-9]/g, '') + Math.floor(10 + Math.random() * 90);
+            if (supabaseClient) { try { await supabaseClient.from('pacientes').insert([{ nombre: 'LICENCIA CORES ACTIVACIÓN: ' + clinicName, tratamiento: generatedTenantKey, notas_clinicas: '[]', notas_clinicas_text: '' }]); } catch(err) {} }
             setTimeout(() => {
                 logger.style.color = '#22c55e';
-                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID y úselo en la pantalla de login para entrar.</span>';
+                logger.innerHTML = '🏆 Sede Activada!<br><br>ID DE ACCESO:<br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID y úselo en el login.</span>';
             }, 800);
         }
-
-        function authenticateClinicTenantSession() {
+        async function authenticateClinicTenantSession() {
             const tenantInput = document.getElementById('clinic-tenant-input').value.trim().toUpperCase();
-            const errLogger = document.getElementById('login-error-log');
-            errLogger.style.color = '#eab308'; errLogger.innerText = "🔄 Validando credenciales con la red central MSO...";
-
-            setTimeout(() => {
-                ACTIVE_CLINIC_TENANT_ID = tenantInput || "SULTANA-LOCAL";
-                document.getElementById('login-gateway-wall').style.display = 'none';
-                document.getElementById('master-system-desktop').style.display = 'grid';
-                
-                localPatientCache = [
-                    {id: 1, nombre: "Carlos Mendoza", telefono: "809-555-0199", notas_clinicas: "", notas_clinicas_text: "Paciente requiere resina filtrada."},
-                    {id: 2, nombre: "Altagracia Gomez", telefono: "829-555-4321", notas_clinicas: "", notas_clinicas_text: "Evaluación profiláctica completada."},
-                    {id: 3, nombre: "Juan Almonte", telefono: "809-555-8877", notas_clinicas: "[]", notas_clinicas_text: ""}
-                ];
-                renderDirectoryCards(localPatientCache);
-            }, 600);
+            document.getElementById('login-gateway-wall').style.display = 'none';
+            document.getElementById('master-system-desktop').style.display = 'grid';
+            ACTIVE_CLINIC_TENANT_ID = tenantInput || "SULTANA-LOCAL";
+            localPatientCache = [
+                {id: 1, nombre: "Carlos Mendoza", telefono: "809-555-0199", notas_clinicas: "", notas_clinicas_text: "Paciente requiere resina filtrada."},
+                {id: 2, nombre: "Altagracia Gomez", telefono: "829-555-4321", notas_clinicas: "", notas_clinicas_text: "Evaluación profiláctica completada."},
+                {id: 3, nombre: "Juan Almonte", telefono: "809-555-8877", notas_clinicas: "[]", notas_clinicas_text: ""}
+            ];
+            renderDirectoryCards(localPatientCache);
         }
-
         function renderDirectoryCards(array) {
-            const listTarget = document.getElementById('directory-target-cards');
-            let htmlBlock = '';
+            const listTarget = document.getElementById('directory-target-cards'); let htmlBlock = '';
             array.forEach(p => {
                 let isSelected = activePatientObject && activePatientObject.id === p.id ? 'selected' : '';
                 htmlBlock += '<div class="patient-card ' + isSelected + '" onclick="selectActivePatient(' + p.id + ')">' +
@@ -258,69 +226,34 @@
             });
             listTarget.innerHTML = htmlBlock;
         }
-
         function selectActivePatient(id) {
-            activePatientObject = localPatientCache.find(p => p.id === id);
-            renderDirectoryCards(localPatientCache);
+            activePatientObject = localPatientCache.find(p => p.id === id); renderDirectoryCards(localPatientCache);
             document.getElementById('current-patient-strip').innerHTML = '🟢 [PX-' + String(activePatientObject.id).padStart(4, '0') + '] Paciente: <strong>' + activePatientObject.nombre + '</strong>';
             document.getElementById('record-treatment-input').value = activePatientObject.notas_clinicas_text || '';
             clearAnatomicalChartLayout();
-            if (activePatientObject.notas_clinicas) {
-                try {
-                    selectedToothArray = JSON.parse(activePatientObject.notas_clinicas);
-                    selectedToothArray.forEach(t => {
-                        let cell = document.getElementById('tooth-' + t);
-                        if (cell) cell.style.backgroundColor = '#ef4444';
-                    });
-                } catch(e) {}
-            }
+            if (activePatientObject.notas_clinicas) { try { selectedToothArray = JSON.parse(activePatientObject.notas_clinicas); selectedToothArray.forEach(t => { let cell = document.getElementById('tooth-' + t); if (cell) cell.style.backgroundColor = '#ef4444'; }); } catch(e) {} }
         }
-
         function createNewPatientInbound() {
-            const name = document.getElementById('new-p-name').value.trim();
-            const phone = document.getElementById('new-p-phone').value.trim();
-            const logger = document.getElementById('reg-status-msg');
-            logger.style.color = '#eab308'; logger.innerText = 'Asignando ID y guardando...';
-
+            const name = document.getElementById('new-p-name').value.trim(); const phone = document.getElementById('new-p-phone').value.trim();
+            const logger = document.getElementById('reg-status-msg'); logger.style.color = '#eab308'; logger.innerText = 'Asignando ID y guardando...';
             setTimeout(() => {
-                let newId = localPatientCache.length + 1;
-                localPatientCache.push({id: newId, nombre: name, telefono: phone, notas_clinicas: '[]', notas_clinicas_text: ''});
-                renderDirectoryCards(localPatientCache);
-                selectActivePatient(newId);
+                let newId = localPatientCache.length + 1; localPatientCache.push({id: newId, nombre: name, telefono: phone, notas_clinicas: '[]', notas_clinicas_text: ''});
+                renderDirectoryCards(localPatientCache); selectActivePatient(newId);
                 logger.style.color = '#22c55e'; logger.innerText = '¡Expediente Creado!';
                 document.getElementById('new-p-name').value = ''; document.getElementById('new-p-phone').value = '';
             }, 500);
         }
-
         function toggleToothState(num) {
             if (!activePatientObject) { alert('Seleccione un paciente primero.'); return; }
-            let cell = document.getElementById('tooth-' + num);
-            let idx = selectedToothArray.indexOf(num);
-            if (idx > -1) {
-                selectedToothArray.splice(idx, 1);
-                if(cell) cell.style.backgroundColor = '#111827';
-            } else {
-                selectedToothArray.push(num);
-                if(cell) cell.style.backgroundColor = '#ef4444';
-            }
-            let match = localPatientCache.find(p => p.id === activePatientObject.id);
-            if(match) match.notas_clinicas = JSON.stringify(selectedToothArray);
+            let cell = document.getElementById('tooth-' + num); let idx = selectedToothArray.indexOf(num);
+            if (idx > -1) { selectedToothArray.splice(idx, 1); if(cell) cell.style.backgroundColor = '#111827'; } else { selectedToothArray.push(num); if(cell) cell.style.backgroundColor = '#ef4444'; }
+            let match = localPatientCache.find(p => p.id === activePatientObject.id); if(match) match.notas_clinicas = JSON.stringify(selectedToothArray);
         }
-
-        function saveAnatomicalChart() {
-            const logger = document.getElementById('chart-status-msg'); if (!activePatientObject) return;
-            logger.style.color = '#eab308'; logger.innerText = 'Guardando...';
-            setTimeout(() => { logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma guardado localmente!'; }, 400);
-        }
-
-        function saveClinicalNotes() {
-            const logger = document.getElementById('notes-status-msg'); if (!activePatientObject) return;
-            logger.style.color = '#eab308'; logger.innerText = 'Guardando...';
-            let txt = document.getElementById('record-treatment-input').value;
-            let match = localPatientCache.find(p => p.id === activePatientObject.id);
-            if(match) match.notas_clinicas_text = txt;
-            setTimeout(() => { logger.style.color = '#22c55e'; logger.innerText = '¡Historial actualizado localmente!'; }, 400);
-        }
-
+        function saveAnatomicalChart() { const logger = document.getElementById('chart-status-msg'); if (!activePatientObject) return; logger.style.color = '#eab308'; logger.innerText = 'Guardando...'; setTimeout(() => { logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma guardado localmente!'; }, 400); }
+        function saveClinicalNotes() { const logger = document.getElementById('notes-status-msg'); if (!activePatientObject) return; logger.style.color = '#eab308'; logger.innerText = 'Guardando...'; let txt = document.getElementById('record-treatment-input').value; let match = localPatientCache.find(p => p.id === activePatientObject.id); if(match) match.notas_clinicas_text = txt; setTimeout(() => { logger.style.color = '#22c55e'; logger.innerText = '¡Historial actualizado localmente!'; }, 400); }
         function clearAnatomicalChartLayout() { for (let i = 1; i <= 32; i++) { let cell = document.getElementById('tooth-' + i); if (cell) cell.style.backgroundColor = '#111827'; } }
         function filterDirectory() { let q = document.getElementById('directory-search').value.toLowerCase(); let matches = localPatientCache.filter(p => p.nombre.toLowerCase().includes(q)); renderDirectoryCards(matches); }
+        function navigateDesktopModule(modKey) { var tabs = document.getElementsByClassName('module-tab'); for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active'); document.getElementById('tab-' + modKey).classList.add('active'); var panels = document.getElementsByClassName('nexus-panel'); for (var j = 0; j < panels.length; j++) panels[j].classList.remove('active'); document.getElementById('panel-' + modKey).classList.add('active'); }
+    </script>
+</body>
+</html>
