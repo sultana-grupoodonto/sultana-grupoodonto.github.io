@@ -16,7 +16,7 @@
         .brand-block { display: flex; align-items: center; gap: 12px; }
         .brand-title { margin: 0; font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
         .brand-sub { margin: 2px 0 0 0; font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; }
-        .tabs-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .tabs-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
         .module-tab { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 12px 20px; font-weight: bold; cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; color: #94a3b8; display: inline-flex; align-items: center; gap: 8px; }
         .module-tab:hover { border-color: #d4af37; color: #ffffff; }
         .module-tab.active { border-color: #d4af37; background-color: #1e1b4b; color: #d4af37; }
@@ -35,20 +35,23 @@
         .app-container { background-color: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; min-height: 520px; box-sizing: border-box; position: relative; }
         .nexus-panel { display: none; }
         .nexus-panel.active { display: block; }
-        .panel-title { margin: 0; font-size: 18px; font-weight: 800; text-transform: uppercase; }
+        .panel-title { margin: 0 0 4px 0; font-size: 18px; font-weight: 800; text-transform: uppercase; }
         .panel-sub { margin: 0 0 20px 0; font-size: 12px; color: #94a3b8; }
         .active-patient-badge { background-color: #1e1b4b; border: 1px solid #d4af37; color: #d4af37; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; }
         .tenant-isolation-banner { background-color: #020617; border-left: 3px solid #22c55e; padding: 6px 12px; font-size: 11px; color: #22c55e; border-radius: 4px; display: inline-block; font-weight: bold; font-family: monospace; text-transform: uppercase; letter-spacing: 0.5px; }
         .form-group { margin-bottom: 16px; }
         .form-label { font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: bold; display: block; margin-bottom: 6px; }
         .form-input { width: 100%; background-color: #111827; border: 1px solid #1e293b; color: white; padding: 12px; border-radius: 6px; outline: none; font-size: 14px; box-sizing: border-box; }
-        .submit-btn { background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 28px; border-radius: 8px; text-transform: uppercase; cursor: pointer; }
+        .submit-btn { background-color: #d4af37; color: #030712; border: none; font-weight: 900; font-size: 12px; padding: 14px 28px; border-radius: 8px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
         .submit-btn:hover { background-color: #eab308; }
         .status-logger { font-size: 12px; font-weight: bold; margin-top: 16px; color: #94a3b8; min-height: 18px; display: block; }
-        .grid-32 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding-top: 8px; }
+        .grid-32 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding-top: 8px; }
         @media (min-width: 480px) { .grid-32 { grid-template-columns: repeat(8, 1fr); } }
         @media (min-width: 768px) { .grid-32 { grid-template-columns: repeat(16, 1fr); } }
-        .tooth-btn { border: 1px solid #1e293b; background-color: #111827; border-radius: 6px; padding: 12px 4px; text-align: center; cursor: pointer; }
+        .tooth-btn { border: 2px solid #334155; background-color: #1e293b; border-radius: 8px 8px 16px 16px; padding: 10px 2px; text-align: center; cursor: pointer; transition: all 0.2s ease; position: relative; min-height: 65px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
+        .tooth-btn:hover { border-color: #d4af37; }
+        .tooth-num { font-size: 11px; font-weight: bold; color: #94a3b8; font-family: monospace; }
+        .tooth-crown { width: 20px; height: 22px; background-color: #f8fafc; border-radius: 6px 6px 10px 10px; border: 1px solid #cbd5e1; margin: 4px auto; display: block; box-shadow: inset 0 -4px 6px rgba(0,0,0,0.15); }
         footer { text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto; }
     </style>
 </head>
@@ -113,44 +116,41 @@
                 <h2 class="panel-title">Sultana ChartMax™</h2>
                 <p class="panel-sub">Marque diagnóstico de patologías o extracciones.</p>
                 <div class="grid-32">
-                    <div id="tooth-1" onclick="toggleToothState(1)" class="tooth-btn"><div class="tooth-num">1</div><span>🦷</span></div>
-                    <div id="tooth-2" onclick="toggleToothState(2)" class="tooth-btn"><div class="tooth-num">2</div><span>🦷</span></div>
-                    <div id="tooth-3" onclick="toggleToothState(3)" class="tooth-btn"><div class="tooth-num">3</div><span>🦷</span></div>
-                    <div id="tooth-4" onclick="toggleToothState(4)" class="tooth-btn"><div class="tooth-num">4</div><span>🦷</span></div>
-                    <div id="tooth-5" onclick="toggleToothState(5)" class="tooth-btn"><div class="tooth-num">5</div><span>🦷</span></div>
-                    <div id="tooth-6" onclick="toggleToothState(6)" class="tooth-btn"><div class="tooth-num">6</div><span>🦷</span></div>
-                    <div id="tooth-7" onclick="toggleToothState(7)" class="tooth-btn"><div class="tooth-num">7</div><span>🦷</span></div>
-                    <div id="tooth-8" onclick="toggleToothState(8)" class="tooth-btn"><div class="tooth-num">8</div><span>🦷</span></div>
-                    <div id="tooth-9" onclick="toggleToothState(9)" class="tooth-btn"><div class="tooth-num">9</div><span>🦷</span></div>
-                    <div id="tooth-10" onclick="toggleToothState(10)" class="tooth-btn"><div class="tooth-num">10</div><span>🦷</span></div>
-                    <div id="tooth-11" onclick="toggleToothState(11)" class="tooth-btn"><div class="tooth-num">11</div><span>🦷</span></div>
-                    <div id="tooth-12" onclick="toggleToothState(12)" class="tooth-btn"><div class="tooth-num">12</div><span>🦷</span></div>
-                    <div id="tooth-13" onclick="toggleToothState(13)" class="tooth-btn"><div class="tooth-num">13</div><span>🦷</span></div>
-                    <div id="tooth-14" onclick="toggleToothState(14)" class="tooth-btn"><div class="tooth-num">14</div><span>🦷</span></div>
-                    <div id="tooth-15" onclick="toggleToothState(15)" class="tooth-btn"><div class="tooth-num">15</div><span>🦷</span></div>
-                    <div id="tooth-16" onclick="toggleToothState(16)" class="tooth-btn"><div class="tooth-num">16</div><span>🦷</span></div>
-                    <div id="tooth-17" onclick="toggleToothState(17)" class="tooth-btn"><div class="tooth-num">17</div><span>🦷</span></div>
-                    <div id="tooth-18" onclick="toggleToothState(18)" class="tooth-btn"><div class="tooth-num">18</div><span>🦷</span></div>
-                    <div id="tooth-19" onclick="toggleToothState(19)" class="tooth-btn"><div class="tooth-num">19</div><span>🦷</span></div>
-                    <div id="tooth-20" onclick="toggleToothState(20)" class="tooth-btn"><div class="tooth-num">20</div><span>🦷</span></div>
-                    <div id="tooth-21" onclick="toggleToothState(21)" class="tooth-btn"><div class="tooth-num">21</div><span>🦷</span></div>
-                    <div id="tooth-22" onclick="toggleToothState(22)" class="tooth-btn"><div class="tooth-num">22</div><span>🦷</span></div>
-                    <div id="tooth-23" onclick="toggleToothState(23)" class="tooth-btn"><div class="tooth-num">23</div><span>🦷</span></div>
-                    <div id="tooth-24" onclick="toggleToothState(24)" class="tooth-btn"><div class="tooth-num">24</div><span>🦷</span></div>
-                    <div id="tooth-25" onclick="toggleToothState(25)" class="tooth-btn"><div class="tooth-num">25</div><span>🦷</span></div>
-                    <div id="tooth-26" onclick="toggleToothState(26)" class="tooth-btn"><div class="tooth-num">26</div><span>🦷</span></div>
-                    <div id="tooth-27" onclick="toggleToothState(27)" class="tooth-btn"><div class="tooth-num">27</div><span>🦷</span></div>
-                    <div id="tooth-28" onclick="toggleToothState(28)" class="tooth-btn"><div class="tooth-num">28</div><span>🦷</span></div>
-                    <div id="tooth-29" onclick="toggleToothState(29)" class="tooth-btn"><div class="tooth-num">29</div><span>🦷</span></div>
-                    <div id="tooth-30" onclick="toggleToothState(30)" class="tooth-btn"><div class="tooth-num">30</div><span>🦷</span></div>
-                    <div id="tooth-31" onclick="toggleToothState(31)" class="tooth-btn"><div class="tooth-num">31</div><span>🦷</span></div>
-                    <div id="tooth-32" onclick="toggleToothState(32)" class="tooth-btn"><div class="tooth-num">32</div><span>🦷</span></div>
+                    <div id="tooth-1" onclick="toggleToothState(1)" class="tooth-btn"><div class="tooth-num">1</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-2" onclick="toggleToothState(2)" class="tooth-btn"><div class="tooth-num">2</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-3" onclick="toggleToothState(3)" class="tooth-btn"><div class="tooth-num">3</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-4" onclick="toggleToothState(4)" class="tooth-btn"><div class="tooth-num">4</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-5" onclick="toggleToothState(5)" class="tooth-btn"><div class="tooth-num">5</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-6" onclick="toggleToothState(6)" class="tooth-btn"><div class="tooth-num">6</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-7" onclick="toggleToothState(7)" class="tooth-btn"><div class="tooth-num">7</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-8" onclick="toggleToothState(8)" class="tooth-btn"><div class="tooth-num">8</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-9" onclick="toggleToothState(9)" class="tooth-btn"><div class="tooth-num">9</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-10" onclick="toggleToothState(10)" class="tooth-btn"><div class="tooth-num">10</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-11" onclick="toggleToothState(11)" class="tooth-btn"><div class="tooth-num">11</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-12" onclick="toggleToothState(12)" class="tooth-btn"><div class="tooth-num">12</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-13" onclick="toggleToothState(13)" class="tooth-btn"><div class="tooth-num">13</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-14" onclick="toggleToothState(14)" class="tooth-btn"><div class="tooth-num">14</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-15" onclick="toggleToothState(15)" class="tooth-btn"><div class="tooth-num">15</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-16" onclick="toggleToothState(16)" class="tooth-btn"><div class="tooth-num">16</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-17" onclick="toggleToothState(17)" class="tooth-btn"><div class="tooth-num">17</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-18" onclick="toggleToothState(18)" class="tooth-btn"><div class="tooth-num">18</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-19" onclick="toggleToothState(19)" class="tooth-btn"><div class="tooth-num">19</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-20" onclick="toggleToothState(20)" class="tooth-btn"><div class="tooth-num">20</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-21" onclick="toggleToothState(21)" class="tooth-btn"><div class="tooth-num">21</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-22" onclick="toggleToothState(22)" class="tooth-btn"><div class="tooth-num">22</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-23" onclick="toggleToothState(23)" class="tooth-btn"><div class="tooth-num">23</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-24" onclick="toggleToothState(24)" class="tooth-btn"><div class="tooth-num">24</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-25" onclick="toggleToothState(25)" class="tooth-btn"><div class="tooth-num">25</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-26" onclick="toggleToothState(26)" class="tooth-btn"><div class="tooth-num">26</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-27" onclick="toggleToothState(27)" class="tooth-btn"><div class="tooth-num">27</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-28" onclick="toggleToothState(28)" class="tooth-btn"><div class="tooth-num">28</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-29" onclick="toggleToothState(29)" class="tooth-btn"><div class="tooth-num">29</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-30" onclick="toggleToothState(30)" class="tooth-btn"><div class="tooth-num">30</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-31" onclick="toggleToothState(31)" class="tooth-btn"><div class="tooth-num">31</div><div class="tooth-crown"></div></div>
+                    <div id="tooth-32" onclick="toggleToothState(32)" class="tooth-btn"><div class="tooth-num">32</div><div class="tooth-crown"></div></div>
                 </div>
-                <div style="margin-top: 24px;">
-                    <button class="submit-btn" onclick="saveAnatomicalChart()">Guardar Cambios del Odontograma</button>
-                    <span id="chart-status-msg" class="status-logger"></span>
-                </div>
-            </div>
+                <div style="margin-top: 20px; background-color: #111827; padding: 16px; border-radius: 8px; border: 1px solid #1e293b;">
+                    <label class="form-label" id="tooth-note-label" style="color:#d4af37;">Sección de Notas: Ninguna pieza seleccionada</label>
             <div id="panel-records" class="nexus-panel">
                 <h2 class="panel-title">📋 Historial y Tratamiento Progresivo</h2>
                 <p class="panel-sub">Notas de evolución clínica del paciente.</p>
@@ -177,10 +177,14 @@
             </div>
         </section>
     </main>
+    <footer>
+        <p style="text-align: center; padding: 24px; font-size: 10px; border-top: 1px solid #1e293b; background-color: #000000; color: #64748b; margin-top: auto;">&copy; 2026 Sultana Dental Group MSO • Tech Systems Division. Standalone Resilient Sandbox Core.</p>
+    </footer>
     <script>
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
         let supabaseClient = null; let localPatientCache = []; let activePatientObject = null; let selectedToothArray = []; let ACTIVE_CLINIC_TENANT_ID = "";
+        let currentlySelectedToothNum = null; let localToothNotesCache = {};
         try { if (typeof supabase !== 'undefined') { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } } catch (e) {}
 
         function toggleAuthGateMode(mode) {
@@ -230,12 +234,13 @@
             activePatientObject = localPatientCache.find(p => p.id === id); renderDirectoryCards(localPatientCache);
             document.getElementById('current-patient-strip').innerHTML = '🟢 [PX-' + String(activePatientObject.id).padStart(4, '0') + '] Paciente: <strong>' + activePatientObject.nombre + '</strong>';
             document.getElementById('record-treatment-input').value = activePatientObject.notas_clinicas_text || '';
+            currentlySelectedToothNum = null; document.getElementById('tooth-note-label').innerText = "Sección de Notas: Ninguna pieza seleccionada"; document.getElementById('tooth-specific-textarea').value = "";
             clearAnatomicalChartLayout();
-            if (activePatientObject.notas_clinicas) { try { selectedToothArray = JSON.parse(activePatientObject.notas_clinicas); selectedToothArray.forEach(t => { let cell = document.getElementById('tooth-' + t); if (cell) cell.style.backgroundColor = '#ef4444'; }); } catch(e) {} }
+            if (activePatientObject.notas_clinicas) { try { selectedToothArray = JSON.parse(activePatientObject.notas_clinicas); selectedToothArray.forEach(t => { let cell = document.getElementById('tooth-' + t); if (cell) cell.style.borderColor = '#ef4444'; }); } catch(e) {} }
         }
         function createNewPatientInbound() {
-            const name = document.getElementById('new-p-name').value.trim(); const phone = document.getElementById('new-p-phone').value.trim();
-            const logger = document.getElementById('reg-status-msg'); logger.style.color = '#eab308'; logger.innerText = 'Asignando ID y guardando...';
+            const name = document.getElementById('new-p-name').value.trim(); const phone = document.getElementById('new-p-phone').value.trim(); const logger = document.getElementById('reg-status-msg');
+            logger.style.color = '#eab308'; logger.innerText = 'Asignando ID y guardando...';
             setTimeout(() => {
                 let newId = localPatientCache.length + 1; localPatientCache.push({id: newId, nombre: name, telefono: phone, notas_clinicas: '[]', notas_clinicas_text: ''});
                 renderDirectoryCards(localPatientCache); selectActivePatient(newId);
@@ -245,15 +250,14 @@
         }
         function toggleToothState(num) {
             if (!activePatientObject) { alert('Seleccione un paciente primero.'); return; }
+            currentlySelectedToothNum = num; document.getElementById('tooth-note-label').innerText = "Escribir nota específica para el DIENTE NUMERO: [" + num + "]";
+            document.getElementById('tooth-specific-textarea').value = localToothNotesCache[num] || "";
             let cell = document.getElementById('tooth-' + num); let idx = selectedToothArray.indexOf(num);
-            if (idx > -1) { selectedToothArray.splice(idx, 1); if(cell) cell.style.backgroundColor = '#111827'; } else { selectedToothArray.push(num); if(cell) cell.style.backgroundColor = '#ef4444'; }
+            if (idx > -1) { selectedToothArray.splice(idx, 1); if(cell) cell.style.borderColor = '#334155'; } else { selectedToothArray.push(num); if(cell) cell.style.borderColor = '#ef4444'; }
             let match = localPatientCache.find(p => p.id === activePatientObject.id); if(match) match.notas_clinicas = JSON.stringify(selectedToothArray);
         }
-        function saveAnatomicalChart() { const logger = document.getElementById('chart-status-msg'); if (!activePatientObject) return; logger.style.color = '#eab308'; logger.innerText = 'Guardando...'; setTimeout(() => { logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma guardado localmente!'; }, 400); }
-        function saveClinicalNotes() { const logger = document.getElementById('notes-status-msg'); if (!activePatientObject) return; logger.style.color = '#eab308'; logger.innerText = 'Guardando...'; let txt = document.getElementById('record-treatment-input').value; let match = localPatientCache.find(p => p.id === activePatientObject.id); if(match) match.notas_clinicas_text = txt; setTimeout(() => { logger.style.color = '#22c55e'; logger.innerText = '¡Historial actualizado localmente!'; }, 400); }
-        function clearAnatomicalChartLayout() { for (let i = 1; i <= 32; i++) { let cell = document.getElementById('tooth-' + i); if (cell) cell.style.backgroundColor = '#111827'; } }
+        function updateLiveToothNote() { if (!currentlySelectedToothNum) return; localToothNotesCache[currentlySelectedToothNum] = document.getElementById('tooth-specific-textarea').value; }
+        function saveAnatomicalChart() { const logger = document.getElementById('chart-status-msg'); logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma guardado localmente!'; }
+        function saveClinicalNotes() { const logger = document.getElementById('notes-status-msg'); let txt = document.getElementById('record-treatment-input').value; let match = localPatientCache.find(p => p.id === activePatientObject.id); if(match) match.notas_clinicas_text = txt; logger.style.color = '#22c55e'; logger.innerText = '¡Historial actualizado localmente!'; }
+        function clearAnatomicalChartLayout() { for (let i = 1; i <= 32; i++) { let cell = document.getElementById('tooth-' + i); if (cell) cell.style.borderColor = '#334155'; } }
         function filterDirectory() { let q = document.getElementById('directory-search').value.toLowerCase(); let matches = localPatientCache.filter(p => p.nombre.toLowerCase().includes(q)); renderDirectoryCards(matches); }
-        function navigateDesktopModule(modKey) { var tabs = document.getElementsByClassName('module-tab'); for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active'); document.getElementById('tab-' + modKey).classList.add('active'); var panels = document.getElementsByClassName('nexus-panel'); for (var j = 0; j < panels.length; j++) panels[j].classList.remove('active'); document.getElementById('panel-' + modKey).classList.add('active'); }
-    </script>
-</body>
-</html>
