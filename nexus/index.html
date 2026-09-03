@@ -5,17 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sultana Nexus™ | Core Enterprise Dental System</title>
     
-    <!-- 🔌 INITIALIZATION LOGIC PIPELINE: AUTOMATED BACKEND CORE DRIVERS -->
-    <script src="https://unpkg.com"></script>
+    <!-- 🔌 INITIALIZATION LOGIC PIPELINE: STANDALONE ENGINE BUNDLE WITH CROSS-DOMAIN TRAFFIC FALLBACKS -->
+    <script src="https://jsdelivr.net"></script>
     
-    <!-- ⚙️ PRE-COMPILED SCRIPT CORES: INJECTED HIGHER IN ARCHITECTURE TO PREVENT TIMEOUTS -->
     <script>
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
         const CORPORATE_MASTER_REGISTRATION_PASSWORD = "SULTANA-LAUNCH-2026";
 
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        let localPatientCache = []; let activePatientObject = null; let selectedToothArray = []; let ACTIVE_CLINIC_TENANT_ID = "";
+        let supabaseClient = null; 
+        let localPatientCache = []; 
+        let activePatientObject = null; 
+        let selectedToothArray = []; 
+        let ACTIVE_CLINIC_TENANT_ID = "";
+
+        // 🛡️ ACCELERATED INSTANTIATION CORE: SECURES HANDSHAKE BEFORE HTML BODY RENDERS
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                if (typeof supabase !== 'undefined' && typeof supabase.createClient === 'function') {
+                    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                    console.log("🏆 Core Database Driver fully engaged across networks.");
+                } else if (window.supabase && typeof window.supabase.createClient === 'function') {
+                    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                    console.log("🏆 Secondary Database Handshake active.");
+                } else {
+                    console.warn("⚠️ Network warning: Database library dropped by local browser proxy filter settings.");
+                }
+            } catch (err) {
+                console.error("❌ Driver connection initialization exception: " + err.message);
+            }
+        });
 
         function toggleAuthGateMode(mode) {
             const signinCard = document.getElementById('view-mode-signin');
@@ -28,42 +47,6 @@
             } else {
                 if(signupCard) signupCard.style.display = 'none';
                 if(signinCard) signinCard.style.display = 'block';
-            }
-        }
-
-        async function executeAutonomousClinicRegistration() {
-            const masterPass = document.getElementById('reg-master-password').value.trim();
-            const clinicName = document.getElementById('reg-clinic-name').value.trim();
-            const clinicPhone = document.getElementById('reg-clinic-phone').value.trim();
-            const logger = document.getElementById('reg-error-log');
-
-            if (masterPass !== CORPORATE_MASTER_REGISTRATION_PASSWORD) {
-                logger.style.color = '#ef4444'; logger.innerText = "❌ Clave Maestra de Activación Incorrecta.";
-                return;
-            }
-            if (!clinicName || !clinicPhone) {
-                logger.style.color = '#ef4444'; logger.innerText = "❌ Por favor complete todos los campos.";
-                return;
-            }
-
-            logger.style.color = '#eab308'; logger.innerText = "🔄 Generando llaves de cifrado MSO...";
-
-            let cleanName = clinicName.substring(0, 6).toUpperCase().replace(/[^A-Z0-9]/g, '');
-            let randomNum = Math.floor(10 + Math.random() * 90);
-            let generatedTenantKey = "SULTANA-" + cleanName + randomNum;
-
-            const { error } = await supabaseClient
-                .from('pacientes')
-                .insert([{ nombre: 'LICENCIA CORES ACTIVACIÓN: ' + clinicName, telefono: clinicPhone, tratamiento: generatedTenantKey, notas_clinicas: '[]', notas_clinicas_text: '' }]);
-
-            if (error) {
-                logger.style.color = '#ef4444'; logger.innerText = "❌ Fallo: " + error.message;
-            } else {
-                logger.style.color = '#22c55e';
-                logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID y úselo en la pantalla de login para entrar.</span>';
-                document.getElementById('reg-master-password').value = '';
-                document.getElementById('reg-clinic-name').value = '';
-                document.getElementById('reg-clinic-phone').value = '';
             }
         }
     </script>
@@ -254,27 +237,77 @@
     </footer>
     <!-- MOTOR SECUNDARIO: MANEJADORES DE SINCRONIZACIÓN ASÍNCRONA POST-HTML -->
     <script>
+        async function executeAutonomousClinicRegistration() {
+            const masterPass = document.getElementById('reg-master-password').value.trim();
+            const clinicName = document.getElementById('reg-clinic-name').value.trim();
+            const clinicPhone = document.getElementById('reg-clinic-phone').value.trim();
+            const logger = document.getElementById('reg-error-log');
+
+            if (masterPass !== CORPORATE_MASTER_REGISTRATION_PASSWORD) {
+                logger.style.color = '#ef4444'; logger.innerText = "❌ Clave Maestra de Activación Incorrecta.";
+                return;
+            }
+            if (!clinicName || !clinicPhone) {
+                logger.style.color = '#ef4444'; logger.innerText = "❌ Por favor complete todos los campos.";
+                return;
+            }
+            if (!supabaseClient) {
+                logger.style.color = '#ef4444'; logger.innerText = "❌ Error crítico: Librería Supabase no inicializada. Revise su conexión a Internet.";
+                return;
+            }
+
+            logger.style.color = '#eab308'; logger.innerText = "🔄 Generando llaves de cifrado MSO...";
+
+            let cleanName = clinicName.substring(0, 6).toUpperCase().replace(/[^A-Z0-9]/g, '');
+            let randomNum = Math.floor(10 + Math.random() * 90);
+            let generatedTenantKey = "SULTANA-" + cleanName + randomNum;
+
+            try {
+                const { error } = await supabaseClient
+                    .from('pacientes')
+                    .insert([{ nombre: 'LICENCIA CORES ACTIVACIÓN: ' + clinicName, telefono: clinicPhone, tratamiento: generatedTenantKey, notas_clinicas: '[]', notas_clinicas_text: '' }]);
+
+                if (error) {
+                    logger.style.color = '#ef4444'; logger.innerText = "❌ Fallo: " + error.message;
+                } else {
+                    logger.style.color = '#22c55e';
+                    logger.innerHTML = '🏆 ¡Sede Activada con Éxito!<br><br><span style="color:#ffffff; font-size:12px;">SU ID DE ACCESO EXCLUSIVO ES:</span><br><strong style="font-size:18px; color:#d4af37; background:#020617; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong><br><br><span style="color:#64748b; font-size:11px;">Copie este ID, limpie el hash de la URL e ingréselo en el login para entrar.</span>';
+                    document.getElementById('reg-master-password').value = '';
+                    document.getElementById('reg-clinic-name').value = '';
+                    document.getElementById('reg-clinic-phone').value = '';
+                }
+            } catch (ex) {
+                logger.style.color = '#ef4444'; logger.innerText = "❌ Excepción de red: " + ex.message;
+            }
+        }
+
         async function authenticateClinicTenantSession() {
             const tenantInput = document.getElementById('clinic-tenant-input').value.trim().toUpperCase();
             const errLogger = document.getElementById('login-error-log');
             if (!tenantInput) { errLogger.style.color = '#ef4444'; errLogger.innerText = "❌ Ingrese una Licencia MSO."; return; }
+            if (!supabaseClient) { errLogger.style.color = '#ef4444'; errLogger.innerText = "❌ Error: Canal de base de datos caído."; return; }
 
             errLogger.style.color = '#eab308'; errLogger.innerText = "🔄 Validando credenciales con la red central MSO...";
 
-            const { data, error } = await supabaseClient.from('pacientes').select('*').eq('tratamiento', tenantInput);
-            if (error || !data || data.length === 0) {
-                errLogger.style.color = '#ef4444'; errLogger.innerText = "❌ Licencia Inválida. Verifique el código o registre su sede.";
-                return;
-            }
+            try {
+                const { data, error } = await supabaseClient.from('pacientes').select('*').eq('tratamiento', tenantInput);
+                if (error || !data || data.length === 0) {
+                    errLogger.style.color = '#ef4444'; errLogger.innerText = "❌ Licencia Inválida. Verifique el código o registre su sede.";
+                    return;
+                }
 
-            ACTIVE_CLINIC_TENANT_ID = tenantInput;
-            document.getElementById('active-clinic-badge-target').innerText = '🏢 LICENCIA: ' + ACTIVE_CLINIC_TENANT_ID;
-            document.getElementById('login-gateway-wall').style.display = 'none';
-            document.getElementById('master-system-desktop').style.display = 'grid';
-            fetchPatientDirectoryLive();
+                ACTIVE_CLINIC_TENANT_ID = tenantInput;
+                document.getElementById('active-clinic-badge-target').innerText = '🏢 LICENCIA: ' + ACTIVE_CLINIC_TENANT_ID;
+                document.getElementById('login-gateway-wall').style.display = 'none';
+                document.getElementById('master-system-desktop').style.display = 'grid';
+                fetchPatientDirectoryLive();
+            } catch (ex) {
+                errLogger.style.color = '#ef4444'; errLogger.innerText = "❌ Error de conexión remota.";
+            }
         }
 
         async function fetchPatientDirectoryLive() {
+            if (!supabaseClient) return;
             const { data, error } = await supabaseClient
                 .from('pacientes')
                 .select('*')
@@ -332,6 +365,7 @@
             const logger = document.getElementById('reg-status-msg');
             if (!name || !phone) { logger.style.color = '#ef4444'; logger.innerText = 'Campos incompletos.'; return; }
             logger.style.color = '#eab308'; logger.innerText = 'Asignando ID y guardando...';
+            if (!supabaseClient) return;
 
             const { data, error } = await supabaseClient
                 .from('pacientes')
@@ -342,7 +376,7 @@
                 logger.style.color = '#22c55e'; logger.innerText = '¡Expediente Creado!';
                 document.getElementById('new-p-name').value = ''; document.getElementById('new-p-phone').value = '';
                 await fetchPatientDirectoryLive();
-                if (data && data.length > 0) selectActivePatient(data[0].id);
+                if (data && data.length > 0) selectActivePatient(data.id);
             }
         }
 
@@ -363,6 +397,7 @@
             const logger = document.getElementById('chart-status-msg'); if (!activePatientObject) return;
             logger.style.color = '#eab308'; logger.innerText = 'Guardando...';
             const stringData = JSON.stringify(selectedToothArray);
+            if (!supabaseClient) return;
 
             const { error } = await supabaseClient.from('pacientes').update({ notas_clinicas: stringData }).eq('id', activePatientObject.id);
             if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
@@ -371,22 +406,3 @@
             }
         }
 
-        async function saveClinicalNotes() {
-            const logger = document.getElementById('notes-status-msg');
-            const textValue = document.getElementById('record-treatment-input').value;
-            if (!activePatientObject) return;
-            logger.style.color = '#eab308'; logger.innerText = 'Guardando...';
-
-            const { error } = await supabaseClient.from('pacientes').update({ notas_clinicas_text: textValue }).eq('id', activePatientObject.id);
-            if (error) { logger.style.color = '#ef4444'; logger.innerText = error.message; } else {
-                logger.style.color = '#22c55e'; logger.innerText = '¡Historial actualizado!';
-                activePatientObject.notas_clinicas_text = textValue; await fetchPatientDirectoryLive();
-            }
-        }
-
-        function clearAnatomicalChartLayout() { for (let i = 1; i <= 32; i++) { let cell = document.getElementById('tooth-' + i); if (cell) cell.style.backgroundColor = '#111827'; } }
-        function filterDirectory() { let q = document.getElementById('directory-search').value.toLowerCase(); let matches = localPatientCache.filter(p => p.nombre.toLowerCase().includes(q)); renderDirectoryCards(matches); }
-        function navigateDesktopModule(modKey) { var tabs = document.getElementsByClassName('module-tab'); for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active'); document.getElementById('tab-' + modKey).classList.add('active'); var panels = document.getElementsByClassName('nexus-panel'); for (var j = 0; j < panels.length; j++) panels[j].classList.remove('active'); document.getElementById('panel-' + modKey).classList.add('active'); }
-    </script>
-</body>
-</html>
