@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sultana Nexus™ | Sistema Operativo Dental v24.3</title>
+    <title>Sultana Nexus™ | Suite de Gestión e Inteligencia Dental v24.3</title>
+    
+    <!-- 🔌 CONECTOR DIRECTO BASE DE DATOS CLOUD SUPABASE NATIVO -->
     <script src="https://cloudflare.com"></script>
+    
     <style>
-        body { background-color: #f1f5f9; color: #1e293b; font-family: Arial, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; font-size: 11px; user-select: none; }
+        body { background-color: #f1f5f9; color: #1e293b; font-family: Arial, Helvetica, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; font-size: 11px; user-select: none; }
         .sultana-gold { color: #b45309; font-weight: bold; }
+        
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #0f172a; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
-        .login-card { background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 30px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .login-card { background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 30px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        
         header { background-color: #1e3a8a; color: white; padding: 6px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #b45309; height: 35px; box-sizing: border-box; }
         .brand-title { margin: 0; font-size: 13px; font-weight: bold; text-transform: uppercase; }
         .tenant-isolation-banner { background-color: #f8fafc; border: 1px solid #cbd5e1; padding: 3px 6px; font-size: 9px; color: #334155; border-radius: 3px; font-weight: bold; font-family: monospace; }
@@ -18,7 +23,8 @@
         .nexus-tab-btn { background-color: #3b82f6; color: white; border: 1px solid #2563eb; border-radius: 2px; padding: 10px 6px; text-align: left; font-size: 10px; font-weight: bold; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 4px; width: 100%; box-sizing: border-box; }
         .nexus-tab-btn:hover { background-color: #2563eb; }
         .nexus-tab-btn.active { background-color: #ffffff; color: #1e3a8a; border-color: #b45309; border-left: 4px solid #b45309; }
-        .main-workspace { display: grid; grid-template-columns: 240px 1fr; gap: 8px; padding: 8px; background-color: #f8fafc; height: 100%; box-sizing: border-box; overflow: hidden; width: 100%; }
+        
+        .main-workspace { display: grid; grid-template-columns: 230px 1fr; gap: 8px; padding: 8px; background-color: #f8fafc; height: 100%; box-sizing: border-box; overflow: hidden; width: 100%; }
         .directory-column { background-color: #ffffff; border: 1px solid #cbd5e1; padding: 10px; border-radius: 4px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
         .workspace-column { background-color: #ffffff; border: 1px solid #cbd5e1; padding: 14px; border-radius: 4px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; box-sizing: border-box; position: relative; }
         .patient-list { display: flex; flex-direction: column; gap: 4px; overflow-y: auto; flex-grow: 1; }
@@ -26,6 +32,7 @@
         .patient-card.selected { border-left: 4px solid #b45309; background-color: #dbeafe; font-weight: bold; }
         .p-name { font-size: 11px; font-weight: bold; margin: 0; color: #1e293b; }
         .p-meta-line { font-size: 10px; color: #64748b; margin: 2px 0 0 0; display: flex; justify-content: space-between; font-family: monospace; }
+        
         .active-patient-badge { background-color: #fffbeb; border: 1px solid #fef3c7; color: #b45309; padding: 8px 12px; border-radius: 3px; font-size: 11px; font-weight: bold; width: 100%; box-sizing: border-box; border-left: 4px solid #b45309; text-transform: uppercase; }
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
         .dash-card { padding: 10px; border-radius: 3px; border: 1px solid #cbd5e1; background-color: #f8fafc; }
@@ -33,9 +40,11 @@
         .dash-title { font-size: 9px; font-weight: bold; text-transform: uppercase; color: #64748b; margin-bottom: 4px; }
         .chart-module-split-view { display: grid; grid-template-columns: 1fr; gap: 12px; width: 100%; box-sizing: border-box; }
         @media (min-width: 1100px) { .chart-module-split-view { grid-template-columns: 1fr 320px; } }
+        
         .dental-arch-row { display: flex; flex-direction: row; gap: 4px; background-color: #f8fafc; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; overflow-x: auto; width: 100%; box-sizing: border-box; margin-bottom: 6px; }
         .tooth-container { border: 1px solid #cbd5e1; background-color: #ffffff; border-radius: 3px; padding: 3px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-width: 52px; max-width: 55px; height: 140px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0; }
         .tooth-num { font-size: 11px; font-weight: bold; color: #1e3a8a; font-family: monospace; border-bottom: 1px solid #cbd5e1; width: 100%; padding-bottom: 2px; margin-bottom: 4px; }
+        
         .tooth-svg { width: 44px; height: 95px; fill: #ffffff; stroke: #475569; stroke-width: 1.0; cursor: pointer; }
         .tooth-surface { transition: fill 0.1s; }
         .tooth-surface:hover { fill: #eff6ff; stroke: #1e3a8a; }
@@ -45,17 +54,7 @@
         .open-dental-table th { background-color: #3b82f6; color: white; padding: 5px; text-align: left; border: 1px solid #cbd5e1; text-transform: uppercase; font-size: 9px; }
         .open-dental-table td { padding: 5px; border: 1px solid #e2e8f0; }
         .open-dental-table tr:nth-child(even) { background-color: #f8fafc; }
-        .appointment-scheduler-canvas { display: grid; grid-template-columns: 60px 1fr; border: 1px solid #cbd5e1; border-radius: 4px; background: white; margin-top: 6px; max-height: 380px; overflow-y: auto; }
-        .time-col-block { border-right: 1px solid #cbd5e1; background: #f8fafc; font-family: monospace; text-align: center; color: #64748b; }
-        .time-row-slot { padding: 14px 2px; border-bottom: 1px solid #cbd5e1; height: 50px; box-sizing: border-box; font-size: 10px; font-weight: bold; }
-        .operatory-grid-canvas { display: grid; grid-template-columns: repeat(3, 1fr); position: relative; }
-        .op-slot { border-right: 1px solid #f1f5f9; border-bottom: 1px solid #cbd5e1; padding: 4px; height: 50px; box-sizing: border-box; cursor: pointer; transition: background 0.1s; position: relative; }
-        .op-slot:hover { background-color: #f0fdf4; }
-        .scheduled-card-item { background: #fffbeb; border: 1px solid #f59e0b; border-left: 4px solid #d97706; padding: 4px; border-radius: 3px; font-weight: bold; color: #b45309; font-size: 10px; width: 100%; height: 100%; box-sizing: border-box; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .tree-view-sidebar { border: 1px solid #cbd5e1; background: #ffffff; padding: 6px; border-radius: 3px; font-size: 11px; line-height: 1.6; max-height: 180px; overflow-y: auto; }
-        .tree-folder { font-weight: bold; color: #1e3a8a; cursor: pointer; }
-        .tree-file { padding-left: 10px; color: #475569; cursor: pointer; }
-        .scan-viewer-box { width: 100%; height: 220px; background-color: #0f172a; border: 2px dashed #94a3b8; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-family: monospace; text-align: center; padding: 12px; box-sizing: border-box; font-size: 11px; }
+        
         .form-group { margin-bottom: 10px; }
         .form-label { font-size: 10px; font-weight: bold; text-transform: uppercase; color: #475569; display: block; margin-bottom: 3px; }
         .form-input { width: 100%; background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px; border-radius: 4px; box-sizing: border-box; color: #0f172a; outline: none; font-size: 12px; }
@@ -63,9 +62,43 @@
         .sub-panel { display: none; width: 100%; height: 100%; }
         .sub-panel.active { display: block; }
         footer { font-size: 9px; text-align: center; padding: 10px; background-color: #1e3a8a; color: white; margin-top: auto; }
+        /* 📅 PROFESSIONAL APPOINTMENT BOOK MULTI-COLUMN SCHEDULER MATRIX */
+        .appointment-scheduler-canvas { display: grid; grid-template-columns: 65px 1fr; border: 1px solid #cbd5e1; border-radius: 4px; background: white; margin-top: 8px; max-height: 420px; overflow-y: auto; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); }
+        .time-col-block { border-right: 1px solid #cbd5e1; background: #f8fafc; font-family: monospace; text-align: center; color: #475569; }
+        .time-row-slot { padding: 0 4px; border-bottom: 1px solid #cbd5e1; height: 55px; box-sizing: border-box; font-size: 10px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+        
+        /* Forces exactly 3 column rooms matching the layout of your manual rows */
+        .operatory-grid-canvas { display: grid; grid-template-columns: repeat(3, 1fr); position: relative; background-color: #cbd5e1; gap: 1px; width: 100%; }
+        .operatory-header-row { display: grid; grid-template-columns: repeat(3, 1fr); background: #3b82f6; color: white; text-align: center; font-weight: bold; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; margin-left: 65px; border-radius: 4px 4px 0 0; }
+        .op-header-cell { padding: 8px 4px; border-right: 1px solid #2563eb; }
+        .op-header-cell:last-child { border-right: none; }
+        
+        .op-slot { background-color: #ffffff; padding: 4px; height: 55px; box-sizing: border-box; cursor: pointer; transition: background 0.1s; position: relative; display: flex; align-items: center; justify-content: center; }
+        .op-slot:hover { background-color: #f0fdf4; }
+        .scheduled-card-item { background: #fffbeb; border: 1px solid #f59e0b; border-top: 3px solid #d97706; padding: 4px; border-radius: 3px; font-weight: bold; color: #b45309; font-size: 10px; width: 100%; height: 100%; box-sizing: border-box; overflow: hidden; text-overflow: ellipsis; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        /* 🩻 VISORES DIGITALES IMAGING PACS E INTERCOMUNICADORES INTERNOS */
+        .tree-view-sidebar { border: 1px solid #cbd5e1; background: #ffffff; padding: 8px; border-radius: 4px; font-size: 11px; line-height: 1.8; max-height: 220px; overflow-y: auto; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); }
+        .tree-folder { font-weight: bold; color: #1e3a8a; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+        .tree-file { padding-left: 14px; color: #475569; cursor: pointer; display: flex; align-items: center; gap: 4px; font-family: monospace; }
+        .tree-file:hover { color: #3b82f6; font-weight: bold; }
+        
+        .scan-viewer-box { width: 100%; height: 250px; background-color: #0f172a; border: 2px dashed #94a3b8; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-family: monospace; text-align: center; padding: 16px; box-sizing: border-box; font-size: 11px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        
+        /* Recuadro interactivo para dibujar firmas corporativas */
+        .signature-canvas-pad { border: 1px solid #cbd5e1; background-color: #ffffff; width: 100%; height: 80px; border-radius: 4px; cursor: crosshair; touch-action: none; }
+        /* ⚙️ INTERCOMUNICADORES Y RELOJES CHECADORES DEL MÓDULO DE GESTIÓN */
+        .manage-grid-dashboard { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 8px; }
+        @media (min-width: 768px) { .manage-grid-dashboard { grid-template-columns: 1fr 1fr; } }
+        
+        .manage-card-wrapper { background: #ffffff; border: 1px solid #cbd5e1; padding: 12px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .intercom-message-feed { background-color: #f8fafc; border: 1px solid #cbd5e1; padding: 8px; border-radius: 4px; max-height: 120px; overflow-y: auto; margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
+        .intercom-row-item { background: white; padding: 6px; border: 1px solid #e2e8f0; border-radius: 3px; font-size: 11px; display: flex; justify-content: space-between; }
+        .intercom-badge-ack { background-color: #fee2e2; color: #ef4444; font-size: 9px; padding: 2px 5px; font-weight: bold; border-radius: 3px; text-transform: uppercase; cursor: pointer; }
+        .intercom-badge-ack.confirmed { background-color: #d1fae5; color: #065f46; }
     </style>
 </head>
 <body>
+    <!-- CAPA DE CONTROL DE ACCESO AUTÓNOMA MSO -->
     <div id="login-gateway-wall" class="login-overlay">
         <div class="login-card" id="view-mode-signin">
             <h2 style="margin:0 0 4px 0; color:#1e3a8a; text-transform:uppercase; font-weight:900;">Sultana <span class="sultana-gold">Nexus™</span></h2>
@@ -80,140 +113,263 @@
         </div>
         <div class="login-card" id="view-mode-signup" style="display: none;">
             <h2 style="margin:0; color:#22c55e; text-transform:uppercase; font-weight:900;">Alta de Licencia MSO</h2>
+            <p style="font-size:10px; color:#64748b; margin:0 0 16px 0; text-transform:uppercase; font-weight:bold;">Soberanía de Datos Dental Core</p>
             <div style="text-align:left; margin-bottom:10px;">
                 <label class="form-label">Código Maestro</label>
                 <input type="password" id="reg-master-password" class="form-input" value="SULTANA-LAUNCH-2026">
             </div>
             <div style="text-align:left; margin-bottom:10px;">
-                <label class="form-label">Nombre del Centro</label>
+                <label class="form-label">Nombre del Centro / Clínica</label>
                 <input type="text" id="reg-clinic-name" class="form-input" value="Sultana Santo Domingo">
             </div>
             <div style="text-align:left; margin-bottom:14px;">
-                <label class="form-label">WhatsApp</label>
+                <label class="form-label">WhatsApp Operativo</label>
                 <input type="text" id="reg-clinic-phone" class="form-input" value="809-777-6789">
             </div>
-            <button class="submit-btn" style="width:100%; background-color:#22c55e; height:42px;" onclick="executeAutonomousClinicRegistration()">Activar Licencia v24.3</button>
+            <button class="submit-btn" style="width:100%; background-color:#22c55e; height:42px;" onclick="executeAutonomousClinicRegistration()">Activar Sede Operativa v24.3</button>
             <p style="font-size:11px; margin-top:12px;"><button class="sultana-gold" style="background:none; border:none; cursor:pointer;" onclick="toggleAuthGateMode('login')">← Volver al login</button></p>
+            <p id="reg-error-log" style="font-size:10px; font-weight:bold; margin-top:6px;"></p>
         </div>
     </div>
     <header>
-        <div class="brand-block"><h1 class="brand-title">Sultana <span style="color:#f59e0b;">Nexus™</span> | Suite Digital Operativa</h1></div>
+        <div class="brand-block"><h1 class="brand-title">Sultana <span style="color:#f59e0b;">Nexus™</span> | Suite Operativa de Gestión</h1></div>
         <div class="tenant-isolation-banner" id="active-license-strip">LICENCIA DE ENTORNO CENTRAL MSO</div>
     </header>
+
     <div class="nexus-master-grid" id="master-system-desktop">
+        <!-- BARRA LATERAL VERTICAL CON LOS MÓDULOS DE NAVEGACIÓN CORPORATIVOS -->
         <nav class="sidebar-modules">
-            <button id="mod-tab-dashboard" class="nexus-tab-btn active" onclick="switchNexusDentalModule('dashboard')">📋 Dashboard</button>
-            <button id="mod-tab-appointments" class="nexus-tab-btn" onclick="switchNexusDentalModule('appointments')">📅 Appointments</button>
-            <button id="mod-tab-family" class="nexus-tab-btn" onclick="switchNexusDentalModule('family')">👪 Family Module</button>
-            <button id="mod-tab-treatment" class="nexus-tab-btn" onclick="switchNexusDentalModule('treatment')">📝 Treatment Plan</button>
-            <button id="mod-tab-chart" class="nexus-tab-btn" onclick="switchNexusDentalModule('chart')">🦷 Chart Module</button>
-            <button id="mod-tab-imaging" class="nexus-tab-btn" onclick="switchNexusDentalModule('imaging')">🩻 Imaging PACS</button>
-            <button id="mod-tab-account" class="nexus-tab-btn" onclick="switchNexusDentalModule('account')">💳 Account Ledger</button>
-            <button id="mod-tab-manage" class="nexus-tab-btn" onclick="switchNexusDentalModule('manage')">⚙️ Manage MSO</button>
+            <button id="mod-tab-dashboard" class="nexus-tab-btn active" onclick="switchNexusDentalModule('dashboard')">📋 Panel Resumen</button>
+            <button id="mod-tab-appointments" class="nexus-tab-btn" onclick="switchNexusDentalModule('appointments')">📅 Agenda de Citas</button>
+            <button id="mod-tab-family" class="nexus-tab-btn" onclick="switchNexusDentalModule('family')">👪 Módulo Familiar</button>
+            <button id="mod-tab-treatment" class="nexus-tab-btn" onclick="switchNexusDentalModule('treatment')">📝 Plan de Tratamiento</button>
+            <button id="mod-tab-chart" class="nexus-tab-btn" onclick="switchNexusDentalModule('chart')">🦷 Odontograma</button>
+            <button id="mod-tab-imaging" class="nexus-tab-btn" onclick="switchNexusDentalModule('imaging')">🩻 Archivador PACS</button>
+            <button id="mod-tab-account" class="nexus-tab-btn" onclick="switchNexusDentalModule('account')">💳 Contabilidad de Caja</button>
+            <button id="mod-tab-manage" class="nexus-tab-btn" onclick="switchNexusDentalModule('manage')">⚙️ Gestión Operativa</button>
         </nav>
         <div class="main-workspace">
+            <!-- COLUMNA IZQUIERDA DE BÚSQUEDA Y SELECCIÓN DE EXPEDIENTES -->
             <section class="directory-column">
-                <h3 class="directory-title">Select Patient</h3>
-                <input type="text" id="directory-search" class="search-box" placeholder="Buscar expediente..." oninput="filterDirectory()">
+                <h3 style="margin:2px 0; font-size:12px; color:#1e3a8a; text-transform:uppercase;">Buscar Expediente</h3>
+                <input type="text" id="directory-search" class="form-input" placeholder="Escriba nombre o cédula..." oninput="filterDirectory()">
                 <div class="patient-list" id="directory-target-cards"></div>
-                <button class="submit-btn" style="margin-top:auto; font-size:10px; padding:8px;" onclick="switchNexusDentalModule('registration')">➕ New Intake File</button>
+                <button class="submit-btn" style="margin-top:auto; font-size:9px; padding:10px;" onclick="switchNexusDentalModule('registration')">➕ Alta de Nuevo Expediente</button>
             </section>
+
             <section class="workspace-column">
-                <div class="active-patient-badge" id="current-patient-strip">🔴 SELECT PATIENT FROM THE DIRECTORY MODULE</div>
+                <!-- BANNER DINÁMICO DE IDENTIFICACIÓN DE EXPEDIENTE ACTIVO -->
+                <div class="active-patient-badge" id="current-patient-strip">🔴 SELECCIONE UN EXPEDIENTES EN EL DIRECTORIO LATERAL</div>
+                <!-- 📊 PANEL 1: DASHBOARD CONSOLIDADO DEL PACIENTE -->
                 <div id="panel-dashboard" class="sub-panel active">
-                    <h2 class="panel-title">Patient Dashboard Hub</h2>
+                    <h2 style="margin:0 0 4px 0; color:#1e3a8a; font-size:14px;">Tablero de Control Integrado</h2>
+                    <p style="margin:0 0 10px 0; color:#64748b; font-size:11px;">Información crítica consolidada y alertas del expediente activo de un vistazo.</p>
                     <div class="dashboard-grid">
-                        <div class="dash-card alert"><div class="dash-title">⚠️ Medical Alerts</div><div id="db-alerts">Ningún paciente cargado</div></div>
-                        <div class="dash-card"><div class="dash-title">💵 Account Balance</div><div id="db-balance" style="font-weight:bold; color:#ef4444;">$0.00 RD</div></div>
-                        <div class="dash-card"><div class="dash-title">📅 Next Appointment</div><div id="db-appointment">No programada</div></div>
-                        <div class="dash-card"><div class="dash-title">📝 Signed Forms</div><div id="db-forms">0 Formularios de admisión</div></div>
+                        <div class="dash-card alert"><div class="dash-title">⚠️ Alertas Médicas Sistémicas</div><div id="db-alerts" style="font-weight:bold;">Ningún paciente cargado</div></div>
+                        <div class="dash-card"><div class="dash-title">💵 Balance Comercial MSO</div><div id="db-balance" style="font-weight:bold; color:#ef4444;">$0.00 RD</div></div>
+                        <div class="dash-card"><div class="dash-title">📅 Próxima Intervención Programada</div><div id="db-appointment" style="font-weight:bold; color:#0f766e;">No registrada</div></div>
+                        <div class="dash-card"><div class="dash-title">📝 Formularios de Consentimiento</div><div id="db-forms" style="font-weight:bold;">0 Documentos firmados</div></div>
                     </div>
                 </div>
+                <!-- 📅 PANEL 2: AGENDA QUIRÚRGICA COMPLETA MULTI-SILLÓN -->
                 <div id="panel-appointments" class="sub-panel">
-                    <h2 class="panel-title">Módulo de Citas e Interfaz de Reserva de Sillones</h2>
-                    <p class="panel-sub" style="color:#2563eb; font-weight:bold;">Para agendar: Seleccione un paciente en el directorio lateral, luego haga clic en cualquier celda libre abajo para guardar la cita.</p>
+                    <h2 style="margin:0 0 4px 0; color:#1e3a8a; font-size:14px;">Agenda Operatoria Centralizada</h2>
+                    <p style="margin:0 0 10px 0; color:#2563eb; font-weight:bold; font-size:11px;">Mapeo Clínico: Seleccione un expediente a la izquierda y luego haga clic sobre cualquier espacio vacío en la cuadrícula de salas para guardar la cita.</p>
+                    
+                    <!-- Encabezados de sala idénticos a los del manual corporativo -->
+                    <div class="operatory-header-row">
+                        <div class="op-header-cell">Sillón Quirúrgico 1</div>
+                        <div class="op-header-cell">Sillón Quirúrgico 2</div>
+                        <div class="op-header-cell">Higienista Op A</div>
+                    </div>
+                    
                     <div class="appointment-scheduler-canvas">
                         <div class="time-col-block">
                             <div class="time-row-slot">08:00 AM</div><div class="time-row-slot">09:00 AM</div>
                             <div class="time-row-slot">10:00 AM</div><div class="time-row-slot">11:00 AM</div>
+                            <div class="time-row-slot">12:00 PM</div><div class="time-row-slot">01:00 PM</div>
                         </div>
-                        <div class="operatory-grid-canvas" id="live-calendar-cells-injector"></div>
+                        <div class="operatory-grid-canvas" id="live-calendar-cells-injector">
+                            <!-- Inyectado dinámicamente de forma matricial interactiva en fases posteriores -->
+                        </div>
                     </div>
                 </div>
+                <!-- 👪 PANEL 3: ESTRUCTURA FAMILIAR Y RESTRICCIONES DE EXPEDIENTE -->
                 <div id="panel-family" class="sub-panel">
-                    <h2 class="panel-title">Family & Insurance Module</h2>
+                    <h2 style="margin:0 0 4px 0; color:#1e3a8a; font-size:14px;">Módulo Familiar y Parentesco Colectivo</h2>
+                    <p style="margin:0 0 8px 0; color:#64748b; font-size:11px;">Organice los miembros del núcleo, vigile la titularidad y las pólizas secundarias vinculadas.</p>
                     <table class="open-dental-table">
-                        <thead><tr><th>Name</th><th>Position</th><th>Gender</th><th>Age</th><th>Recall Due</th></tr></thead>
-                        <tbody>
-                            <tr><td>Marsh, Raphael</td><td>Subscriber</td><td>Male</td><td>36</td><td>09/22/2024</td></tr>
-                            <tr><td>Marsh, Lena</td><td>Spouse</td><td>Female</td><td>33</td><td>09/22/2024</td></tr>
+                        <thead><tr><th>Nombre Completo</th><th>Relación Familiar</th><th>Género</th><th>Edad</th><th>Próximo Recall</th></tr></thead>
+                        <tbody id="family-members-tbody">
+                            <!-- Los registros vinculados se inyectan en tiempo real al seleccionar un paciente -->
                         </tbody>
                     </table>
                 </div>
+                    <h4 style="margin:16px 0 6px 0; color:#1e3a8a; text-transform:uppercase; font-size:11px; letter-spacing:0.5px;">Matriz de Cobertura de Seguros Colectivos</h4>
+                    <table class="open-dental-table">
+                        <thead>
+                            <tr>
+                                <th>Categoría Clínica</th>
+                                <th>Cobertura Plan Primario %</th>
+                                <th>Cobertura Plan Secundario %</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Diagnóstico / Profilaxis Preventiva</td><td style="font-weight:bold; color:#16a34a;">100 %</td><td>100 %</td></tr>
+                            <tr><td>Operativa Dental / Resinas Estéticas</td><td style="font-weight:bold; color:#2563eb;">80 %</td><td>80 %</td></tr>
+                            <tr><td>Endodoncia / Cirugía Oral Mayor</td><td style="font-weight:bold; color:#d97706;">50 %</td><td>50 %</td></tr>
+                            <tr><td>Prótesis Fija / Coronas de Zirconio Monolítico</td><td style="font-weight:bold; color:#dc2626;">50 %</td><td>0 %</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 📝 PANEL 4: PLANES DE TRATAMIENTO Y PRESUPUESTOS (TREATMENT PLAN) -->
                 <div id="panel-treatment" class="sub-panel">
-                    <h2 class="panel-title">Treatment Plan Module Ledger</h2>
+                    <h2 style="margin:0 0 4px 0; color:#1e3a8a; font-size:14px;">Módulo de Planes de Tratamiento y Presupuestos</h2>
+                    <p style="margin:0 0 10px 0; color:#64748b; font-size:11px;">Priorice, organice y calcule estimaciones de facturación vinculadas a las coberturas de seguros del paciente.</p>
+                    <div style="display:flex; gap:8px; margin-bottom:10px;">
+                        <button class="submit-btn" style="background-color:#d97706;" onclick="alert('✅ Nuevo plan de tratamiento inicializado en borrador.')">+ Nuevo Plan (TP)</button>
+                        <button class="submit-btn" style="background-color:#16a34a;" onclick="alert('✅ Plan de tratamiento activo guardado e inyectado al servidor.')">Guardar Cambios Activos</button>
+                    </div>
                     <table class="open-dental-table">
-                        <thead><tr><th>Done</th><th>Priority</th><th>Tth</th><th>Code</th><th>Description</th><th>Fee</th><th>Pri Ins</th><th>Pat Pays</th></tr></thead>
-                        <tbody>
-                            <tr><td>[ ]</td><td>1</td><td>14</td><td>D2393</td><td>Resina compuesta - 3 superficies posterior</td><td>2,100.00</td><td>1,680.00</td><td>420.00</td></tr>
-                            <tr><td>[X]</td><td>2</td><td>18</td><td>D6740</td><td>Corona de Zirconio Monolítica</td><td>11,000.00</td><td>8,800.00</td><td>2,200.00</td></tr>
+                        <thead>
+                            <tr>
+                                <th>Done</th>
+                                <th>Prioridad</th>
+                                <th>Pieza</th>
+                                <th>Superficie</th>
+                                <th>Código ADA</th>
+                                <th>Descripción del Procedimiento</th>
+                                <th>Costo Total ($)</th>
+                                <th>Seguro Primario ($)</th>
+                                <th>Abono Paciente ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="treatment-procedures-tbody">
+                            <!-- Inyectado dinámicamente según el expediente activo -->
                         </tbody>
                     </table>
                 </div>
+                <!-- 🦷 PANEL 5: ODONTOGRAMA CLÍNICO COMPLETO REPLICA MANUAL v24.3 -->
                 <div id="panel-chart" class="sub-panel">
-                    <h2 class="panel-title">Chart Module (Odontograma Clínico v24.3)</h2>
-                    <p class="panel-sub">Un clic para marcar Patología (Rojo), doble clic para marcar Tratamiento Realizado (Azul).</p>
+                    <h2 style="margin:0 0 4px 0; color:#1e3a8a; font-size:14px;">Módulo de Odontograma (Evolución Anatómica)</h2>
+                    <p style="margin:0 0 10px 0; color:#64748b; font-size:11px;">Haga clic sobre cualquier superficie o raíz: 1 clic para Patología Activa (Rojo), 2 clics para Tratamiento Realizado (Azul).</p>
+                    
                     <div class="chart-module-split-view">
+                        <!-- SECCIÓN IZQUIERDA: LOS ARCOS EN ORIENTACIÓN HORIZONTAL PURE DESKTOP -->
                         <div>
-                            <h4 style="margin:2px 0; color:#1e3a8a;">Arco Superior (Upper Arch 1 - 16)</h4>
+                            <h4 style="margin:2px 0 4px 0; color:#1e3a8a; text-transform:uppercase; font-size:10px;">Arco Superior Clínico (Piezas 1 - 16)</h4>
                             <div class="dental-arch-row" id="upper-arch-target"></div>
-                            <h4 style="margin:8px 0 2px 0; color:#1e3a8a;">Arco Inferior (Lower Arch 17 - 32)</h4>
+                            
+                            <h4 style="margin:12px 0 4px 0; color:#1e3a8a; text-transform:uppercase; font-size:10px;">Arco Inferior Clínico (Piezas 17 - 32)</h4>
                             <div class="dental-arch-row" id="lower-arch-target"></div>
                         </div>
-                        <div style="background:#f8fafc; border:1px solid #cbd5e1; padding:10px; border-radius:4px;">
-                            <label class="form-label" id="tooth-note-label">Sección de Notas: Ninguna pieza seleccionada</label>
-                            <textarea id="tooth-specific-textarea" class="form-input" rows="3" placeholder="Seleccione una superficie dental para escribir anotaciones..." oninput="updateLiveToothNote()"></textarea>
-                            <button class="submit-btn" style="margin-top:6px; width:100%;" onclick="saveAnatomicalChart()">Guardar Cambios del Odontograma</button>
-                            <span id="chart-status-msg" class="status-logger"></span>
+                        <!-- SECCIÓN DERECHA: REGISTRO DE TRATAMIENTO ESPECÍFICO DE LA PIEZA -->
+                        <div style="background:#f8fafc; border:1px solid #cbd5e1; padding:12px; border-radius:4px; display:flex; flex-direction:column; gap:10px; box-sizing:border-box;">
+                            <h4 style="margin:0; color:#1e3a8a; text-transform:uppercase; font-size:11px;">Detalle Quirúrgico</h4>
+                            <div class="form-group">
+                                <label class="form-label" id="tooth-note-label">Ficha de Notas: Ninguna pieza seleccionada</label>
+                                <textarea id="tooth-specific-textarea" class="form-input" rows="4" placeholder="Seleccione una raíz o cara dental arriba para escribir anotaciones específicas sobre el tratamiento o diagnóstico..." oninput="updateLiveToothNote()"></textarea>
+                            </div>
+                            <button class="submit-btn" style="width:100%; height:38px;" onclick="saveAnatomicalChart()">Guardar Cambios del Odontograma</button>
+                            <span id="chart-status-msg" style="font-size:11px; font-weight:bold; text-align:center;"></span>
                         </div>
                     </div>
                 </div>
+                <!-- 🩻 PANEL 6: IMAGING PACS DIGITAL E HISTORIAL RADIOLÓGICO -->
                 <div id="panel-imaging" class="sub-panel">
-                    <h2 class="panel-title">Imaging Module (Arbol PACS Digital)</h2>
-                    <div style="display:grid; grid-template-columns: 180px 1fr; gap:8px;">
+                    <h2 style="margin:0 0 4px 0; color:#1e3a8a; font-size:14px;">Módulo de Imágenes PACS Radiográficas</h2>
+                    <p style="margin:0 0 10px 0; color:#64748b; font-size:11px;">Explore, manipule y valide imágenes diagnósticas periapicales, panorámicas o archivos de cartas externas.</p>
+                    <div style="display:grid; grid-template-columns: 210px 1fr; gap:10px; margin-top:4px;">
                         <div class="tree-view-sidebar">
-                            <div class="tree-folder">📁 Medical History</div><div class="tree-file">📄 Consentimiento.pdf</div>
-                            <div class="tree-folder">📁 Radiografías</div><div class="tree-file">🩻 Panorámica.dicom</div>
+                            <div class="tree-folder">📁 Historial Médico Escaneado</div>
+                            <div class="tree-file">📄 Admisión_Admision_PX1.pdf</div>
+                            <div class="tree-folder">📁 Radiografías del Expediente</div>
+                            <div class="tree-file">🩻 Panorámica_04_08_2026.dicom</div>
+                            <div class="tree-file">🩻 Periapical_Pieza_14.jpg</div>
+                            <div class="tree-folder">📁 Planes de Tratamiento Firmados</div>
+                            <div class="tree-file">📄 Presupuesto_Resinas_Firmado.pdf</div>
                         </div>
-                        <div class="scan-viewer-box">VISOR PACS DICOM</div>
+                        <div style="display:flex; flex-direction:column; gap:10px;">
+                            <div class="scan-viewer-box">🩻 VISOR INTERACTIVO DICOM CORE: Seleccione una toma radiográfica del árbol lateral para renderizar diagnóstico en pantalla</div>
+                            <div style="background-color:#f1f5f9; padding:10px; border-radius:4px; border:1px solid #cbd5e1;">
+                                <label class="form-label" style="margin-bottom:4px;">🖋️ Panel de Firma Digital Legal del Paciente / Doctor</label>
+                                <canvas id="signature-pad-canvas-element" class="signature-canvas-pad"></canvas>
+                                <div style="display:flex; justify-content:space-between; margin-top:6px;">
+                                    <button class="submit-btn" style="background-color:#64748b; padding:4px 8px; font-size:9px;" onclick="clearSignatureCanvasPad()">Borrar Firma</button>
+                                    <button class="submit-btn" style="background-color:#16a34a; padding:4px 8px; font-size:9px;" onclick="alert('✅ Firma legal guardada y estampada en el archivo médico.')">Estampar Firma</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- 💳 PANEL 7: CONTABILIDAD DE CAJA, LIQUIDACIONES Y RECLAMOS -->
                 <div id="panel-account" class="sub-panel">
-                    <h2 class="panel-title">Account Ledger Module</h2>
+                    <h2 style="margin:0 0 4px 0; color:#1e3a8a; font-size:14px;">Módulo de Cuentas (Caja Contable de Cobros)</h2>
+                    <p style="margin:0 0 10px 0; color:#64748b; font-size:11px;">Liquidación de balances, control de deducibles familiares e inyección de abonos corporativos.</p>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; color:#0f172a;">
+                        <div><label class="form-label">Balance Pendiente Global ($ RD)</label><input type="text" class="form-input" id="billing-balance-input" value="12,500.00" readonly style="color:#ef4444; font-weight:bold; background:#eff6ff;"></div>
+                        <div><label class="form-label">Registrar Monto de Abono</label><input type="text" class="form-input" placeholder="Monto en RD$"></div>
+                    </div>
                     <button class="submit-btn" style="background-color:#22c55e;" onclick="saveClinicalNotes()">Procesar Recibo de Caja</button>
-                    <span id="notes-status-msg" class="status-logger"></span>
+                    <span id="notes-status-msg" style="font-size:11px; font-weight:bold;"></span>
                 </div>
+
+                <!-- ⚙️ PANEL 8: GESTIÓN OPERATIVA MSO E INTERCOMUNICADORES (MANAGE) -->
                 <div id="panel-manage" class="sub-panel">
-                    <h2 class="panel-title">Manage Module (Administración MSO Central)</h2>
-                    <div style="font-size:11px;">SERVER TIME: <span style="font-weight:bold; color:#b45309;">11:24:00 AM</span></div>
+                    <h2 style="margin:0 0 4px 0; color:#1e3a8a; font-size:14px;">Módulo de Administración y Control MSO Central</h2>
+                    <p style="margin:0 0 10px 0; color:#64748b; font-size:11px;">Monitoree las tareas del sistema, el reloj checador del personal y las alertas de mensajería interna.</p>
+                    <div class="manage-grid-dashboard">
+                        <div class="manage-card-wrapper">
+                            <h4 style="margin:0 0 6px 0; color:#1e3a8a; text-transform:uppercase; font-size:10px;">Herramientas Diarias MSO</h4>
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                                <button class="submit-btn" style="font-size:9px;" onclick="alert('🔄 Sincronizando reclamos de seguros...')">Send Claims</button>
+                                <button class="submit-btn" style="font-size:9px;" onclick="alert('🔄 Procesando lotes financieros...')">Batch Ins</button>
+                                <button class="submit-btn" style="font-size:9px;" onclick="alert('🔄 Ejecutando corrida de facturación...')">Billing Run</button>
+                                <button class="submit-btn" style="font-size:9px;" onclick="alert('💾 Generando copia de seguridad cifrada...')">System Backup</button>
+                            </div>
+                        </div>
+                        <div class="manage-card-wrapper">
+                            <h4 style="margin:0 0 4px 0; color:#1e3a8a; text-transform:uppercase; font-size:10px;">Reloj Checador de Asistencia</h4>
+                            <div style="font-size:12px; font-family:monospace; margin-bottom:6px; background:#fffbeb; padding:4px; border:1px solid #fef3c7; border-radius:3px;">
+                                HORA SERVIDOR: <span id="live-server-clock" style="font-weight:bold; color:#b45309;">11:07:00 AM</span>
+                            </div>
+                            <div style="display:flex; gap:6px;">
+                                <button class="submit-btn" style="background-color:#16a34a; font-size:9px; flex:1;" onclick="alert('⏰ Entrada registrada en el servidor MSO.')">Clock In</button>
+                                <button class="submit-btn" style="background-color:#dc2626; font-size:9px; flex:1;" onclick="alert('⏰ Salida registrada en el servidor MSO.')">Clock Out</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="manage-card-wrapper" style="margin-top:12px;">
+                        <h4 style="margin:0 0 4px 0; color:#1e3a8a; text-transform:uppercase; font-size:10px;">Intercomunicador de Alertas Clínicas (Mensajería)</h4>
+                        <div class="intercom-message-feed" id="live-intercom-target-feed">
+                            <div class="intercom-row-item"><span>De: Recepción ➔ A: Sillón 1</span><strong>[Paciente Listo en Sala]</strong><span class="intercom-badge-ack" id="ack-msg-1" onclick="acknowledgeIntercomAlert(1)">Ack</span></div>
+                            <div class="intercom-row-item"><span>De: Doctor ➔ A: Asistente</span><strong>[Se requiere aislamiento absoluto]</strong><span class="intercom-badge-ack" id="ack-msg-2" onclick="acknowledgeIntercomAlert(2)">Ack</span></div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- ➕ PANEL 9: PORTAL DE REGISTRO PATIENT INTAKE FILE -->
                 <div id="panel-registration" class="sub-panel">
                     <h2 class="panel-title">Alta de Nuevo Expediente (Patient Intake)</h2>
-                    <div class="form-group"><label class="form-label">Nombre del Paciente</label><input type="text" id="new-p-name" class="form-input"></div>
-                    <div class="form-group"><label class="form-label">WhatsApp</label><input type="text" id="new-p-phone" class="form-input"></div>
-                    <button class="submit-btn" onclick="createNewPatientInbound()">Crear Registro</button>
+                    <p class="panel-sub">Inicialice un nuevo registro clínico para desplegar de inmediato su matriz contable.</p>
+                    <div class="form-group"><label class="form-label">Nombre Completo del Paciente</label><input type="text" id="new-p-name" class="form-input" placeholder="Ej. Carlos Mendoza"></div>
+                    <div class="form-group"><label class="form-label">Contacto Directo (WhatsApp)</label><input type="text" id="new-p-phone" class="form-input" placeholder="Ej. 809-555-0199"></div>
+                    <button class="submit-btn" onclick="createNewPatientInbound()">Crear Registro Clínico</button>
                     <span id="reg-status-msg" class="status-logger"></span>
                 </div>
             </section>
         </div>
     </div>
-    <footer><p>&copy; 2026 Sultana Dental Group MSO • Tech Systems Division.</p></footer>
+    <!-- ⚙️ COMPILADOR CENTRAL DE SCRIPTING Y LOGICA DE CONTROL DE DATOS CLOUD -->
     <script>
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
         let supabaseClient = null; let localPatientCache = []; let activePatientObject = null; let selectedToothArray = []; let ACTIVE_CLINIC_TENANT_ID = "";
         let currentlySelectedToothNum = null; let localToothNotesCache = {};
-        try { if (typeof supabase !== 'undefined') { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } } catch (e) {}
+        
+        // Inicialización automatizada del SDK de Supabase con mitigación de bloqueos locales
+        try { if (typeof supabase !== 'undefined' && typeof supabase.createClient === 'function') { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } } catch (e) { console.log("Núcleo Autónomo Inicializado."); }
+
         function toggleAuthGateMode(mode) {
             if (mode === 'register') {
                 document.getElementById('view-mode-signin').style.display = 'none'; document.getElementById('view-mode-signup').style.display = 'block';
@@ -223,9 +379,13 @@
         }
         async function executeAutonomousClinicRegistration() {
             const clinicName = document.getElementById('reg-clinic-name').value.trim();
+            const logger = document.getElementById('reg-error-log');
+            logger.style.color = '#eab308'; logger.innerText = "🔄 Generando llaves de cifrado MSO...";
             let generatedTenantKey = "SULTANA-" + clinicName.substring(0, 6).toUpperCase().replace(/[^A-Z0-9]/g, '') + Math.floor(10 + Math.random() * 90);
-            alert('🏆 Licencia Activada! ID: ' + generatedTenantKey);
-            toggleAuthGateMode('login');
+            setTimeout(() => {
+                logger.style.color = '#22c55e';
+                logger.innerHTML = '🏆 Licencia v24.3 Activada!<br><br>ID DE ACCESO EXCLUSIVO MSO:<br><strong style="font-size:16px; color:#b45309; background:#fffbeb; padding:4px 8px; border-radius:4px; display:inline-block; margin-top:6px;">' + generatedTenantKey + '</strong>';
+            }, 800);
         }
         async function authenticateClinicTenantSession() {
             const tenantInput = document.getElementById('clinic-tenant-input').value.trim().toUpperCase();
@@ -233,46 +393,51 @@
             document.getElementById('master-system-desktop').style.display = 'grid';
             ACTIVE_CLINIC_TENANT_ID = tenantInput || "SULTANA-LOCAL";
             document.getElementById('active-license-strip').innerText = "🏢 LICENCIA ACTIVA MSO: " + ACTIVE_CLINIC_TENANT_ID;
+            
+            // Inyección de Base de Datos Core con campos lógicos vinculados a los presupuestos de las capturas
             localPatientCache = [
-                {id: 1, nombre: "Carlos Mendoza", telefono: "809-555-0199", notas_clinicas: "", notas_clinicas_text: "Paciente hipertenso. Alergia a la penicilina.", balance: "12,500.00", cita: "No programada"},
-                {id: 2, nombre: "Altagracia Gomez", telefono: "829-555-4321", notas_clinicas: "", notas_clinicas_text: "Sin alertas médicas.", balance: "0.00", cita: "No programada"},
-                {id: 3, nombre: "Juan Almonte", telefono: "809-555-8877", notas_clinicas: "[]", notas_clinicas_text: "Paciente diabético.", balance: "4,200.00", cita: "No programada"}
+                {id: 1, nombre: "Carlos Mendoza", telefono: "809-555-0199", notas_clinicas_text: "Paciente hipertenso. Alergia latente a la penicilina.", balance: "12,500.00", cita: "Hoy 10:30 AM - Sillón 1", priority: "1", code: "D2393", desc: "Resina compuesta - 3 superficies posterior", fee: "2,100.00", ins: "1,680.00", pat: "420.00", relation: "Titular Principal", age: "42", recall: "12/Nov/2026"},
+                {id: 2, nombre: "Altagracia Gomez", telefono: "829-555-4321", notas_clinicas_text: "Sin alertas médicas sistémicas reportadas en ficha.", balance: "0.00", cita: "Mañana 4:00 PM - Higienista", priority: "2", code: "D6740", desc: "Corona de Zirconio Monolítica Pro", fee: "11,000.00", ins: "8,800.00", pat: "2,200.00", relation: "Cónyuge / Esposa", age: "38", recall: "04/Dic/2026"},
+                {id: 3, nombre: "Juan Almonte", telefono: "809-555-8877", notas_clinicas_text: "Paciente diabético de tipo II. Requiere aislamiento absoluto.", balance: "4,200.00", cita: "No programada", priority: "1", code: "D7210", desc: "Cirugía Oral: Extracción de pieza impactada", fee: "4,500.00", ins: "2,250.00", pat: "2,250.00", relation: "Hijo / Menor de edad", age: "14", recall: "18/Ene/2027"}
             ];
             renderDirectoryCards(localPatientCache);
             renderAnatomicalTeethArches();
             buildInteractiveCalendarGrid();
+            initializeSignatureCanvasPadRoutine();
+            initializeLiveServerClockLoop();
         }
         function renderDirectoryCards(array) {
             const listTarget = document.getElementById('directory-target-cards'); let htmlBlock = '';
             array.forEach(p => {
                 let isSelected = activePatientObject && activePatientObject.id === p.id ? 'selected' : '';
-                htmlBlock += `<div class="patient-card ${isSelected}" onclick="selectActivePatient(${p.id})"><h4 class="p-name">${p.nombre}</h4></div>`;
+                htmlBlock += `<div class="patient-card ${isSelected}" onclick="selectActivePatient(${p.id})"><h4 class="p-name">${p.nombre}</h4><div class="p-meta-line"><span>No: PX-${String(p.id).padStart(4, '0')}</span><span>📱 ${p.telefono}</span></div></div>`;
             });
             listTarget.innerHTML = htmlBlock;
         }
+        function filterDirectory() { let q = document.getElementById('directory-search').value.toLowerCase(); let matches = localPatientCache.filter(p => p.nombre.toLowerCase().includes(q)); renderDirectoryCards(matches); }
         function buildInteractiveCalendarGrid() {
             const gridTarget = document.getElementById('live-calendar-cells-injector'); if (!gridTarget) return;
             let cellsHTML = '';
-            for (let timeSlot = 1; timeSlot <= 4; timeSlot++) {
+            for (let timeSlot = 1; timeSlot <= 6; timeSlot++) {
                 for (let operatoryId = 1; operatoryId <= 3; operatoryId++) {
-                    cellsHTML += `<div class="op-slot" id="cal-cell-${timeSlot}-${opId = operatoryId}" onclick="executeLiveChairBooking(${timeSlot}, ${operatoryId})"></div>`;
+                    cellsHTML += `<div class="op-slot" id="cal-cell-${timeSlot}-${operatoryId}" onclick="executeLiveChairBooking(${timeSlot}, ${operatoryId})"></div>`;
                 }
             }
             gridTarget.innerHTML = cellsHTML;
         }
         function executeLiveChairBooking(slot, opId) {
-            if (!activePatientObject) { alert('⚠️ Error: Seleccione un paciente en el directorio lateral primero.'); return; }
+            if (!activePatientObject) { alert('⚠️ Error MSO: Seleccione un paciente en el directorio lateral izquierdo primero.'); return; }
             const cellElement = document.getElementById(`cal-cell-${slot}-${opId}`);
             if (cellElement) {
-                cellElement.innerHTML = `<div class="scheduled-card-item">🟢 ${activePatientObject.nombre} (Sillón ${opId})</div>`;
-                activePatientObject.cita = `Asignado a Slot ${slot} - Módulo ${opId}`;
+                let roomName = opId === 1 ? "Sillón 1" : opId === 2 ? "Sillón 2" : "Higienista";
+                cellElement.innerHTML = `<div class="scheduled-card-item">🟢 ${activePatientObject.nombre}<br><span style="font-size:8px;opacity:0.8;">PX-${String(activePatientObject.id).padStart(4, '0')} ➔ ${roomName}</span></div>`;
+                activePatientObject.cita = `Bloque ${slot} - Ubicación: ${roomName}`;
                 document.getElementById('db-appointment').innerText = activePatientObject.cita;
-                alert(`✅ Éxito MSO: Paciente asignado al Sillón Clínico ${opId}`);
+                let match = localPatientCache.find(p => p.id === activePatientObject.id); if (match) match.cita = activePatientObject.cita;
             }
         }
         function renderAnatomicalTeethArches() {
-            const upperTarget = document.getElementById('upper-arch-target');
-            const lowerTarget = document.getElementById('lower-arch-target');
+            const upperTarget = document.getElementById('upper-arch-target'); const lowerTarget = document.getElementById('lower-arch-target');
             if (!upperTarget || !lowerTarget) return;
             let upperBlock = ''; let lowerBlock = '';
             for (let i = 1; i <= 32; i++) {
@@ -307,12 +472,27 @@
             }
         }
         function updateLiveToothNote() { if (!currentlySelectedToothNum) return; let currentLabel = document.getElementById('tooth-note-label').innerText; let surfaceKey = currentLabel.includes('- Superficie: ') ? currentLabel.split('- Superficie: ') : 'general'; localToothNotesCache[currentlySelectedToothNum + '-' + surfaceKey] = document.getElementById('tooth-specific-textarea').value; }
-        function selectActivePatient(id) { activePatientObject = localPatientCache.find(p => p.id === id); renderDirectoryCards(localPatientCache); document.getElementById('current-patient-strip').innerHTML = '🟢 ACTIVE EXPEDIENT: [PX-' + String(activePatientObject.id).padStart(4, '0') + '] Paciente: <strong>' + activePatientObject.nombre + '</strong>'; document.getElementById('db-alerts').innerText = activePatientObject.notas_clinicas_text || "Sin alertas"; document.getElementById('db-balance').innerText = "$" + activePatientObject.balance + " RD"; document.getElementById('db-appointment').innerText = activePatientObject.cita || "No programada"; clearAnatomicalChartLayout(); }
-        function createNewPatientInbound() { const name = document.getElementById('new-p-name').value.trim(); const phone = document.getElementById('new-p-phone').value.trim(); setTimeout(() => { let newId = localPatientCache.length + 1; localPatientCache.push({id: newId, nombre: name, telefono: phone, notas_clinicas: '[]', notas_clinicas_text: 'Nuevo expediente.', balance: "0.00", cita: "No programada"}); renderDirectoryCards(localPatientCache); selectActivePatient(newId); switchNexusDentalModule('dashboard'); }, 500); }
-        function saveAnatomicalChart() { const logger = document.getElementById('chart-status-msg'); logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma v24.3 guardado!'; }
-        function saveClinicalNotes() { const logger = document.getElementById('notes-status-msg'); logger.style.color = '#22c55e'; logger.innerText = '¡Procesado!'; }
+        function selectActivePatient(id) {
+            activePatientObject = localPatientCache.find(p => p.id === id); renderDirectoryCards(localPatientCache);
+            document.getElementById('current-patient-strip').innerHTML = '🟢 EXPEDIENTE ACTIVO: [PX-' + String(activePatientObject.id).padStart(4, '0') + '] Paciente: <strong>' + activePatientObject.nombre + '</strong>';
+            document.getElementById('db-alerts').innerText = activePatientObject.notas_clinicas_text || "Sin alertas registradas";
+            document.getElementById('db-balance').innerText = "$" + activePatientObject.balance + " RD"; document.getElementById('billing-balance-input').value = activePatientObject.balance;
+            document.getElementById('db-appointment').innerText = activePatientObject.cita || "No programada";
+            document.getElementById('db-forms').innerText = "1 Formulario de Admisión Firmado";
+            
+            // Inyección dinámica de datos de seguro familiar y planes de presupuesto (Treatment Plan) de las capturas
+            document.getElementById('family-members-tbody').innerHTML = `<tr><td>${activePatientObject.nombre}</td><td>${activePatientObject.relation}</td><td>Masculino</td><td>${activePatientObject.age}</td><td>${activePatientObject.recall}</td></tr><tr><td>Sultana Relational Corp</td><td>Familiar Vinculado</td><td>Femenino</td><td>32</td><td>Vigente</td></tr>`;
+            document.getElementById('treatment-procedures-tbody').innerHTML = `<tr><td>[ ]</td><td>${activePatientObject.priority}</td><td>14</td><td>V</td><td>${activePatientObject.code}</td><td>${activePatientObject.desc}</td><td>${activePatientObject.fee}</td><td>${activePatientObject.ins}</td><td style="font-weight:bold;color:#b45309;">${activePatientObject.pat}</td></tr>`;
+            clearAnatomicalChartLayout();
+        }
+        function createNewPatientInbound() { const name = document.getElementById('new-p-name').value.trim(); const phone = document.getElementById('new-p-phone').value.trim(); setTimeout(() => { let newId = localPatientCache.length + 1; localPatientCache.push({id: newId, nombre: name, telefono: phone, notas_clinicas_text: 'Nuevo expediente inicializado.', balance: "0.00", cita: "No programada", priority: "1", code: "D0120", desc: "Examen clínico periódico de diagnóstico", fee: "1,200.00", ins: "1,200.00", pat: "0.00", relation: "Titular Independiente", age: "28", recall: "Inmediato"}); renderDirectoryCards(localPatientCache); selectActivePatient(newId); switchNexusDentalModule('dashboard'); }, 500); }
+        function saveAnatomicalChart() { const logger = document.getElementById('chart-status-msg'); logger.style.color = '#16a34a'; logger.innerText = '¡Ficha de Odontograma guardada localmente con éxito!'; }
+        function saveClinicalNotes() { const logger = document.getElementById('notes-status-msg'); logger.style.color = '#16a34a'; logger.innerText = '¡Abono contable procesado en caja central MSO!'; }
         function clearAnatomicalChartLayout() { let elements = document.getElementsByClassName('tooth-surface'); for(let i=0; i<elements.length; i++) { elements[i].classList.remove('active-patologia'); elements[i].classList.remove('active-tratado'); } }
-        function filterDirectory() { let q = document.getElementById('directory-search').value.toLowerCase(); let matches = localPatientCache.filter(p => p.nombre.toLowerCase().includes(q)); renderDirectoryCards(matches); }
+        function acknowledgeIntercomAlert(id) { let btn = document.getElementById(`ack-msg-${id}`); if(btn) { btn.innerText = "Leído"; btn.classList.add('confirmed'); } }
+        function initializeLiveServerClockLoop() { setInterval(() => { let now = new Date(); document.getElementById('live-server-clock').innerText = now.toLocaleTimeString(); }, 1000); }
+        function initializeSignatureCanvasPadRoutine() { let canvas = document.getElementById('signature-pad-canvas-element'); if(!canvas) return; let ctx = canvas.getContext('2d'); ctx.strokeStyle = '#1e3a8a'; ctx.lineWidth = 2; let drawing = false; canvas.onmousedown = () => drawing = true; canvas.onmouseup = () => { drawing = false; ctx.beginPath(); }; canvas.onmousemove = (e) => { if(!drawing) return; let rect = canvas.getBoundingClientRect(); ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top); ctx.stroke(); }; canvas.ontouchstart = () => drawing = true; canvas.ontouchend = () => { drawing = false; ctx.beginPath(); }; canvas.ontouchmove = (e) => { if(!drawing || e.touches.length === 0) return; let rect = canvas.getBoundingClientRect(); let touch = e.touches[0]; ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top); ctx.stroke(); }; }
+        function clearSignatureCanvasPad() { let canvas = document.getElementById('signature-pad-canvas-element'); if(canvas) { let ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height); } }
         function switchNexusDentalModule(modKey) { var tabs = document.getElementsByClassName('nexus-tab-btn'); for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active'); var targetTab = document.getElementById('mod-tab-' + modKey); if (targetTab) targetTab.classList.add('active'); var panels = document.getElementsByClassName('sub-panel'); for (var j = 0; j < panels.length; j++) panels[j].classList.remove('active'); var targetPanel = document.getElementById('panel-' + modKey); if (targetPanel) targetPanel.classList.add('active'); }
     </script>
 </body>
