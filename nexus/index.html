@@ -3,18 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sultana Nexus MSO™ | Suite de Gestión e Inteligencia Dental</title>
-    
-    <!-- 🔌 CONECTOR DIRECTO BASE DE DATOS CLOUD SUPABASE NATIVO -->
+    <title>Sultana Nexus™ | Sistema Operativo Dental v24.3</title>
     <script src="https://cloudflare.com"></script>
-    
     <style>
-        body { background-color: #f1f5f9; color: #1e293b; font-family: Arial, Helvetica, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; font-size: 11px; user-select: none; }
+        body { background-color: #f1f5f9; color: #1e293b; font-family: Arial, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; font-size: 11px; user-select: none; }
         .sultana-gold { color: #b45309; font-weight: bold; }
-        
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #0f172a; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
-        .login-card { background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 30px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-        
+        .login-card { background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 30px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
         header { background-color: #1e3a8a; color: white; padding: 6px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #b45309; height: 35px; box-sizing: border-box; }
         .brand-title { margin: 0; font-size: 13px; font-weight: bold; text-transform: uppercase; }
         .tenant-isolation-banner { background-color: #f8fafc; border: 1px solid #cbd5e1; padding: 3px 6px; font-size: 9px; color: #334155; border-radius: 3px; font-weight: bold; font-family: monospace; }
@@ -23,8 +18,7 @@
         .nexus-tab-btn { background-color: #3b82f6; color: white; border: 1px solid #2563eb; border-radius: 2px; padding: 10px 6px; text-align: left; font-size: 10px; font-weight: bold; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 4px; width: 100%; box-sizing: border-box; }
         .nexus-tab-btn:hover { background-color: #2563eb; }
         .nexus-tab-btn.active { background-color: #ffffff; color: #1e3a8a; border-color: #b45309; border-left: 4px solid #b45309; }
-        
-        .main-workspace { display: grid; grid-template-columns: 230px 1fr; gap: 8px; padding: 8px; background-color: #f8fafc; height: 100%; box-sizing: border-box; overflow: hidden; width: 100%; }
+        .main-workspace { display: grid; grid-template-columns: 240px 1fr; gap: 8px; padding: 8px; background-color: #f8fafc; height: 100%; box-sizing: border-box; overflow: hidden; width: 100%; }
         .directory-column { background-color: #ffffff; border: 1px solid #cbd5e1; padding: 10px; border-radius: 4px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
         .workspace-column { background-color: #ffffff; border: 1px solid #cbd5e1; padding: 14px; border-radius: 4px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; box-sizing: border-box; position: relative; }
         .patient-list { display: flex; flex-direction: column; gap: 4px; overflow-y: auto; flex-grow: 1; }
@@ -32,43 +26,36 @@
         .patient-card.selected { border-left: 4px solid #b45309; background-color: #dbeafe; font-weight: bold; }
         .p-name { font-size: 11px; font-weight: bold; margin: 0; color: #1e293b; }
         .p-meta-line { font-size: 10px; color: #64748b; margin: 2px 0 0 0; display: flex; justify-content: space-between; font-family: monospace; }
-        
         .active-patient-badge { background-color: #fffbeb; border: 1px solid #fef3c7; color: #b45309; padding: 8px 12px; border-radius: 3px; font-size: 11px; font-weight: bold; width: 100%; box-sizing: border-box; border-left: 4px solid #b45309; text-transform: uppercase; }
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
         .dash-card { padding: 10px; border-radius: 3px; border: 1px solid #cbd5e1; background-color: #f8fafc; }
         .dash-card.alert { background-color: #fef2f2; border-color: #fca5a5; color: #991b1b; border-left: 4px solid #ef4444; }
         .dash-title { font-size: 9px; font-weight: bold; text-transform: uppercase; color: #64748b; margin-bottom: 4px; }
-        /* 🦷 FILAS DE ORIENTACIÓN HORIZONTAL RIGUROSA (MÓDULO ODONTOGRAMA) */
         .chart-module-split-view { display: grid; grid-template-columns: 1fr; gap: 12px; width: 100%; box-sizing: border-box; }
         @media (min-width: 1100px) { .chart-module-split-view { grid-template-columns: 1fr 320px; } }
-        
         .dental-arch-row { display: flex; flex-direction: row; gap: 4px; background-color: #f8fafc; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; overflow-x: auto; width: 100%; box-sizing: border-box; margin-bottom: 6px; }
         .tooth-container { border: 1px solid #cbd5e1; background-color: #ffffff; border-radius: 3px; padding: 3px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-width: 52px; max-width: 55px; height: 140px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0; }
         .tooth-num { font-size: 11px; font-weight: bold; color: #1e3a8a; font-family: monospace; border-bottom: 1px solid #cbd5e1; width: 100%; padding-bottom: 2px; margin-bottom: 4px; }
-        
         .tooth-svg { width: 44px; height: 95px; fill: #ffffff; stroke: #475569; stroke-width: 1.0; cursor: pointer; }
         .tooth-surface { transition: fill 0.1s; }
         .tooth-surface:hover { fill: #eff6ff; stroke: #1e3a8a; }
-        .tooth-surface.active-patologia { fill: #ef4444 !important; stroke: #b91c1c; } /* Rojo Patología */
-        .tooth-surface.active-tratado { fill: #3b82f6 !important; stroke: #1d4ed8; }   /* Azul Realizado */
-        /* 📊 MATRICES FINANCIERAS Y LIBROS DE PROCEDIMIENTOS */
+        .tooth-surface.active-patologia { fill: #ef4444 !important; stroke: #b91c1c; }
+        .tooth-surface.active-tratado { fill: #3b82f6 !important; stroke: #1d4ed8; }
         .open-dental-table { width: 100%; border-collapse: collapse; margin-top: 6px; background: white; font-size: 11px; }
         .open-dental-table th { background-color: #3b82f6; color: white; padding: 5px; text-align: left; border: 1px solid #cbd5e1; text-transform: uppercase; font-size: 9px; }
         .open-dental-table td { padding: 5px; border: 1px solid #e2e8f0; }
         .open-dental-table tr:nth-child(even) { background-color: #f8fafc; }
-        
-        .appointment-scheduler-canvas { display: grid; grid-template-columns: 50px 1fr; border: 1px solid #cbd5e1; border-radius: 4px; background: white; margin-top: 6px; max-height: 250px; overflow-y: auto; }
+        .appointment-scheduler-canvas { display: grid; grid-template-columns: 60px 1fr; border: 1px solid #cbd5e1; border-radius: 4px; background: white; margin-top: 6px; max-height: 380px; overflow-y: auto; }
         .time-col-block { border-right: 1px solid #cbd5e1; background: #f8fafc; font-family: monospace; text-align: center; color: #64748b; }
-        .time-row-slot { padding: 12px 2px; border-bottom: 1px solid #cbd5e1; height: 40px; box-sizing: border-box; font-size: 10px; }
-        .operatory-grid-canvas { display: grid; grid-template-columns: repeat(3, 1fr); }
-        .op-slot { border-right: 1px solid #f1f5f9; border-bottom: 1px solid #cbd5e1; padding: 4px; height: 40px; box-sizing: border-box; }
-        .scheduled-card-item { background: #fffbeb; border-left: 3px solid #d97706; padding: 2px; border-radius: 2px; font-weight: bold; color: #b45309; font-size: 9px; }
+        .time-row-slot { padding: 14px 2px; border-bottom: 1px solid #cbd5e1; height: 50px; box-sizing: border-box; font-size: 10px; font-weight: bold; }
+        .operatory-grid-canvas { display: grid; grid-template-columns: repeat(3, 1fr); position: relative; }
+        .op-slot { border-right: 1px solid #f1f5f9; border-bottom: 1px solid #cbd5e1; padding: 4px; height: 50px; box-sizing: border-box; cursor: pointer; transition: background 0.1s; position: relative; }
+        .op-slot:hover { background-color: #f0fdf4; }
+        .scheduled-card-item { background: #fffbeb; border: 1px solid #f59e0b; border-left: 4px solid #d97706; padding: 4px; border-radius: 3px; font-weight: bold; color: #b45309; font-size: 10px; width: 100%; height: 100%; box-sizing: border-box; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .tree-view-sidebar { border: 1px solid #cbd5e1; background: #ffffff; padding: 6px; border-radius: 3px; font-size: 11px; line-height: 1.6; max-height: 180px; overflow-y: auto; }
         .tree-folder { font-weight: bold; color: #1e3a8a; cursor: pointer; }
         .tree-file { padding-left: 10px; color: #475569; cursor: pointer; }
-        
         .scan-viewer-box { width: 100%; height: 220px; background-color: #0f172a; border: 2px dashed #94a3b8; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-family: monospace; text-align: center; padding: 12px; box-sizing: border-box; font-size: 11px; }
-        
         .form-group { margin-bottom: 10px; }
         .form-label { font-size: 10px; font-weight: bold; text-transform: uppercase; color: #475569; display: block; margin-bottom: 3px; }
         .form-input { width: 100%; background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px; border-radius: 4px; box-sizing: border-box; color: #0f172a; outline: none; font-size: 12px; }
@@ -113,9 +100,7 @@
         <div class="brand-block"><h1 class="brand-title">Sultana <span style="color:#f59e0b;">Nexus™</span> | Suite Digital Operativa</h1></div>
         <div class="tenant-isolation-banner" id="active-license-strip">LICENCIA DE ENTORNO CENTRAL MSO</div>
     </header>
-
     <div class="nexus-master-grid" id="master-system-desktop">
-        <!-- BARRA LATERAL VERTICAL CON LA NOMENCLATURA INDEPENDIENTE SULTANA NEXUS -->
         <nav class="sidebar-modules">
             <button id="mod-tab-dashboard" class="nexus-tab-btn active" onclick="switchNexusDentalModule('dashboard')">📋 Dashboard</button>
             <button id="mod-tab-appointments" class="nexus-tab-btn" onclick="switchNexusDentalModule('appointments')">📅 Appointments</button>
@@ -126,7 +111,6 @@
             <button id="mod-tab-account" class="nexus-tab-btn" onclick="switchNexusDentalModule('account')">💳 Account Ledger</button>
             <button id="mod-tab-manage" class="nexus-tab-btn" onclick="switchNexusDentalModule('manage')">⚙️ Manage MSO</button>
         </nav>
-
         <div class="main-workspace">
             <section class="directory-column">
                 <h3 class="directory-title">Select Patient</h3>
@@ -136,7 +120,6 @@
             </section>
             <section class="workspace-column">
                 <div class="active-patient-badge" id="current-patient-strip">🔴 SELECT PATIENT FROM THE DIRECTORY MODULE</div>
-
                 <div id="panel-dashboard" class="sub-panel active">
                     <h2 class="panel-title">Patient Dashboard Hub</h2>
                     <div class="dashboard-grid">
@@ -146,19 +129,17 @@
                         <div class="dash-card"><div class="dash-title">📝 Signed Forms</div><div id="db-forms">0 Formularios de admisión</div></div>
                     </div>
                 </div>
-
                 <div id="panel-appointments" class="sub-panel">
-                    <h2 class="panel-title">Appointments Scheduler Grid</h2>
+                    <h2 class="panel-title">Módulo de Citas e Interfaz de Reserva de Sillones</h2>
+                    <p class="panel-sub" style="color:#2563eb; font-weight:bold;">Para agendar: Seleccione un paciente en el directorio lateral, luego haga clic en cualquier celda libre abajo para guardar la cita.</p>
                     <div class="appointment-scheduler-canvas">
-                        <div class="time-col-block"><div class="time-row-slot">08 AM</div><div class="time-row-slot">09 AM</div><div class="time-row-slot">10 AM</div></div>
-                        <div class="operatory-grid-canvas">
-                            <div class="op-slot"><div class="scheduled-card-item">Mendoza (Op 1)</div></div><div class="op-slot"></div><div class="op-slot"></div>
-                            <div class="op-slot"></div><div class="op-slot"><div class="scheduled-card-item">Gomez (Hygiene)</div></div><div class="op-slot"></div>
-                            <div class="op-slot"></div><div class="op-slot"></div><div class="op-slot"></div>
+                        <div class="time-col-block">
+                            <div class="time-row-slot">08:00 AM</div><div class="time-row-slot">09:00 AM</div>
+                            <div class="time-row-slot">10:00 AM</div><div class="time-row-slot">11:00 AM</div>
                         </div>
+                        <div class="operatory-grid-canvas" id="live-calendar-cells-injector"></div>
                     </div>
                 </div>
-
                 <div id="panel-family" class="sub-panel">
                     <h2 class="panel-title">Family & Insurance Module</h2>
                     <table class="open-dental-table">
@@ -179,8 +160,6 @@
                         </tbody>
                     </table>
                 </div>
-
-                <!-- 🦷 MODULO CHART COMPLETO CON ARCOS HORIZONTALES SEPARADOS DE RAÍZ Y CORONA -->
                 <div id="panel-chart" class="sub-panel">
                     <h2 class="panel-title">Chart Module (Odontograma Clínico v24.3)</h2>
                     <p class="panel-sub">Un clic para marcar Patología (Rojo), doble clic para marcar Tratamiento Realizado (Azul).</p>
@@ -209,18 +188,15 @@
                         <div class="scan-viewer-box">VISOR PACS DICOM</div>
                     </div>
                 </div>
-
                 <div id="panel-account" class="sub-panel">
                     <h2 class="panel-title">Account Ledger Module</h2>
                     <button class="submit-btn" style="background-color:#22c55e;" onclick="saveClinicalNotes()">Procesar Recibo de Caja</button>
                     <span id="notes-status-msg" class="status-logger"></span>
                 </div>
-
                 <div id="panel-manage" class="sub-panel">
                     <h2 class="panel-title">Manage Module (Administración MSO Central)</h2>
                     <div style="font-size:11px;">SERVER TIME: <span style="font-weight:bold; color:#b45309;">11:24:00 AM</span></div>
                 </div>
-
                 <div id="panel-registration" class="sub-panel">
                     <h2 class="panel-title">Alta de Nuevo Expediente (Patient Intake)</h2>
                     <div class="form-group"><label class="form-label">Nombre del Paciente</label><input type="text" id="new-p-name" class="form-input"></div>
@@ -232,13 +208,11 @@
         </div>
     </div>
     <footer><p>&copy; 2026 Sultana Dental Group MSO • Tech Systems Division.</p></footer>
-
     <script>
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
         let supabaseClient = null; let localPatientCache = []; let activePatientObject = null; let selectedToothArray = []; let ACTIVE_CLINIC_TENANT_ID = "";
         let currentlySelectedToothNum = null; let localToothNotesCache = {};
-        
         try { if (typeof supabase !== 'undefined') { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } } catch (e) {}
         function toggleAuthGateMode(mode) {
             if (mode === 'register') {
@@ -260,12 +234,13 @@
             ACTIVE_CLINIC_TENANT_ID = tenantInput || "SULTANA-LOCAL";
             document.getElementById('active-license-strip').innerText = "🏢 LICENCIA ACTIVA MSO: " + ACTIVE_CLINIC_TENANT_ID;
             localPatientCache = [
-                {id: 1, nombre: "Carlos Mendoza", telefono: "809-555-0199", notas_clinicas: "", notas_clinicas_text: "Paciente hipertenso.", balance: "12,500.00", cita: "Hoy 10:30 AM"},
-                {id: 2, nombre: "Altagracia Gomez", telefono: "829-555-4321", notas_clinicas: "", notas_clinicas_text: "Sin alertas.", balance: "0.00", cita: "Mañana 4:00 PM"},
-                {id: 3, nombre: "Juan Almonte", telefono: "809-555-8877", notas_clinicas: "[]", notas_clinicas_text: "Paciente diabético.", balance: "4,200.00", cita: "12-Sep 9:00 AM"}
+                {id: 1, nombre: "Carlos Mendoza", telefono: "809-555-0199", notas_clinicas: "", notas_clinicas_text: "Paciente hipertenso. Alergia a la penicilina.", balance: "12,500.00", cita: "No programada"},
+                {id: 2, nombre: "Altagracia Gomez", telefono: "829-555-4321", notas_clinicas: "", notas_clinicas_text: "Sin alertas médicas.", balance: "0.00", cita: "No programada"},
+                {id: 3, nombre: "Juan Almonte", telefono: "809-555-8877", notas_clinicas: "[]", notas_clinicas_text: "Paciente diabético.", balance: "4,200.00", cita: "No programada"}
             ];
             renderDirectoryCards(localPatientCache);
             renderAnatomicalTeethArches();
+            buildInteractiveCalendarGrid();
         }
         function renderDirectoryCards(array) {
             const listTarget = document.getElementById('directory-target-cards'); let htmlBlock = '';
@@ -274,6 +249,26 @@
                 htmlBlock += `<div class="patient-card ${isSelected}" onclick="selectActivePatient(${p.id})"><h4 class="p-name">${p.nombre}</h4></div>`;
             });
             listTarget.innerHTML = htmlBlock;
+        }
+        function buildInteractiveCalendarGrid() {
+            const gridTarget = document.getElementById('live-calendar-cells-injector'); if (!gridTarget) return;
+            let cellsHTML = '';
+            for (let timeSlot = 1; timeSlot <= 4; timeSlot++) {
+                for (let operatoryId = 1; operatoryId <= 3; operatoryId++) {
+                    cellsHTML += `<div class="op-slot" id="cal-cell-${timeSlot}-${opId = operatoryId}" onclick="executeLiveChairBooking(${timeSlot}, ${operatoryId})"></div>`;
+                }
+            }
+            gridTarget.innerHTML = cellsHTML;
+        }
+        function executeLiveChairBooking(slot, opId) {
+            if (!activePatientObject) { alert('⚠️ Error: Seleccione un paciente en el directorio lateral primero.'); return; }
+            const cellElement = document.getElementById(`cal-cell-${slot}-${opId}`);
+            if (cellElement) {
+                cellElement.innerHTML = `<div class="scheduled-card-item">🟢 ${activePatientObject.nombre} (Sillón ${opId})</div>`;
+                activePatientObject.cita = `Asignado a Slot ${slot} - Módulo ${opId}`;
+                document.getElementById('db-appointment').innerText = activePatientObject.cita;
+                alert(`✅ Éxito MSO: Paciente asignado al Sillón Clínico ${opId}`);
+            }
         }
         function renderAnatomicalTeethArches() {
             const upperTarget = document.getElementById('upper-arch-target');
