@@ -3,77 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sultana Nexus™ | Suite Completa Open Dental v24.3</title>
+    <title>Sultana Nexus MSO™ | Suite de Gestión e Inteligencia Dental</title>
     
-    <!-- 🔌 ENLACE OFICIAL DE COMPILACIÓN NATIVA PARA EL SDK DE SUPABASE -->
+    <!-- 🔌 CONECTOR DIRECTO BASE DE DATOS CLOUD SUPABASE NATIVO -->
     <script src="https://cloudflare.com"></script>
     
     <style>
-        /* 🎨 PALETA DE COLORES INSTITUCIONAL SURGICAL BLUE DE OPEN DENTAL */
-        body { background-color: #f1f5f9; color: #1e293b; font-family: Arial, Helvetica, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; font-size: 12px; user-select: none; }
+        body { background-color: #f1f5f9; color: #1e293b; font-family: Arial, Helvetica, sans-serif; min-height: 100vh; margin: 0; display: flex; flex-direction: column; font-size: 11px; user-select: none; }
         .sultana-gold { color: #b45309; font-weight: bold; }
         
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #0f172a; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
-        .login-card { background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 30px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .login-card { background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 30px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
         
-        header { background-color: #1e3a8a; color: white; padding: 6px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #b45309; height: 38px; box-sizing: border-box; }
-        .brand-title { margin: 0; font-size: 14px; font-weight: bold; text-transform: uppercase; }
-        .tenant-isolation-banner { background-color: #f8fafc; border: 1px solid #cbd5e1; padding: 3px 6px; font-size: 10px; color: #334155; border-radius: 3px; font-weight: bold; font-family: monospace; }
-        /* 🖥️ MATRIZ PRINCIPAL DESKTOP DE CONTENEDORES v24.3 */
-        .open-dental-grid { display: none; grid-template-columns: 140px 1fr; height: calc(100vh - 38px); width: 100%; overflow: hidden; }
+        header { background-color: #1e3a8a; color: white; padding: 6px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #b45309; height: 35px; box-sizing: border-box; }
+        .brand-title { margin: 0; font-size: 13px; font-weight: bold; text-transform: uppercase; }
+        .tenant-isolation-banner { background-color: #f8fafc; border: 1px solid #cbd5e1; padding: 3px 6px; font-size: 9px; color: #334155; border-radius: 3px; font-weight: bold; font-family: monospace; }
+        .nexus-master-grid { display: none; grid-template-columns: 140px 1fr; height: calc(100vh - 35px); width: 100%; overflow: hidden; }
+        .sidebar-modules { background-color: #e2e8f0; border-right: 1px solid #cbd5e1; display: flex; flex-direction: column; padding: 4px 2px; gap: 3px; box-sizing: border-box; overflow-y: auto; }
+        .nexus-tab-btn { background-color: #3b82f6; color: white; border: 1px solid #2563eb; border-radius: 2px; padding: 10px 6px; text-align: left; font-size: 10px; font-weight: bold; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 4px; width: 100%; box-sizing: border-box; }
+        .nexus-tab-btn:hover { background-color: #2563eb; }
+        .nexus-tab-btn.active { background-color: #ffffff; color: #1e3a8a; border-color: #b45309; border-left: 4px solid #b45309; }
         
-        .sidebar-modules { background-color: #e2e8f0; border-right: 1px solid #cbd5e1; display: flex; flex-direction: column; padding: 4px 2px; gap: 2px; box-sizing: border-box; overflow-y: auto; }
-        .open-dental-tab { background-color: #3b82f6; color: white; border: 1px solid #2563eb; border-radius: 2px; padding: 8px 6px; text-align: left; font-size: 10px; font-weight: bold; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 4px; width: 100%; box-sizing: border-box; }
-        .open-dental-tab:hover { background-color: #2563eb; }
-        .open-dental-tab.active { background-color: #ffffff; color: #1e3a8a; border-color: #b45309; border-left: 4px solid #b45309; }
-        
-        .main-workspace { display: grid; grid-template-columns: 240px 1fr; gap: 8px; padding: 8px; background-color: #f8fafc; height: 100%; box-sizing: border-box; overflow: hidden; width: 100%; }
-        .directory-column { background-color: #ffffff; border: 1px solid #cbd5e1; padding: 8px; border-radius: 4px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
-        .workspace-column { background-color: #ffffff; border: 1px solid #cbd5e1; padding: 12px; border-radius: 4px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; box-sizing: border-box; position: relative; }
+        .main-workspace { display: grid; grid-template-columns: 230px 1fr; gap: 8px; padding: 8px; background-color: #f8fafc; height: 100%; box-sizing: border-box; overflow: hidden; width: 100%; }
+        .directory-column { background-color: #ffffff; border: 1px solid #cbd5e1; padding: 10px; border-radius: 4px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+        .workspace-column { background-color: #ffffff; border: 1px solid #cbd5e1; padding: 14px; border-radius: 4px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; box-sizing: border-box; position: relative; }
         .patient-list { display: flex; flex-direction: column; gap: 4px; overflow-y: auto; flex-grow: 1; }
         .patient-card { background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 8px; cursor: pointer; border-radius: 3px; }
         .patient-card.selected { border-left: 4px solid #b45309; background-color: #dbeafe; font-weight: bold; }
-        .p-name { font-size: 12px; font-weight: bold; margin: 0; color: #1e293b; }
+        .p-name { font-size: 11px; font-weight: bold; margin: 0; color: #1e293b; }
         .p-meta-line { font-size: 10px; color: #64748b; margin: 2px 0 0 0; display: flex; justify-content: space-between; font-family: monospace; }
         
         .active-patient-badge { background-color: #fffbeb; border: 1px solid #fef3c7; color: #b45309; padding: 8px 12px; border-radius: 3px; font-size: 11px; font-weight: bold; width: 100%; box-sizing: border-box; border-left: 4px solid #b45309; text-transform: uppercase; }
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
         .dash-card { padding: 10px; border-radius: 3px; border: 1px solid #cbd5e1; background-color: #f8fafc; }
         .dash-card.alert { background-color: #fef2f2; border-color: #fca5a5; color: #991b1b; border-left: 4px solid #ef4444; }
-        .dash-title { font-size: 10px; font-weight: bold; text-transform: uppercase; color: #64748b; margin-bottom: 4px; }
-        /* 🦷 MATRIZ DUAL DE ODONTOGRAMA AVANZADO (MÓDULO CHART MANUAL v24.3) */
-        .grid-32 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background-color: #f8fafc; padding: 12px; border: 1px solid #cbd5e1; border-radius: 4px; }
-        @media (min-width: 480px) { .grid-32 { grid-template-columns: repeat(8, 1fr); } }
-        @media (min-width: 768px) { .grid-32 { grid-template-columns: repeat(16, 1fr); } }
+        .dash-title { font-size: 9px; font-weight: bold; text-transform: uppercase; color: #64748b; margin-bottom: 4px; }
+        /* 🦷 FILAS DE ORIENTACIÓN HORIZONTAL RIGUROSA (MÓDULO ODONTOGRAMA) */
+        .chart-module-split-view { display: grid; grid-template-columns: 1fr; gap: 12px; width: 100%; box-sizing: border-box; }
+        @media (min-width: 1100px) { .chart-module-split-view { grid-template-columns: 1fr 320px; } }
         
-        .tooth-container { border: 1px solid #cbd5e1; background-color: #ffffff; border-radius: 3px; padding: 4px 2px; text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 145px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .dental-arch-row { display: flex; flex-direction: row; gap: 4px; background-color: #f8fafc; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; overflow-x: auto; width: 100%; box-sizing: border-box; margin-bottom: 6px; }
+        .tooth-container { border: 1px solid #cbd5e1; background-color: #ffffff; border-radius: 3px; padding: 3px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-width: 52px; max-width: 55px; height: 140px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); box-sizing: border-box; flex-shrink: 0; }
         .tooth-num { font-size: 11px; font-weight: bold; color: #1e3a8a; font-family: monospace; border-bottom: 1px solid #cbd5e1; width: 100%; padding-bottom: 2px; margin-bottom: 4px; }
         
-        .tooth-svg { width: 45px; height: 95px; fill: #ffffff; stroke: #475569; stroke-width: 1.2; cursor: pointer; }
+        .tooth-svg { width: 44px; height: 95px; fill: #ffffff; stroke: #475569; stroke-width: 1.0; cursor: pointer; }
         .tooth-surface { transition: fill 0.1s; }
         .tooth-surface:hover { fill: #eff6ff; stroke: #1e3a8a; }
-        
-        /* Código de color interactivo de Open Dental */
-        .tooth-surface.active-patologia { fill: #ef4444 !important; stroke: #b91c1c; } /* Rojo = Caries/Problema */
-        .tooth-surface.active-tratado { fill: #3b82f6 !important; stroke: #1d4ed8; }   /* Azul = Realizado */
-        /* 📊 ESTILOS DE CUADRÍCULAS CONTABLES (TREATMENT PLAN & ACCOUNT LEDGERS) */
-        .open-dental-table { width: 100%; border-collapse: collapse; margin-top: 8px; background: white; font-size: 11px; }
-        .open-dental-table th { background-color: #3b82f6; color: white; padding: 6px; text-align: left; border: 1px solid #cbd5e1; text-transform: uppercase; font-size: 9px; }
-        .open-dental-table td { padding: 6px; border: 1px solid #e2e8f0; }
+        .tooth-surface.active-patologia { fill: #ef4444 !important; stroke: #b91c1c; } /* Rojo Patología */
+        .tooth-surface.active-tratado { fill: #3b82f6 !important; stroke: #1d4ed8; }   /* Azul Realizado */
+        /* 📊 MATRICES FINANCIERAS Y LIBROS DE PROCEDIMIENTOS */
+        .open-dental-table { width: 100%; border-collapse: collapse; margin-top: 6px; background: white; font-size: 11px; }
+        .open-dental-table th { background-color: #3b82f6; color: white; padding: 5px; text-align: left; border: 1px solid #cbd5e1; text-transform: uppercase; font-size: 9px; }
+        .open-dental-table td { padding: 5px; border: 1px solid #e2e8f0; }
         .open-dental-table tr:nth-child(even) { background-color: #f8fafc; }
         
-        /* 📅 AGENDA DE SILLONES EN COLUMNAS (APPOINTMENTS) */
-        .appointment-scheduler-canvas { display: grid; grid-template-columns: 50px 1fr; border: 1px solid #cbd5e1; border-radius: 4px; background: white; margin-top: 8px; max-height: 280px; overflow-y: auto; }
+        .appointment-scheduler-canvas { display: grid; grid-template-columns: 50px 1fr; border: 1px solid #cbd5e1; border-radius: 4px; background: white; margin-top: 6px; max-height: 250px; overflow-y: auto; }
         .time-col-block { border-right: 1px solid #cbd5e1; background: #f8fafc; font-family: monospace; text-align: center; color: #64748b; }
         .time-row-slot { padding: 12px 2px; border-bottom: 1px solid #cbd5e1; height: 40px; box-sizing: border-box; font-size: 10px; }
         .operatory-grid-canvas { display: grid; grid-template-columns: repeat(3, 1fr); }
         .op-slot { border-right: 1px solid #f1f5f9; border-bottom: 1px solid #cbd5e1; padding: 4px; height: 40px; box-sizing: border-box; }
         .scheduled-card-item { background: #fffbeb; border-left: 3px solid #d97706; padding: 2px; border-radius: 2px; font-weight: bold; color: #b45309; font-size: 9px; }
-        /* 🩻 VISORES DIGITALES PACS E INTERCOMUNICADORES (IMAGING & MANAGE) */
-        .tree-view-sidebar { border: 1px solid #cbd5e1; background: #ffffff; padding: 8px; border-radius: 3px; font-size: 11px; line-height: 1.8; max-height: 200px; overflow-y: auto; }
+        .tree-view-sidebar { border: 1px solid #cbd5e1; background: #ffffff; padding: 6px; border-radius: 3px; font-size: 11px; line-height: 1.6; max-height: 180px; overflow-y: auto; }
         .tree-folder { font-weight: bold; color: #1e3a8a; cursor: pointer; }
-        .tree-file { padding-left: 12px; color: #475569; cursor: pointer; }
-        .tree-file:hover { color: #3b82f6; }
+        .tree-file { padding-left: 10px; color: #475569; cursor: pointer; }
         
         .scan-viewer-box { width: 100%; height: 220px; background-color: #0f172a; border: 2px dashed #94a3b8; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-family: monospace; text-align: center; padding: 12px; box-sizing: border-box; font-size: 11px; }
         
@@ -83,14 +75,14 @@
         .submit-btn { background-color: #2563eb; color: white; border: none; font-weight: bold; font-size: 10px; padding: 10px 18px; border-radius: 3px; text-transform: uppercase; cursor: pointer; }
         .sub-panel { display: none; width: 100%; height: 100%; }
         .sub-panel.active { display: block; }
+        footer { font-size: 9px; text-align: center; padding: 10px; background-color: #1e3a8a; color: white; margin-top: auto; }
     </style>
 </head>
 <body>
-    <!-- GATEWAY CENTRAL DE ACCESO PERMANENTE -->
     <div id="login-gateway-wall" class="login-overlay">
         <div class="login-card" id="view-mode-signin">
             <h2 style="margin:0 0 4px 0; color:#1e3a8a; text-transform:uppercase; font-weight:900;">Sultana <span class="sultana-gold">Nexus™</span></h2>
-            <p style="font-size:10px; color:#64748b; margin:0 0 20px 0; text-transform:uppercase; font-weight:bold;">Core Open Dental v24.3 Platform Suite</p>
+            <p style="font-size:10px; color:#64748b; margin:0 0 20px 0; text-transform:uppercase; font-weight:bold;">Core Enterprise Suite de Gestión Dental</p>
             <div style="text-align:left; margin-bottom:16px;">
                 <label class="form-label">ID de Licencia del Consultorio</label>
                 <input type="text" id="clinic-tenant-input" class="form-input" style="margin-top:4px;" placeholder="SULTANA-LOCAL">
@@ -118,21 +110,21 @@
         </div>
     </div>
     <header>
-        <div class="brand-block"><h1 class="brand-title">Sultana <span style="color:#f59e0b;">Nexus™</span> | Open Dental Core Suite</h1></div>
-        <div class="tenant-isolation-banner" id="active-license-strip">LICENCIA CORING SANDBOX</div>
+        <div class="brand-block"><h1 class="brand-title">Sultana <span style="color:#f59e0b;">Nexus™</span> | Suite Digital Operativa</h1></div>
+        <div class="tenant-isolation-banner" id="active-license-strip">LICENCIA DE ENTORNO CENTRAL MSO</div>
     </header>
 
-    <div class="open-dental-grid" id="master-system-desktop">
-        <!-- BARRA LATERAL VERTICAL OFICIAL DE MÓDULOS DEL MANUAL v24.3 -->
+    <div class="nexus-master-grid" id="master-system-desktop">
+        <!-- BARRA LATERAL VERTICAL CON LA NOMENCLATURA INDEPENDIENTE SULTANA NEXUS -->
         <nav class="sidebar-modules">
-            <button id="mod-tab-dashboard" class="open-dental-tab active" onclick="switchOpenDentalModule('dashboard')">📋 Dashboard</button>
-            <button id="mod-tab-appointments" class="open-dental-tab" onclick="switchOpenDentalModule('appointments')">📅 Appointments</button>
-            <button id="mod-tab-family" class="open-dental-tab" onclick="switchOpenDentalModule('family')">👪 Family Module</button>
-            <button id="mod-tab-treatment" class="open-dental-tab" onclick="switchOpenDentalModule('treatment')">📝 Treatment Plan</button>
-            <button id="mod-tab-chart" class="open-dental-tab" onclick="switchOpenDentalModule('chart')">🦷 Chart Module</button>
-            <button id="mod-tab-imaging" class="open-dental-tab" onclick="switchOpenDentalModule('imaging')">🩻 Imaging PACS</button>
-            <button id="mod-tab-account" class="open-dental-tab" onclick="switchOpenDentalModule('account')">💳 Account Ledger</button>
-            <button id="mod-tab-manage" class="open-dental-tab" onclick="switchOpenDentalModule('manage')">⚙️ Manage MSO</button>
+            <button id="mod-tab-dashboard" class="nexus-tab-btn active" onclick="switchNexusDentalModule('dashboard')">📋 Dashboard</button>
+            <button id="mod-tab-appointments" class="nexus-tab-btn" onclick="switchNexusDentalModule('appointments')">📅 Appointments</button>
+            <button id="mod-tab-family" class="nexus-tab-btn" onclick="switchNexusDentalModule('family')">👪 Family Module</button>
+            <button id="mod-tab-treatment" class="nexus-tab-btn" onclick="switchNexusDentalModule('treatment')">📝 Treatment Plan</button>
+            <button id="mod-tab-chart" class="nexus-tab-btn" onclick="switchNexusDentalModule('chart')">🦷 Chart Module</button>
+            <button id="mod-tab-imaging" class="nexus-tab-btn" onclick="switchNexusDentalModule('imaging')">🩻 Imaging PACS</button>
+            <button id="mod-tab-account" class="nexus-tab-btn" onclick="switchNexusDentalModule('account')">💳 Account Ledger</button>
+            <button id="mod-tab-manage" class="nexus-tab-btn" onclick="switchNexusDentalModule('manage')">⚙️ Manage MSO</button>
         </nav>
 
         <div class="main-workspace">
@@ -140,12 +132,11 @@
                 <h3 class="directory-title">Select Patient</h3>
                 <input type="text" id="directory-search" class="search-box" placeholder="Buscar expediente..." oninput="filterDirectory()">
                 <div class="patient-list" id="directory-target-cards"></div>
-                <button class="submit-btn" style="margin-top:auto; font-size:10px; padding:8px;" onclick="switchOpenDentalModule('registration')">➕ New Intake File</button>
+                <button class="submit-btn" style="margin-top:auto; font-size:10px; padding:8px;" onclick="switchNexusDentalModule('registration')">➕ New Intake File</button>
             </section>
             <section class="workspace-column">
                 <div class="active-patient-badge" id="current-patient-strip">🔴 SELECT PATIENT FROM THE DIRECTORY MODULE</div>
 
-                <!-- 📊 MODULO 1: DASHBOARD CENTRAL DEL EXPEDIENTE -->
                 <div id="panel-dashboard" class="sub-panel active">
                     <h2 class="panel-title">Patient Dashboard Hub</h2>
                     <div class="dashboard-grid">
@@ -156,45 +147,30 @@
                     </div>
                 </div>
 
-                <!-- 📅 MODULO 2: AGENDA EN SILLONES OPERATORIOS -->
                 <div id="panel-appointments" class="sub-panel">
                     <h2 class="panel-title">Appointments Scheduler Grid</h2>
-                    <button class="submit-btn" style="margin-bottom:8px;" onclick="alert('✅ Nueva cita agregada al sillón asignado.')">+ New Appointment</button>
                     <div class="appointment-scheduler-canvas">
-                        <div class="time-col-block"><div class="time-row-slot">08 AM</div><div class="time-row-slot">09 AM</div><div class="time-row-slot">10 AM</div><div class="time-row-slot">11 AM</div></div>
+                        <div class="time-col-block"><div class="time-row-slot">08 AM</div><div class="time-row-slot">09 AM</div><div class="time-row-slot">10 AM</div></div>
                         <div class="operatory-grid-canvas">
                             <div class="op-slot"><div class="scheduled-card-item">Mendoza (Op 1)</div></div><div class="op-slot"></div><div class="op-slot"></div>
                             <div class="op-slot"></div><div class="op-slot"><div class="scheduled-card-item">Gomez (Hygiene)</div></div><div class="op-slot"></div>
                             <div class="op-slot"></div><div class="op-slot"></div><div class="op-slot"></div>
-                            <div class="op-slot"></div><div class="op-slot"></div><div class="op-slot"></div>
                         </div>
                     </div>
                 </div>
-                <!-- 👪 MODULO 3: HISTORIAL FAMILIAR Y ESTRUCTURA DE COBERTURAS -->
+
                 <div id="panel-family" class="sub-panel">
                     <h2 class="panel-title">Family & Insurance Module</h2>
-                    <h4 style="margin:8px 0 4px 0; color:#1e3a8a;">Family Members Group</h4>
                     <table class="open-dental-table">
                         <thead><tr><th>Name</th><th>Position</th><th>Gender</th><th>Age</th><th>Recall Due</th></tr></thead>
-                        <tbody id="family-members-tbody">
+                        <tbody>
                             <tr><td>Marsh, Raphael</td><td>Subscriber</td><td>Male</td><td>36</td><td>09/22/2024</td></tr>
                             <tr><td>Marsh, Lena</td><td>Spouse</td><td>Female</td><td>33</td><td>09/22/2024</td></tr>
                         </tbody>
                     </table>
-                    <h4 style="margin:12px 0 4px 0; color:#1e3a8a;">Insurance Percentage Matrix</h4>
-                    <table class="open-dental-table">
-                        <thead><tr><th>Category</th><th>Primary Coverage %</th><th>Secondary Coverage %</th></tr></thead>
-                        <tbody>
-                            <tr><td>Diagnostic / Preventive</td><td>100 %</td><td>100 %</td></tr>
-                            <tr><td>Restorative / Resinas</td><td>80 %</td><td>80 %</td></tr>
-                            <tr><td>Endodontics / Perio</td><td>50 %</td><td>50 %</td></tr>
-                        </tbody>
-                    </table>
                 </div>
-                <!-- 📝 MODULO 4: PLANES DE TRATAMIENTO Y CALCULADOR DE COBERTURAS -->
                 <div id="panel-treatment" class="sub-panel">
                     <h2 class="panel-title">Treatment Plan Module Ledger</h2>
-                    <div style="display:flex; gap:6px; margin:6px 0;"><button class="submit-btn" style="background:#b45309;">+ New TP Plan</button><button class="submit-btn" style="background:#22c55e;">Save Active TP</button></div>
                     <table class="open-dental-table">
                         <thead><tr><th>Done</th><th>Priority</th><th>Tth</th><th>Code</th><th>Description</th><th>Fee</th><th>Pri Ins</th><th>Pat Pays</th></tr></thead>
                         <tbody>
@@ -203,72 +179,60 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- 🦷 MODULO 5: ODONTOGRAMA DE REPLICA DUAL CON RAÍCES Y CORONAS INDEPENDIENTES -->
+
+                <!-- 🦷 MODULO CHART COMPLETO CON ARCOS HORIZONTALES SEPARADOS DE RAÍZ Y CORONA -->
                 <div id="panel-chart" class="sub-panel">
-                    <h2 class="panel-title">Chart Module (Odontograma Clínico Anatómico v24.3)</h2>
+                    <h2 class="panel-title">Chart Module (Odontograma Clínico v24.3)</h2>
                     <p class="panel-sub">Un clic para marcar Patología (Rojo), doble clic para marcar Tratamiento Realizado (Azul).</p>
-                    <div class="grid-32" id="anatomical-arches-target">
-                        <!-- El inyector del Bloque 16 dibujará las raíces y las coronas vectoriales independientes -->
+                    <div class="chart-module-split-view">
+                        <div>
+                            <h4 style="margin:2px 0; color:#1e3a8a;">Arco Superior (Upper Arch 1 - 16)</h4>
+                            <div class="dental-arch-row" id="upper-arch-target"></div>
+                            <h4 style="margin:8px 0 2px 0; color:#1e3a8a;">Arco Inferior (Lower Arch 17 - 32)</h4>
+                            <div class="dental-arch-row" id="lower-arch-target"></div>
+                        </div>
+                        <div style="background:#f8fafc; border:1px solid #cbd5e1; padding:10px; border-radius:4px;">
+                            <label class="form-label" id="tooth-note-label">Sección de Notas: Ninguna pieza seleccionada</label>
+                            <textarea id="tooth-specific-textarea" class="form-input" rows="3" placeholder="Seleccione una superficie dental para escribir anotaciones..." oninput="updateLiveToothNote()"></textarea>
+                            <button class="submit-btn" style="margin-top:6px; width:100%;" onclick="saveAnatomicalChart()">Guardar Cambios del Odontograma</button>
+                            <span id="chart-status-msg" class="status-logger"></span>
+                        </div>
                     </div>
-                    <div style="margin-top:10px; background-color:#f1f5f9; padding:8px; border-radius:4px; border:1px solid #cbd5e1;">
-                        <label class="form-label" id="tooth-note-label">Sección de Notas: Ninguna pieza seleccionada</label>
-                        <textarea id="tooth-specific-textarea" class="form-input" rows="2" placeholder="Seleccione una superficie dental para escribir anotaciones..." oninput="updateLiveToothNote()"></textarea>
-                    </div>
-                    <button class="submit-btn" style="margin-top:8px;" onclick="saveAnatomicalChart()">Guardar Cambios del Odontograma</button>
-                    <span id="chart-status-msg" class="status-logger"></span>
                 </div>
-                <!-- 🩻 MODULO 6: ARBOL DE CARPETAS IMAGING PACS DIGITAL -->
                 <div id="panel-imaging" class="sub-panel">
                     <h2 class="panel-title">Imaging Module (Arbol PACS Digital)</h2>
-                    <div style="display:grid; grid-template-columns: 200px 1fr; gap:10px; margin-top:8px;">
+                    <div style="display:grid; grid-template-columns: 180px 1fr; gap:8px;">
                         <div class="tree-view-sidebar">
-                            <div class="tree-folder">📁 Medical History</div>
-                            <div class="tree-file">📄 Consentimiento Quirúrgico.pdf</div>
-                            <div class="tree-folder">📁 Radiografías</div>
-                            <div class="tree-file">🩻 Panorámica_04_08_2024.dicom</div>
-                            <div class="tree-file">🩻 Periapical_D14.jpg</div>
+                            <div class="tree-folder">📁 Medical History</div><div class="tree-file">📄 Consentimiento.pdf</div>
+                            <div class="tree-folder">📁 Radiografías</div><div class="tree-file">🩻 Panorámica.dicom</div>
                         </div>
-                        <div class="scan-viewer-box">VISOR IMAGING PACS ACTIVO: Seleccione un archivo DICOM lateral para renderizar diagnóstico</div>
+                        <div class="scan-viewer-box">VISOR PACS DICOM</div>
                     </div>
                 </div>
 
-                <!-- 💳 MODULO 7: ESTADO DE CUENTA CONTABLE -->
                 <div id="panel-account" class="sub-panel">
                     <h2 class="panel-title">Account Ledger Module</h2>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; color:#0f172a;">
-                        <div><label class="form-label">Balance Pendiente ($ RD)</label><input type="text" class="form-input" value="12,500.00" readonly style="color:#ef4444; font-weight:bold; background:#eff6ff;"></div>
-                        <div><label class="form-label">Monto de Abono a Procesar</label><input type="text" class="form-input" placeholder="Monto en RD$"></div>
-                    </div>
-                    <button class="submit-btn" style="background-color:#22c55e;" onclick="saveClinicalNotes()">Emitir Recibo de Caja</button>
+                    <button class="submit-btn" style="background-color:#22c55e;" onclick="saveClinicalNotes()">Procesar Recibo de Caja</button>
                     <span id="notes-status-msg" class="status-logger"></span>
                 </div>
-                <!-- ⚙️ MODULO 8: GESTIÓN OPERATIVA DIARIA Y RELOJ CHECADOR -->
+
                 <div id="panel-manage" class="sub-panel">
                     <h2 class="panel-title">Manage Module (Administración MSO Central)</h2>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:8px;">
-                        <div style="background:#f8fafc; border:1px solid #cbd5e1; padding:8px; border-radius:3px;">
-                            <h4 style="margin:0 0 6px 0; color:#1e3a8a;">Daily Operational Tools</h4>
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px;"><button class="submit-btn" style="font-size:9px;">Send Claims</button><button class="submit-btn" style="font-size:9px;">Batch Ins</button><button class="submit-btn" style="font-size:9px;">Billing Run</button><button class="submit-btn" style="font-size:9px;">System Backup</button></div>
-                        </div>
-                        <div style="background:#f8fafc; border:1px solid #cbd5e1; padding:8px; border-radius:3px;">
-                            <h4 style="margin:0 0 4px 0; color:#1e3a8a;">Time Clock Staff Tracker</h4>
-                            <div style="font-size:11px; font-family:monospace;">SERVER TIME: <span id="live-server-clock" style="font-weight:bold; color:#b45309;">11:07:00 AM</span></div>
-                            <div style="display:flex; gap:4px; margin-top:6px;"><button class="submit-btn" style="background:#22c55e; font-size:9px;">Clock In</button><button class="submit-btn" style="background:#ef4444; font-size:9px;">Clock Out</button></div>
-                        </div>
-                    </div>
+                    <div style="font-size:11px;">SERVER TIME: <span style="font-weight:bold; color:#b45309;">11:24:00 AM</span></div>
                 </div>
 
-                <!-- ➕ MODULO 9: PORTAL DE NUEVO PACIENTE -->
                 <div id="panel-registration" class="sub-panel">
                     <h2 class="panel-title">Alta de Nuevo Expediente (Patient Intake)</h2>
-                    <div class="form-group"><label class="form-label">Nombre Completo del Paciente</label><input type="text" id="new-p-name" class="form-input" placeholder="Ej. Carlos Mendoza"></div>
-                    <div class="form-group"><label class="form-label">Contacto (WhatsApp)</label><input type="text" id="new-p-phone" class="form-input" placeholder="Ej. 809-555-0199"></div>
-                    <button class="submit-btn" onclick="createNewPatientInbound()">Crear Registro Clínico</button>
+                    <div class="form-group"><label class="form-label">Nombre del Paciente</label><input type="text" id="new-p-name" class="form-input"></div>
+                    <div class="form-group"><label class="form-label">WhatsApp</label><input type="text" id="new-p-phone" class="form-input"></div>
+                    <button class="submit-btn" onclick="createNewPatientInbound()">Crear Registro</button>
                     <span id="reg-status-msg" class="status-logger"></span>
                 </div>
             </section>
         </div>
     </div>
+    <footer><p>&copy; 2026 Sultana Dental Group MSO • Tech Systems Division.</p></footer>
+
     <script>
         const SUPABASE_URL = "https://wmscuqbxvgqsyafcstsv.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indtc2N1cWJ4dmdxc3lhZmNzdHN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTk3NzksImV4cCI6MjEwMzU5NTc3OX0.2Kw121CDen29_xW5ruUxcv3lRmMMBLaHbqxZiR124Mk";
@@ -276,7 +240,6 @@
         let currentlySelectedToothNum = null; let localToothNotesCache = {};
         
         try { if (typeof supabase !== 'undefined') { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } } catch (e) {}
-
         function toggleAuthGateMode(mode) {
             if (mode === 'register') {
                 document.getElementById('view-mode-signin').style.display = 'none'; document.getElementById('view-mode-signup').style.display = 'block';
@@ -297,9 +260,9 @@
             ACTIVE_CLINIC_TENANT_ID = tenantInput || "SULTANA-LOCAL";
             document.getElementById('active-license-strip').innerText = "🏢 LICENCIA ACTIVA MSO: " + ACTIVE_CLINIC_TENANT_ID;
             localPatientCache = [
-                {id: 1, nombre: "Carlos Mendoza", telefono: "809-555-0199", notas_clinicas: "", notas_clinicas_text: "Paciente hipertenso. Alergia a la penicilina.", balance: "12,500.00", cita: "Hoy 10:30 AM - Op 1"},
-                {id: 2, nombre: "Altagracia Gomez", telefono: "829-555-4321", notas_clinicas: "", notas_clinicas_text: "Sin alertas médicas.", balance: "0.00", cita: "Mañana 4:00 PM - Hygiene"},
-                {id: 3, nombre: "Juan Almonte", telefono: "809-555-8877", notas_clinicas: "[]", notas_clinicas_text: "Paciente diabético.", balance: "4,200.00", cita: "12-Sep 9:00 AM - Op 2"}
+                {id: 1, nombre: "Carlos Mendoza", telefono: "809-555-0199", notas_clinicas: "", notas_clinicas_text: "Paciente hipertenso.", balance: "12,500.00", cita: "Hoy 10:30 AM"},
+                {id: 2, nombre: "Altagracia Gomez", telefono: "829-555-4321", notas_clinicas: "", notas_clinicas_text: "Sin alertas.", balance: "0.00", cita: "Mañana 4:00 PM"},
+                {id: 3, nombre: "Juan Almonte", telefono: "809-555-8877", notas_clinicas: "[]", notas_clinicas_text: "Paciente diabético.", balance: "4,200.00", cita: "12-Sep 9:00 AM"}
             ];
             renderDirectoryCards(localPatientCache);
             renderAnatomicalTeethArches();
@@ -308,41 +271,22 @@
             const listTarget = document.getElementById('directory-target-cards'); let htmlBlock = '';
             array.forEach(p => {
                 let isSelected = activePatientObject && activePatientObject.id === p.id ? 'selected' : '';
-                htmlBlock += `<div class="patient-card ${isSelected}" onclick="selectActivePatient(${p.id})"><h4 class="p-name">${p.nombre}</h4><div class="p-meta-line"><span>No: PX-${String(p.id).padStart(4, '0')}</span></div></div>`;
+                htmlBlock += `<div class="patient-card ${isSelected}" onclick="selectActivePatient(${p.id})"><h4 class="p-name">${p.nombre}</h4></div>`;
             });
             listTarget.innerHTML = htmlBlock;
         }
-        function selectActivePatient(id) {
-            activePatientObject = localPatientCache.find(p => p.id === id); renderDirectoryCards(localPatientCache);
-            document.getElementById('current-patient-strip').innerHTML = '🟢 ACTIVE EXPEDIENT: [PX-' + String(activePatientObject.id).padStart(4, '0') + '] Paciente: <strong>' + activePatientObject.nombre + '</strong>';
-            document.getElementById('db-alerts').innerText = activePatientObject.notas_clinicas_text || "Sin alertas registradas";
-            document.getElementById('db-balance').innerText = "$" + activePatientObject.balance + " RD";
-            document.getElementById('db-appointment').innerText = activePatientObject.cita || "No programada";
-            clearAnatomicalChartLayout();
-        }
-        function createNewPatientInbound() {
-            const name = document.getElementById('new-p-name').value.trim(); const phone = document.getElementById('new-p-phone').value.trim();
-            setTimeout(() => {
-                let newId = localPatientCache.length + 1; localPatientCache.push({id: newId, nombre: name, telefono: phone, notas_clinicas: '[]', notas_clinicas_text: 'Nuevo expediente.', balance: "0.00", cita: "No programada"});
-                renderDirectoryCards(localPatientCache); selectActivePatient(newId);
-                document.getElementById('new-p-name').value = ''; document.getElementById('new-p-phone').value = '';
-                switchOpenDentalModule('dashboard');
-            }, 500);
-        }
-        
-        // 🚀 CONSTRUCTOR VECTORIAL v24.3 DUAL: SEPARA LA FILA DE RAÍCES DE LAS 5 CARAS DE LA CORONA
         function renderAnatomicalTeethArches() {
-            const container = document.getElementById('anatomical-arches-target'); if (!container) return;
-            let htmlPayload = '';
+            const upperTarget = document.getElementById('upper-arch-target');
+            const lowerTarget = document.getElementById('lower-arch-target');
+            if (!upperTarget || !lowerTarget) return;
+            let upperBlock = ''; let lowerBlock = '';
             for (let i = 1; i <= 32; i++) {
-                htmlPayload += `
+                let toothHTML = `
                     <div class="tooth-container">
                         <div class="tooth-num">${i}</div>
                         <svg class="tooth-svg" viewBox="0 0 60 110">
-                            <!-- Fila Superior: Raíz Clínica Independiente (Endodoncias/Quistes) -->
                             <path class="tooth-surface" d="M20,50 Q10,15 25,5 Q30,15 35,50 Z" fill="#ffffff" stroke="#475569" stroke-width="1.2" id="tooth-${i}-raiz" onclick="handleToothSurfaceClick(${i}, 'Raiz')"/>
-                            <line x1="10" y1="53" x2="45" y2="53" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="2"/>
-                            <!-- Fila Inferior: Corona Segmentada en sus 5 Caras Tradicionales -->
+                            <line x1="10" y1="53" x2="45" y2="53" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="1"/>
                             <path class="tooth-surface" d="M12,55 L43,55 L35,68 L20,68 Z" fill="#ffffff" stroke="#475569" id="tooth-${i}-V" onclick="handleToothSurfaceClick(${i}, 'V')"/>
                             <path class="tooth-surface" d="M12,55 L20,68 L20,82 L12,95 Z" fill="#ffffff" stroke="#475569" id="tooth-${i}-M" onclick="handleToothSurfaceClick(${i}, 'M')"/>
                             <path class="tooth-surface" d="M43,55 L35,68 L35,82 L43,95 Z" fill="#ffffff" stroke="#475569" id="tooth-${i}-D" onclick="handleToothSurfaceClick(${i}, 'D')"/>
@@ -350,14 +294,14 @@
                             <polygon class="tooth-surface" points="20,68 35,68 35,82 20,82" fill="#ffffff" stroke="#475569" id="tooth-${i}-O" onclick="handleToothSurfaceClick(${i}, 'O')"/>
                         </svg>
                     </div>`;
+                if (i <= 16) { upperBlock += toothHTML; } else { lowerBlock += toothHTML; }
             }
-            container.innerHTML = htmlPayload;
+            upperTarget.innerHTML = upperBlock; lowerTarget.innerHTML = lowerBlock;
         }
         function handleToothSurfaceClick(toothNum, surfaceKey) {
             if (!activePatientObject) { alert('Seleccione un paciente primero.'); return; }
             currentlySelectedToothNum = toothNum; document.getElementById('tooth-note-label').innerText = "Escribir nota para PIEZA DENTAL [" + toothNum + "] - Superficie: " + surfaceKey;
-            let elementId = `tooth-${toothNum}-${surfaceKey}`;
-            if (surfaceKey === 'Raiz') elementId = `tooth-${toothNum}-raiz`;
+            let elementId = `tooth-${toothNum}-${surfaceKey === 'Raiz' ? 'raiz' : surfaceKey}`;
             let surfaceElement = document.getElementById(elementId);
             if (surfaceElement) {
                 if (!surfaceElement.classList.contains('active-patologia') && !surfaceElement.classList.contains('active-tratado')) {
@@ -367,12 +311,14 @@
                 } else { surfaceElement.classList.remove('active-tratado'); }
             }
         }
-        function updateLiveToothNote() { if (!currentlySelectedToothNum) return; let currentLabel = document.getElementById('tooth-note-label').innerText; let surfaceKey = currentLabel.includes('- Superficie: ') ? currentLabel.split('- Superficie: ')[1] : 'general'; localToothNotesCache[currentlySelectedToothNum + '-' + surfaceKey] = document.getElementById('tooth-specific-textarea').value; }
-        function saveAnatomicalChart() { const logger = document.getElementById('chart-status-msg'); logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma Anatómico v24.3 guardado!'; }
-        function saveClinicalNotes() { const logger = document.getElementById('notes-status-msg'); logger.style.color = '#22c55e'; logger.innerText = '¡Recibo procesado!'; }
+        function updateLiveToothNote() { if (!currentlySelectedToothNum) return; let currentLabel = document.getElementById('tooth-note-label').innerText; let surfaceKey = currentLabel.includes('- Superficie: ') ? currentLabel.split('- Superficie: ') : 'general'; localToothNotesCache[currentlySelectedToothNum + '-' + surfaceKey] = document.getElementById('tooth-specific-textarea').value; }
+        function selectActivePatient(id) { activePatientObject = localPatientCache.find(p => p.id === id); renderDirectoryCards(localPatientCache); document.getElementById('current-patient-strip').innerHTML = '🟢 ACTIVE EXPEDIENT: [PX-' + String(activePatientObject.id).padStart(4, '0') + '] Paciente: <strong>' + activePatientObject.nombre + '</strong>'; document.getElementById('db-alerts').innerText = activePatientObject.notas_clinicas_text || "Sin alertas"; document.getElementById('db-balance').innerText = "$" + activePatientObject.balance + " RD"; document.getElementById('db-appointment').innerText = activePatientObject.cita || "No programada"; clearAnatomicalChartLayout(); }
+        function createNewPatientInbound() { const name = document.getElementById('new-p-name').value.trim(); const phone = document.getElementById('new-p-phone').value.trim(); setTimeout(() => { let newId = localPatientCache.length + 1; localPatientCache.push({id: newId, nombre: name, telefono: phone, notas_clinicas: '[]', notas_clinicas_text: 'Nuevo expediente.', balance: "0.00", cita: "No programada"}); renderDirectoryCards(localPatientCache); selectActivePatient(newId); switchNexusDentalModule('dashboard'); }, 500); }
+        function saveAnatomicalChart() { const logger = document.getElementById('chart-status-msg'); logger.style.color = '#22c55e'; logger.innerText = '¡Odontograma v24.3 guardado!'; }
+        function saveClinicalNotes() { const logger = document.getElementById('notes-status-msg'); logger.style.color = '#22c55e'; logger.innerText = '¡Procesado!'; }
         function clearAnatomicalChartLayout() { let elements = document.getElementsByClassName('tooth-surface'); for(let i=0; i<elements.length; i++) { elements[i].classList.remove('active-patologia'); elements[i].classList.remove('active-tratado'); } }
         function filterDirectory() { let q = document.getElementById('directory-search').value.toLowerCase(); let matches = localPatientCache.filter(p => p.nombre.toLowerCase().includes(q)); renderDirectoryCards(matches); }
-        function switchOpenDentalModule(modKey) { var tabs = document.getElementsByClassName('open-dental-tab'); for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active'); var targetTab = document.getElementById('mod-tab-' + modKey); if (targetTab) targetTab.classList.add('active'); var panels = document.getElementsByClassName('sub-panel'); for (var j = 0; j < panels.length; j++) panels[j].classList.remove('active'); var targetPanel = document.getElementById('panel-' + modKey); if (targetPanel) targetPanel.classList.add('active'); }
+        function switchNexusDentalModule(modKey) { var tabs = document.getElementsByClassName('nexus-tab-btn'); for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active'); var targetTab = document.getElementById('mod-tab-' + modKey); if (targetTab) targetTab.classList.add('active'); var panels = document.getElementsByClassName('sub-panel'); for (var j = 0; j < panels.length; j++) panels[j].classList.remove('active'); var targetPanel = document.getElementById('panel-' + modKey); if (targetPanel) targetPanel.classList.add('active'); }
     </script>
 </body>
 </html>
