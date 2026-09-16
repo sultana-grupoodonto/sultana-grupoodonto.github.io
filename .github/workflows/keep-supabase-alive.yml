@@ -1,0 +1,17 @@
+name: Sultana Nexus Database Keep-Alive
+
+on:
+  schedule:
+    - cron: '0 0 */3 * *'
+  workflow_dispatch:
+
+jobs:
+  ping_db:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Traffic Signal to Supabase Cloud Matrix
+        run: |
+          curl -X GET "https://supabase.co" \
+          -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+          -I
