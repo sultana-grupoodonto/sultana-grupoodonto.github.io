@@ -2,9 +2,8 @@ name: Sultana Nexus Keep-Alive Engine
 
 on:
   schedule:
-    # Runs automatically every 3 days at midnight (00:00)
     - cron: '0 0 */3 * *'
-  workflow_dispatch: # Allows you to trigger it manually anytime
+  workflow_dispatch:
 
 jobs:
   ping-supabase:
