@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Send Activity Heartbeat to REST API
         run: |
-          curl -i -X GET "https://supabase.com" \
+          curl -i -X GET "https://wmscuqbxvgqsyafcstsv.supabase.com" \
           -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
