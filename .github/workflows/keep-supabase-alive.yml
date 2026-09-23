@@ -10,8 +10,8 @@ jobs:
   ping-supabase:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Activity Heartbeat to Rest REST API
+      - name: Send Activity Heartbeat to REST API
         run: |
-          curl -i -X GET "https://supabase.co" \
+          curl -i -X GET "https://supabase.com" \
           -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
