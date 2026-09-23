@@ -1,17 +1,17 @@
-name: Sultana Nexus Database Keep-Alive
+name: Sultana Nexus Keep-Alive Engine
 
 on:
   schedule:
+    # Runs automatically every 3 days at midnight (00:00)
     - cron: '0 0 */3 * *'
-  workflow_dispatch:
+  workflow_dispatch: # Allows you to trigger it manually anytime
 
 jobs:
-  ping_db:
+  ping-supabase:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Traffic Signal to Supabase Cloud Matrix
+      - name: Send Activity Heartbeat to Rest REST API
         run: |
-          curl -X GET "https://supabase.co" \
+          curl -i -X GET "https://supabase.co" \
           -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-          -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-          -I
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
